@@ -1,2 +1,5 @@
-# integrado-ago-dic-2018
-Proyecto integrador 7mo. de Sistemas Computacionales
+# Proyecto integrador agosto - diciembre 2018
+
+### Materias
+1. Ingeniería de Software II
+2. Programación Web II
