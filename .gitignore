@@ -24,3 +24,4 @@
 nbproject
 Thumbs.db
 update-repo.php
+phpunit.xml
