@@ -85,3 +85,53 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
 10. Mantener la sesión abierta de un usuario que haya ingresado al sistema, con la finalidad de simplificar su uso.
 11. El sistema debe presentar la respuesta máximo un segundo y medio después de la solicitud.
 12. Cada registro o actualización de información deberá ser acompañada del usuario, fecha, hora en la que sucedió el evento.
+
+## Funcionalidades
+
+### Punto de venta
+
+1. Control de productos / inventario
+2. Control de ingresos
+3. Control de egresos
+
+### Control de clases (administración)
+
+1. Control de usuarios
+   * Expediente médico
+   * Records
+   * Logros, trofeos o medallas
+2. Control de clientes
+3. Control de disciplinas
+4. Control de rutinas (wod)
+5. Control de clases
+   * Programación de sesiones
+   * Definición de rutina (wod)
+   * Control de asistencia
+   * Situación membresía
+   * Registro de records
+
+### Control de clases (clientes)
+
+1. Consulta clases
+   * Agendar asistencia (control de asistencia)
+   * Registro de record
+2. Control de perfil
+   * Expediente médico
+   * Records
+   * Logros, trofeos o medallas
+   
+### Reportes y consultas
+
+1. Situación de clientes
+2. Historial de pagos
+3. Ingresos y egresos
+
+### Globales
+
+1. Login
+2. Control de acceso / sesión
+3. Recuperación de contraseña
+
+
+  
+
