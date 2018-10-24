@@ -97,10 +97,10 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
 ### Control de clases (administración)
 
 1. Control de usuarios
+2. Control de clientes
    * Expediente médico
    * Records
    * Logros, trofeos o medallas
-2. Control de clientes
 3. Control de disciplinas
 4. Control de rutinas (wod)
 5. Control de clases
