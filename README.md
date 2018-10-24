@@ -110,9 +110,9 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
    * Situación membresía
    * Registro de records
 
-### Control de clases (clientes)
+### Clientes
 
-1. Consulta clases
+1. Control de clases (consulta)
    * Agendar asistencia (control de asistencia)
    * Registro de record
 2. Control de perfil
@@ -131,7 +131,4 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
 1. Login
 2. Control de acceso / sesión
 3. Recuperación de contraseña
-
-
-  
 
