@@ -6,19 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistema de gestión de Sarx Wellness Center">
     <meta name="author" content="UCC Sistemas">
-    <base href="<?php echo BASE; ?>">
 
     <title>Sarx Wellness Center</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="css/base.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
 
     <!-- Archivos JS -->
-    <script src="scripts/base.js"></script>
+    <script src="../js/base.js"></script>
 
 </head>
 

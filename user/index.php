@@ -12,12 +12,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="css/base.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
 
     <!-- Archivos JS -->
+    <script src="../js/base.js"></script>
 
 </head>
 
@@ -27,7 +28,7 @@
 
 <main role="main" class="container">
 
-    <img src="img/logo.png" class="img-fluid"/>
+    <img src="../img/logo.png" class="img-fluid"/>
 
 </main>
 
