@@ -7,7 +7,7 @@
 1. Ingeniería de Software II
 2. Programación Web II
 
-![](img/IMG_20181011_205402403.jpg?raw=true)
+![](app/img/IMG_20181011_205402403.jpg?raw=true)
 
 ## Ámbito
 
