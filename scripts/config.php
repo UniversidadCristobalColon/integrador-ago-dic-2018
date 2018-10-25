@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-define('BASE', '//' . $_SERVER['HTTP_HOST'] . '/int2/');
+define('BASE', '//' . $_SERVER['HTTP_HOST'] . '/');
 
 $db = mysqli_connect("35.225.5.28", "sarx_user", "oBSH6d4RicpMR8Ja", "sarx_db");
 
