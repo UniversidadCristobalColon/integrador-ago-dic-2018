@@ -7,7 +7,7 @@
 1. Ingeniería de Software II
 2. Programación Web II
 
-![](app/img/IMG_20181011_205402403.jpg?raw=true)
+![](img/IMG_20181011_205402403.jpg?raw=true)
 
 ## Ámbito
 
@@ -90,20 +90,20 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
 
 ### Punto de venta
 
-1. Control de productos / inventario
-2. Control de ingresos
-3. Control de egresos
+1. Control de productos / inventario *(Luis Eduardo)*
+2. Control de ingresos *(Marlen)*
+3. Control de egresos *(Judith)*
 
 ### Control de clases (administración)
 
-1. Control de usuarios
-2. Control de clientes
+1. Control de usuarios *(Denisse)*
+2. Control de clientes *(Pamela)*
    * Expediente médico
    * Records
    * Logros, trofeos o medallas
-3. Control de disciplinas
-4. Control de rutinas (wod)
-5. Control de clases
+3. Control de disciplinas *(Denisse)*
+4. Control de rutinas (wod) *(Judith)*
+5. Control de clases *(Fátima / Diego)*
    * Programación de sesiones
    * Definición de rutina (wod)
    * Control de asistencia
@@ -112,23 +112,27 @@ Para más términos relativos a la disciplina https://greatist.com/fitness/ultim
 
 ### Clientes
 
-1. Control de clases (consulta)
+1. Control de clases (consulta) *(Eduardo Velázquez / Diego)*
    * Agendar asistencia (control de asistencia)
    * Registro de record
-2. Control de perfil
+2. Control de perfil *(Pamela)*
    * Expediente médico
    * Records
    * Logros, trofeos o medallas
    
 ### Reportes y consultas
 
-1. Situación de clientes
-2. Historial de pagos
-3. Ingresos y egresos
+1. Situación de clientes *(Fernando)*
+2. Historial de pagos *(Fernando)*
+3. Ingresos y egresos *(Judith)*
 
 ### Globales
 
-1. Login
-2. Control de acceso / sesión
-3. Recuperación de contraseña
+1. Login *(Diana)*
+2. Control de acceso / sesión *(Diana)*
+3. Recuperación de contraseña *(Diana)*
 
+### Otras tareas
+
+1. Diseño gráfico logros, trofeos o medallas *(Marlen)*
+1. Administración de base de datos *(Fátima)*
