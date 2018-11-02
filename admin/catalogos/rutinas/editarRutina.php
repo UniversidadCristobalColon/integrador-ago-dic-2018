@@ -32,13 +32,13 @@
         <p class="lead">
         <form method="get">
             <button type="submit" class="btn btn-success">Guardar</button>
-            <div class="form-row">
-                <div class="form-group col-md-6">
+            <div class="row mb-3">
+                <div class="col-md-6">
                     <br>
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-4">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required>
@@ -49,9 +49,11 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group col-md-12">
-                <label for="contenido">Contenido:</label>
-                <textarea class="form-control" rows="5" id="contenido" required></textarea>
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="contenido">Contenido:</label>
+                    <textarea class="form-control" rows="5" id="contenido" required></textarea>
+                </div>
             </div>
         </form>
         </p>
