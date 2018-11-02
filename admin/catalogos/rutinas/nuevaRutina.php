@@ -28,36 +28,32 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Rutinas</h1>
-<!--        <div class="alert alert-success alert-dismissible">-->
-<!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
-<!--            <strong>Success!</strong> Indicates a successful or positive action.-->
-<!--        </div>-->
-        <a href="nuevaRutina.php" class="btn btn-success" role="button">+ Nueva</a>
+        <h1>Nueva rutina</h1>
         <p class="lead">
-        <table id="example" class="table" style="width:100%">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Rutina</th>
-                <th>Actualizada</th>
-                <th>Disciplinas</th>
-                <th>Opciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Judith</td>
-                <td>hoy</td>
-                <td>Crossfit</td>
-                <td>
-                    <a href="editarRutina.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="editarRutina.php" class="btn btn-link" role="button">Eliminar</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <form method="get">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <br>
+                    <label for="inputTitulo">Título: </label>
+                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <br>
+                    <label for="inputPassword4">Disciplina: </label>
+                    <select class="custom-select d-block w-100" id="disciplina" required>
+                        <option value="">Selecciona...</option>
+                        <option>Crossfit</option>
+                        <option>Yoga</option>
+                        <option>Spinning</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="contenido">Contenido:</label>
+                <textarea class="form-control" rows="5" id="contenido" required></textarea>
+            </div>
+        </form>
         </p>
     </div>
 
