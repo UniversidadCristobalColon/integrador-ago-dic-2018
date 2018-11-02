@@ -33,7 +33,7 @@
 <!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
 <!--            <strong>Success!</strong> Indicates a successful or positive action.-->
 <!--        </div>-->
-        <a href="nuevaRutina.php" class="btn btn-success" role="button">+ Nueva</a>
+        <a href="nueva.php" class="btn btn-success" role="button">+ Nueva</a>
         <p class="lead">
         <table id="example" class="table" style="width:100%">
             <thead>
@@ -52,8 +52,8 @@
                 <td>hoy</td>
                 <td>Crossfit</td>
                 <td>
-                    <a href="editarRutina.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="editarRutina.php" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="editar.php" class="btn btn-link" role="button">Editar</a>
+                    <a href="editar.php" class="btn btn-link" role="button">Eliminar</a>
                 </td>
             </tr>
             </tbody>
