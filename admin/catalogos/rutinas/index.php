@@ -38,7 +38,6 @@
         <table id="example" class="table" style="width:100%">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Rutina</th>
                 <th>Actualizada</th>
                 <th>Disciplinas</th>
@@ -47,7 +46,6 @@
             </thead>
             <tbody>
             <tr>
-                <td>1</td>
                 <td>Judith</td>
                 <td>hoy</td>
                 <td>Crossfit</td>
