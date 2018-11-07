@@ -29,6 +29,12 @@
 
     <div class="starter-template">
         <h1>Historial de pagos</h1>
+
+        <div class="pull-right">
+            <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
+            <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
+        </div>
+
     </div>
 
     <div class="container">
