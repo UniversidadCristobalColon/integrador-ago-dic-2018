@@ -15,6 +15,7 @@
     <link rel="icon" href="img/favicon.png">
 
 
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 	<title>SARX</title>
@@ -23,7 +24,7 @@
 	<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="css/base.css" rel="stylesheet">
+	<link href="css/login.css" rel="stylesheet">
     <!-- Archivos JS -->
     <script src="js/base.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
