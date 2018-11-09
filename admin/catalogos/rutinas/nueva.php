@@ -31,13 +31,13 @@
     <div class="starter-template">
         <h1>Nueva rutina</h1>
         <p class="lead">
-        <form method="get">
+        <form action="guardarNuevo.php" method="get">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
                     <label for="inputTitulo">Título: </label>
-                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required>
+                    <input type="text" class="form-control" id="titulo" placeholder="Título" required>
                 </div>
                 <div class="col-md-4">
                     <br>
