@@ -28,19 +28,20 @@
 
 <main role="main" class="container">
 
+    <img src="../img/logo.png" class="img-fluid"/>
+
     <h2>Section title</h2>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Header</th>
                 <th>Header</th>
                 <th>Header</th>
                 <th>Header</th>
             </tr>
-
-    <img src="../img/logo.png" class="img-fluid"/>
+            </thead>
 
 </main>
 

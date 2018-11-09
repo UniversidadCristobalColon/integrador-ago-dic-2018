@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistema de gestión de Sarx Wellness Center">
     <meta name="author" content="UCC Sistemas">
-    <base href="<?php echo BASE; ?>">
 
     <title>Sarx Wellness Center</title>
 
@@ -28,20 +27,38 @@
 
 <main role="main" class="container">
 
-    <h2>Section title</h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-            </tr>
+    <h1>Editar Ingreso</h1>
 
-    <img src="../img/logo.png" class="img-fluid"/>
+<h4>Actividad de ingreso</h4>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Producto</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option></option>
+            <option>Mensualidad</option>
+            <option>Membresia</option>
+            <option>Agua</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Cantidad</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="producto">Cliente</label>
+        <input type="text" class="form-control" id="producto" aria-describedby="" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="producto">Precio $</label>
+        <input type="text" class="form-control" id="producto" aria-describedby="" placeholder="">
+    </div>
 
+    <input class="btn btn-primary" type="submit" value="Guardar cambios">
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
