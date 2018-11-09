@@ -19,6 +19,22 @@
     <!-- Archivos JS -->
     <script src="../../js/base.js"></script>
 
+    <!--Data table -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script
+            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+    </script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable();
+        } );
+    </script>
+
 </head>
 
 <body>
@@ -40,8 +56,8 @@
                     <legend>Situación de los clientes</legend>
 
                     <div class="pull-right">
-                        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
-                        <a class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
+                        <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
+                        <a href="index.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
                     </div>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
@@ -76,7 +92,7 @@
             <br>
 </main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
