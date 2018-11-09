@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="inputUsuario">Usuario: </label>
                     <select class="custom-select d-block w-100" id="usuario" required>
                         <option value="">Selecciona...</option>
@@ -51,7 +51,23 @@
                         <option>Recepción</option>
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <label for="inputMonto">Fecha: </label>
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker2').datetimepicker({
+                                locale: 'ru'
+                            });
+                        });
+                    </script>
+                </div>
+                <div class="col-md-3">
                     <label for="inputMonto">Monto: </label>
                     <input type="text" class="form-control" id="inputMonto" placeholder="Monto" required>
                 </div>
