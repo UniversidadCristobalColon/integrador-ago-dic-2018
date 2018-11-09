@@ -40,8 +40,8 @@
                     <legend>Situación de los clientes</legend>
 
                     <div class="pull-right">
-                        <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
-                        <a class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
+                        <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
+                        <a href="index.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
                     </div>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>

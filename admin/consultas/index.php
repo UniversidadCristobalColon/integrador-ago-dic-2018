@@ -31,8 +31,8 @@
         <h1>Historial de pagos</h1>
 
         <div class="pull-right">
-            <a class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
-            <a class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
+            <a href="index.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
+            <a href= "situacion_clientes.php" class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
         </div>
 
     </div>
