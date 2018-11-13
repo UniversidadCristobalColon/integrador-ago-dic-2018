@@ -60,23 +60,23 @@
             </tr>
             </thead>
             <tbody>
+            <?php
+            $query2="select * from rutinas";
+            $result2=pg_query($dbcon,$query2);
+            while ($row=pg_fetch_array($result2)) {
+            ?>
             <tr>
-                <?php
-                $sql="SELECT * FROM rutinas";
-                $result=mysqli_query($conexion,$sql);
-                while($row = mysqli_fetch_array($result)){
-                    echo "
-                                <td>".$row['titulo']."</td>
-                                <td>".$row['fecha']."</td>
-                                <td>".$row['disciplina']."</td>
-                         ";
-                }
-                ?>
+                <td><?php echo "$row[1]"; ?></td>
+                <td><?php echo "$row[2]"; ?></td>
+                <td><?php echo "$row[3]"; ?></td>
                 <td>
                     <a href="editar.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="editar.php" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="eliminar.php" class="btn btn-link" role="button">Eliminar</a>
                 </td>
             </tr>
+            <?php
+            }
+            ?>
             </tbody>
         </table>
         </p>

@@ -21,13 +21,13 @@ $query = "INSERT INTO rutinas (
                                     '$titulo',
                                     '$disciplina',
                                     '$contenido',
-                                    CURDATE()
+                                    NOW()
                                     )";
 
 $result=pg_query($dbcon,$query);
 
 if ($conn->query($query) === TRUE) {
-    echo "Los datos se han enviado a revisión, serás redirigido a la página principal.";
+    echo "Los datos se han guardado, serás redirigido a la página principal.";
 
     ?>
     <!--Redireccionamiento al perfil del alumno -->

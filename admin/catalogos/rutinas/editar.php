@@ -30,13 +30,22 @@
     <div class="starter-template">
         <h1>Editar rutina</h1>
         <p class="lead">
+            <?php
+            require ("conexion.php");
+            $xid=$_POST["idEditar"];
+            $query2="select * from rutinas where id=$xid";
+            $result2=pg_query($dbcon,$query2);
+            while ($row2=pg_fetch_array($result2)){
+            ?>
         <form method="get">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
+                    <input type="hidden" name="xEditaRutina" value="<?php echo "$row2[0]"; ?>">
                     <label for="inputTitulo">Título: </label>
-                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required>
+                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
+                           value="<?php echo "$row2[1]"; ?>">
                 </div>
                 <div class="col-md-4">
                     <br>
@@ -52,10 +61,13 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" required content="<?php echo "$row2[3]"; ?>"></textarea>
                 </div>
             </div>
         </form>
+        <?php
+        }
+        ?>
         </p>
     </div>
 
