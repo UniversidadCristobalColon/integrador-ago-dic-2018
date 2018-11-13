@@ -7,15 +7,34 @@
  */
 
 require("conexion.php");
-$titulo = $_GET["titulo"];
-$disciplina = $_GET["disciplina"];
-$contenido = $_GET["contenido"];
+$titulo = $_POST["titulo"];
+$disciplina = $_POST["disciplina"];
+$contenido = $_POST["contenido"];
 
-$query="insert into rutinas values (DEFAULT, '$titulo','$disciplina','$contenido',now())";
+$query = "INSERT INTO rutinas (
+                            id_rutina,
+                            titulo, 
+                            disciplina, 
+                            contenido, 
+                            fecha) VALUES (
+                                    null,
+                                    '$titulo',
+                                    '$disciplina',
+                                    '$contenido',
+                                    CURDATE()
+                                    )";
+
 $result=pg_query($dbcon,$query);
-if($result){
-    header("Location: index.php");
-}else{
-    echo "No se pudo llevar a cabo la operacion";
-    header("refresh:2; url=index.php");
+
+if ($conn->query($query) === TRUE) {
+    echo "Los datos se han enviado a revisión, serás redirigido a la página principal.";
+
+    ?>
+    <!--Redireccionamiento al perfil del alumno -->
+    <meta http-equiv="refresh" content="1;url=index.php">
+    <?php
+}
+//Mostrar error
+else {
+    echo "No se ha podido completar el registro, inténtalo de nuevo." . $query . "<br>" . $conn->error;
 }

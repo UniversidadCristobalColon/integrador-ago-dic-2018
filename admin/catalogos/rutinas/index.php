@@ -61,9 +61,17 @@
             </thead>
             <tbody>
             <tr>
-                <td>Judith</td>
-                <td>hoy</td>
-                <td>Crossfit</td>
+                <?php
+                $sql="SELECT * FROM rutinas";
+                $result=mysqli_query($conexion,$sql);
+                while($row = mysqli_fetch_array($result)){
+                    echo "
+                                <td>".$row['titulo']."</td>
+                                <td>".$row['fecha']."</td>
+                                <td>".$row['disciplina']."</td>
+                         ";
+                }
+                ?>
                 <td>
                     <a href="editar.php" class="btn btn-link" role="button">Editar</a>
                     <a href="editar.php" class="btn btn-link" role="button">Eliminar</a>
