@@ -43,14 +43,19 @@ require_once '../../../scripts/config.php' ?>
             $query="select * from rutinas";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {
+            $id = $row['id'];
+            $titulo = $row['titulo'];
+            $contenido = $row['contenido'];
+            $fecha = $row['actualizacion'];
+            $disciplina = $row['id_disciplina'];
             ?>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo "$row[0]"; ?>" readonly>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>" readonly>
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
-                           value="<?php echo "$row[1]"; ?>" readonly>
+                           value="<?php echo $titulo; ?>" readonly>
                 </div>
                 <div class="col-md-4">
                     <br>

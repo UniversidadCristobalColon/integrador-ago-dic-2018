@@ -64,11 +64,17 @@
             $query="select * from rutinas";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {
+                $id = $row['id'];
+                $titulo = $row['titulo'];
+                $contenido = $row['contenido'];
+                $fecha = $row['actualizacion'];
+                $disciplina = $row['id_disciplina'];
             ?>
             <tr>
-                <td><a href="mostrar.php" class="btn btn-link" role="button"><?php echo "$row[1]"; ?></a></td>
-                <td><?php echo "$row[4]"; ?></td>
-                <td><?php echo "$row[2]"; ?></td>
+                <td hidden><?php echo $id; ?></td>
+                <td><a href="mostrar.php" class="btn btn-link" role="button"><?php echo $titulo; ?></a></td>
+                <td><?php echo $fecha; ?></td>
+                <td><?php echo $disciplina ?></td>
                 <td>
                     <a href="editar.php" class="btn btn-link" role="button">Editar</a>
                     <a href="eliminar.php" class="btn btn-link" role="button">Eliminar</a>
