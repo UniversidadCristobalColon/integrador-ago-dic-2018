@@ -40,7 +40,8 @@ require_once '../../../scripts/config.php' ?>
         <form action="index.php">
             <button type="submit" class="btn btn-success">Regresar</button>
             <?php
-            $query="select * from rutinas";
+            $xid = $_POST['xid'];
+            $query="select * from rutinas where id=$xid";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {
             $id = $row['id'];
@@ -71,7 +72,7 @@ require_once '../../../scripts/config.php' ?>
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required readonly><?php echo "$row[3]"; ?></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" required readonly><?php echo $contenido; ?></textarea>
                 </div>
             </div>
         </form>

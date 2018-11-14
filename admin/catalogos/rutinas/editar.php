@@ -30,20 +30,26 @@
     <div class="starter-template">
         <h1>Editar rutina</h1>
         <p class="lead">
-        <form action="guardarEditado.php" method="post">
-            <button type="submit" class="btn btn-success">Guardar</button>
             <?php
-            $query="select * from rutinas";
+            $xid = $_POST['xid'];
+            $query="select * from rutinas where id=$xid";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {
+            $id = $row['id'];
+            $titulo = $row['titulo'];
+            $contenido = $row['contenido'];
+            $fecha = $row['actualizacion'];
+            $disciplina = $row['id_disciplina'];
             ?>
+        <form action="guardarEditado.php?xid='<?php echo $id; ?>'" method="post">
+            <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo "$row[0]"; ?>">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
-                           value="<?php echo "$row[1]"; ?>">
+                           value="<?php echo $titulo; ?>">
                 </div>
                 <div class="col-md-4">
                     <br>
@@ -59,7 +65,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required><?php echo "$row[3]"; ?></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" required><?php echo $contenido; ?></textarea>
                 </div>
             </div>
         </form>

@@ -7,6 +7,7 @@
  */
 
 require("conexion.php");
+$xid = $_POST['xid'];
 $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];

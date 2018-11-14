@@ -72,12 +72,14 @@
             ?>
             <tr>
                 <td hidden><?php echo $id; ?></td>
-                <td><a href="mostrar.php" class="btn btn-link" role="button"><?php echo $titulo; ?></a></td>
+                <td>
+                    <a href="mostrar.php?xid='<?php echo $id; ?>'" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
+                </td>
                 <td><?php echo $fecha; ?></td>
                 <td><?php echo $disciplina ?></td>
                 <td>
-                    <a href="editar.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="eliminar.php" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="editar.php?xid='<?php echo $id; ?>'" class="btn btn-link" role="button">Editar</a>
+                    <a href="eliminar.php?xid='<?php echo $id; ?>" class="btn btn-link" role="button">Eliminar</a>
                 </td>
             </tr>
             <?php

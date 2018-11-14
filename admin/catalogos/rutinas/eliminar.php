@@ -6,9 +6,10 @@
  * Time: 04:33 PM
  */
 require_once '../../../scripts/config.php';
-$id = $_POST["id"];
 
-$query = "delete from rutinas where id=$id";
+$xid = $_POST['xid'];
+
+$query="delete from rutinas where id=$xid";
 
 $result=$db->query($query);
 
