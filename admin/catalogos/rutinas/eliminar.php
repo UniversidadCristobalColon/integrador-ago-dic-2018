@@ -7,7 +7,7 @@
  */
 require_once '../../../scripts/config.php';
 
-$xid = $_POST['xid'];
+$xid = $_GET['xid'];
 
 $query="delete from rutinas where id=$xid";
 

@@ -40,7 +40,7 @@ require_once '../../../scripts/config.php' ?>
         <form action="index.php">
             <button type="submit" class="btn btn-success">Regresar</button>
             <?php
-            $xid = $_POST['xid'];
+            $xid = $_GET['xid'];
             $query="select * from rutinas where id=$xid";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {

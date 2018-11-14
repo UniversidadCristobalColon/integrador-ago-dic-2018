@@ -31,17 +31,16 @@
         <h1>Editar rutina</h1>
         <p class="lead">
             <?php
-            $xid = $_POST['xid'];
+            $xid = $_GET['xid'];
             $query="select * from rutinas where id=$xid";
             $result=$db->query($query);
             while ($row=mysqli_fetch_array($result)) {
-            $id = $row['id'];
             $titulo = $row['titulo'];
             $contenido = $row['contenido'];
             $fecha = $row['actualizacion'];
             $disciplina = $row['id_disciplina'];
             ?>
-        <form action="guardarEditado.php?xid='<?php echo $id; ?>'" method="post">
+        <form action="guardarEditado.php?xid='<?php echo $xid; ?>'" method="post">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
