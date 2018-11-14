@@ -55,7 +55,7 @@
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required>
-                        <option value="0">Selecciona...</option>
+                        <option value="">Selecciona...</option>
                         <?php
                         $query = $mysqli -> query ("SELECT * FROM disciplinas");
                         while ($valores = mysqli_fetch_array($query)) {
