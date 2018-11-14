@@ -17,7 +17,7 @@ $query = "INSERT INTO rutinas (
                             contenido, 
                             actualizacion) VALUES (
                                     '$titulo',
-                                    '$disciplina',
+                                     $disciplina,
                                     '$contenido',
                                     NOW()
                                     )";
