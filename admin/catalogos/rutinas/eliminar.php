@@ -5,12 +5,12 @@
  * Date: 09/11/2018
  * Time: 04:33 PM
  */
-require ("conexion.php");
-$id = $_POST["idEliminar"];
+require_once '../../../scripts/config.php';
+$id = $_POST["id"];
 
 $query = "delete from rutinas where id=$id";
 
-$result = pg_query($dbcon,$query);
+$result=$db->query($query);
 
 if ($result){
     header("Location: index.php");

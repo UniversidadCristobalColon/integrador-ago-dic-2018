@@ -1,4 +1,11 @@
-<?php require_once '../../../scripts/config.php' ?>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Judith
+ * Date: 13/11/2018
+ * Time: 10:27 PM
+ */
+require_once '../../../scripts/config.php' ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -28,10 +35,10 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Editar rutina</h1>
+        <h1>Ver detalles de rutina</h1>
         <p class="lead">
-        <form action="guardarEditado.php" method="post">
-            <button type="submit" class="btn btn-success">Guardar</button>
+        <form action="index.php">
+            <button type="submit" class="btn btn-success">Regresar</button>
             <?php
             $query="select * from rutinas";
             $result=$db->query($query);
@@ -40,15 +47,15 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo "$row[0]"; ?>">
+                    <input type="hidden" name="id" value="<?php echo "$row[0]"; ?>" readonly>
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
-                           value="<?php echo "$row[1]"; ?>">
+                           value="<?php echo "$row[1]"; ?>" readonly>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
-                    <select class="custom-select d-block w-100" id="disciplina" required>
+                    <select class="custom-select d-block w-100" id="disciplina" required disabled>
                         <option value="">Selecciona...</option>
                         <option value="1">Crossfit</option>
                         <option value="2">Yoga</option>
@@ -59,7 +66,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required><?php echo "$row[3]"; ?></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" required readonly><?php echo "$row[3]"; ?></textarea>
                 </div>
             </div>
         </form>

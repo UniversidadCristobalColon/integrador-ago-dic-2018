@@ -61,14 +61,14 @@
             </thead>
             <tbody>
             <?php
-            $query2="select * from rutinas";
-            $result2=pg_query($dbcon,$query2);
-            while ($row=pg_fetch_array($result2)) {
+            $query="select * from rutinas";
+            $result=$db->query($query);
+            while ($row=mysqli_fetch_array($result)) {
             ?>
             <tr>
-                <td><?php echo "$row[1]"; ?></td>
+                <td><a href="mostrar.php" class="btn btn-link" role="button"><?php echo "$row[1]"; ?></a></td>
+                <td><?php echo "$row[4]"; ?></td>
                 <td><?php echo "$row[2]"; ?></td>
-                <td><?php echo "$row[3]"; ?></td>
                 <td>
                     <a href="editar.php" class="btn btn-link" role="button">Editar</a>
                     <a href="eliminar.php" class="btn btn-link" role="button">Eliminar</a>

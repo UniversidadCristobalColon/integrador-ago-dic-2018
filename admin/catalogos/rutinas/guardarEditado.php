@@ -7,13 +7,18 @@
  */
 
 require("conexion.php");
-$titulo = $_GET["titulo"];
-$disciplina = $_GET["disciplina"];
-$contenido = $_GET["contenido"];
+$titulo = $_POST["titulo"];
+$disciplina = $_POST["disciplina"];
+$contenido = $_POST["contenido"];
 
-$query="UPDATE rutinas SET titulo='$titulo', disciplina='$disciplina', contenido='$contenido' WHERE id=$id";
+$query="UPDATE rutinas SET 
+            titulo='$titulo',
+            disciplina='$disciplina',
+            contenido='$contenido' 
+        WHERE id=$id
+        ";
 
-$result = pg_query($dbcon,$query);
+$result=$db->query($query);
 
 if($result){
     header("Location: index.php");

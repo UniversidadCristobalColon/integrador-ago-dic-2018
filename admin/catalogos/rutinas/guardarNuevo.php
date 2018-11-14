@@ -6,17 +6,17 @@
  * Time: 08:30 AM
  */
 
-require("conexion.php");
+require_once '../../../scripts/config.php';
 $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
 
 $query = "INSERT INTO rutinas (
-                            id_rutina,
+                            id,
                             titulo, 
-                            disciplina, 
+                            id_disciplina, 
                             contenido, 
-                            fecha) VALUES (
+                            actualizacion) VALUES (
                                     null,
                                     '$titulo',
                                     '$disciplina',
@@ -24,17 +24,17 @@ $query = "INSERT INTO rutinas (
                                     NOW()
                                     )";
 
-$result=pg_query($dbcon,$query);
+$result=$db->query($query);
 
-if ($conn->query($query) === TRUE) {
+if ($db->query($query) === TRUE) {
     echo "Los datos se han guardado, serás redirigido a la página principal.";
 
     ?>
-    <!--Redireccionamiento al perfil del alumno -->
+    <!--Redireccionamiento al index de rutinas -->
     <meta http-equiv="refresh" content="1;url=index.php">
     <?php
 }
 //Mostrar error
 else {
-    echo "No se ha podido completar el registro, inténtalo de nuevo." . $query . "<br>" . $conn->error;
+    echo "No se ha podido completar el registro, inténtalo de nuevo." . $query . "<br>" . $db->error;
 }
