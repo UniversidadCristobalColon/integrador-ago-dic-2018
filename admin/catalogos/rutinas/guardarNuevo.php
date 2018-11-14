@@ -34,5 +34,5 @@ if ($db->query($query) === TRUE) {
 }
 //Mostrar error
 else {
-    echo "No se ha podido completar el registro, inténtalo de nuevo." . $query . "<br>" . $db->error;
+    echo "No se ha podido completar el registro de la nueva rutina, inténtalo de nuevo." . $query . "<br>" . $db->error;
 }

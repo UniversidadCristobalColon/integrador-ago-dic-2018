@@ -24,6 +24,6 @@ $result=$db->query($query);
 if($result){
     header("Location: index.php");
 }else{
-    echo "No se pudo registrar el nuevo vuelo.";
+    echo "No se pudo guardar los cambios, inténtelo de nuevo.";
     header("refresh:2; url=index.php");
 }
