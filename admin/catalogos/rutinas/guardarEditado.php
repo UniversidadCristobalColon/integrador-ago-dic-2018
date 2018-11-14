@@ -14,7 +14,7 @@ $contenido = $_POST["contenido"];
 
 $query="UPDATE rutinas SET 
             titulo='$titulo',
-            disciplina='$disciplina',
+            disciplina=$disciplina,
             contenido='$contenido' 
         WHERE id=$id
         ";
