@@ -62,7 +62,7 @@
             <tbody>
             <?php
             $query="select * from rutinas";
-            $result=$db->query($query);
+            $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
                 $id = $row['id'];
                 $titulo = $row['titulo'];

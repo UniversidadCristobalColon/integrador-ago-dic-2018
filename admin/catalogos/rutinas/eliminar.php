@@ -11,7 +11,7 @@ $xid = $_GET['xid'];
 
 $query="delete from rutinas where id=$xid";
 
-$result=$db->query($query);
+$result=mysqli_query($db,$query);
 
 if ($result){
     header("Location: index.php");

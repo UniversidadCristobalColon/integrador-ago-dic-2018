@@ -19,7 +19,7 @@ $query="UPDATE rutinas SET
         WHERE id=$id
         ";
 
-$result=$db->query($query);
+$result=mysqli_query($db,$query);
 
 if($result){
     header("Location: index.php");

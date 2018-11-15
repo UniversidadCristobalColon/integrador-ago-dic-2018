@@ -42,18 +42,17 @@ require_once '../../../scripts/config.php' ?>
             <?php
             $xid = $_GET['xid'];
             $query="select * from rutinas where id=$xid";
-            $result=$db->query($query);
+            $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-            $id = $row['id'];
-            $titulo = $row['titulo'];
-            $contenido = $row['contenido'];
-            $fecha = $row['actualizacion'];
-            $disciplina = $row['id_disciplina'];
+                $titulo = $row['titulo'];
+                $contenido = $row['contenido'];
+                $fecha = $row['actualizacion'];
+                $disciplina = $row['id_disciplina'];
             ?>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo $id; ?>" readonly>
+                    <input type="hidden" name="id" value="<?php echo $xid; ?>" readonly>
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
                            value="<?php echo $titulo; ?>" readonly>
@@ -64,8 +63,9 @@ require_once '../../../scripts/config.php' ?>
                     <select class="custom-select d-block w-100" id="disciplina" required disabled>
                         <option value="">Selecciona...</option>
                         <?php
-                        $query = $mysqli -> query ("SELECT * FROM disciplinas");
-                        while ($valores = mysqli_fetch_array($query)) {
+                        $query="select * from disciplinas";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_array($result)) {
                             echo '<option value="'.$valores[id].'">'.$valores[disciplinas].'</option>';
                         }
                         ?>

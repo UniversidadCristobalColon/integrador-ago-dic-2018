@@ -22,9 +22,9 @@ $query = "INSERT INTO rutinas (
                                     NOW()
                                     )";
 
-$result=$db->query($query);
+$result=mysqli_query($db,$query);
 
-if ($db->query($query) === TRUE) {
+if ($result === TRUE) {
     echo "Los datos se han guardado, serás redirigido a la página principal.";
 
     ?>

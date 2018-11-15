@@ -46,8 +46,9 @@
                     <select class="custom-select d-block w-100" id="disciplina" required>
                         <option value="">Selecciona...</option>
                         <?php
-                        $query = $mysqli -> query ("SELECT * FROM disciplinas");
-                        while ($valores = mysqli_fetch_array($query)) {
+                        $query="select * from disciplinas";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_array($result)) {
                             echo '<option value="'.$valores[id].'">'.$valores[disciplinas].'</option>';
                         }
                         ?>

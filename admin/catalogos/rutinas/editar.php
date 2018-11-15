@@ -30,22 +30,22 @@
     <div class="starter-template">
         <h1>Editar rutina</h1>
         <p class="lead">
+        <form action="guardarEditado.php?xid='<?php echo $xid; ?>'" method="get">
+            <button type="submit" class="btn btn-success">Guardar</button>
             <?php
             $xid = $_GET['xid'];
             $query="select * from rutinas where id=$xid";
-            $result=$db->query($query);
+            $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-            $titulo = $row['titulo'];
-            $contenido = $row['contenido'];
-            $fecha = $row['actualizacion'];
-            $disciplina = $row['id_disciplina'];
+                $titulo = $row['titulo'];
+                $contenido = $row['contenido'];
+                $fecha = $row['actualizacion'];
+                $disciplina = $row['id_disciplina'];
             ?>
-        <form action="guardarEditado.php?xid='<?php echo $xid; ?>'" method="post">
-            <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="id" value="<?php echo $xid; ?>">
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
                            value="<?php echo $titulo; ?>">
@@ -56,8 +56,9 @@
                     <select class="custom-select d-block w-100" id="disciplina" required>
                         <option value="">Selecciona...</option>
                         <?php
-                        $query = $mysqli -> query ("SELECT * FROM disciplinas");
-                        while ($valores = mysqli_fetch_array($query)) {
+                        $query="select * from disciplinas";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_array($result)) {
                             echo '<option value="'.$valores[id].'">'.$valores[disciplinas].'</option>';
                         }
                         ?>
