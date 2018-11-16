@@ -30,7 +30,6 @@
 
     <div class="starter-template">
         <h1>Nueva rutina</h1>
-        <p class="lead">
         <form action="guardarNuevo.php" method="post">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
@@ -63,7 +62,6 @@
                 </div>
             </div>
         </form>
-        </p>
     </div>
 
 </main>

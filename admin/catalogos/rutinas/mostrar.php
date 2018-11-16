@@ -36,7 +36,6 @@ require_once '../../../scripts/config.php' ?>
 
     <div class="starter-template">
         <h1>Ver detalles de rutina</h1>
-        <p class="lead">
         <form action="index.php">
             <button type="submit" class="btn btn-success">Regresar</button>
             <?php
@@ -82,7 +81,6 @@ require_once '../../../scripts/config.php' ?>
         <?php
         }
         ?>
-        </p>
     </div>
 
 </main>
