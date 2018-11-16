@@ -48,30 +48,46 @@
 <!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
 <!--            <strong>Success!</strong> Indicates a successful or positive action.-->
 <!--        </div>-->
-        <a href="nueva.php" class="btn btn-success" role="button">+ Nueva</a>
-        <p class="lead">
-        <table id="example" class="table" style="width:100%">
+        <a href="nueva.php" class="btn btn-success mb-3" role="button">Nueva</a>
+
+        <table id="example" class="table">
             <thead>
             <tr>
-                <th>Rutina</th>
+                <th width="30%">Rutina</th>
                 <th>Actualizada</th>
                 <th>Disciplinas</th>
                 <th>Opciones</th>
             </tr>
             </thead>
             <tbody>
+            <?php
+            $query="select * from rutinas";
+            $result=mysqli_query($db,$query);
+            while ($row=mysqli_fetch_array($result)) {
+                $id = $row['id'];
+                $titulo = $row['titulo'];
+                $contenido = $row['contenido'];
+                $fecha = $row['actualizacion'];
+                $disciplina = $row['id_disciplina'];
+            ?>
             <tr>
-                <td>Judith</td>
-                <td>hoy</td>
-                <td>Crossfit</td>
+
                 <td>
-                    <a href="editar.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="editar.php" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
+                </td>
+                <td><?php echo $fecha; ?></td>
+                <td><?php echo $disciplina ?></td>
+                <td>
+                    <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Eliminar</a>
                 </td>
             </tr>
+            <?php
+            }
+            ?>
             </tbody>
         </table>
-        </p>
+
     </div>
 
 </main>
