@@ -45,6 +45,7 @@
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required>
                         <option value="">Selecciona...</option>
+                        <option value="1">Crossfit</option>
                         <?php
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);

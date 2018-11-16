@@ -30,7 +30,7 @@
     <div class="starter-template">
         <h1>Editar rutina</h1>
         <p class="lead">
-        <form action="guardarEditado.php?xid='<?php echo $xid; ?>'" method="get">
+        <form action="guardarEditado.php?xid=<?php echo $xid; ?>" method="get">
             <button type="submit" class="btn btn-success">Guardar</button>
             <?php
             $xid = $_GET['xid'];
@@ -55,6 +55,7 @@
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required>
                         <option value="">Selecciona...</option>
+                        <option value="1">CrossFit</option>
                         <?php
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);

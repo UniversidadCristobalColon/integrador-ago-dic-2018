@@ -12,10 +12,12 @@ $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
 
 $query = "INSERT INTO rutinas (
+                            id
                             titulo, 
                             id_disciplina, 
                             contenido, 
                             actualizacion) VALUES (
+                                    NULL,
                                     '$titulo',
                                      $disciplina,
                                     '$contenido',

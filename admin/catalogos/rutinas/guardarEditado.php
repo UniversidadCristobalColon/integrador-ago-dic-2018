@@ -6,11 +6,11 @@
  * Time: 08:35 AM
  */
 
-require("conexion.php");
+require_once '../../../scripts/config.php';
 $xid = $_GET['xid'];
-$titulo = $_POST["titulo"];
-$disciplina = $_POST["disciplina"];
-$contenido = $_POST["contenido"];
+$titulo = $_GET["titulo"];
+$disciplina = $_GET["disciplina"];
+$contenido = $_GET["contenido"];
 
 $query="UPDATE rutinas SET 
             titulo='$titulo',
