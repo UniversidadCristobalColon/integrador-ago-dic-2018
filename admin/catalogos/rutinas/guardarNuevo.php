@@ -11,18 +11,19 @@ $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
 
-$query = "INSERT INTO rutinas (
-                            id
-                            titulo, 
-                            id_disciplina, 
-                            contenido, 
-                            actualizacion) VALUES (
+$query = "INSERT INTO 'rutinas' (
+                            'id',
+                            'titulo', 
+                            'id_disciplina', 
+                            'contenido', 
+                            'actualizacion') VALUES (
                                     NULL,
                                     '$titulo',
-                                     $disciplina,
+                                    '$disciplina',
                                     '$contenido',
                                     NOW()
                                     )";
+echo $query;
 
 $result=mysqli_query($db,$query);
 

@@ -7,16 +7,16 @@
  */
 
 require_once '../../../scripts/config.php';
-$xid = $_GET['xid'];
-$titulo = $_GET["titulo"];
-$disciplina = $_GET["disciplina"];
-$contenido = $_GET["contenido"];
+$xid = $_POST['id'];
+$titulo = $_POST["titulo"];
+$disciplina = $_POST["disciplina"];
+$contenido = $_POST["contenido"];
 
 $query="UPDATE rutinas SET 
             titulo='$titulo',
             disciplina=$disciplina,
             contenido='$contenido' 
-        WHERE id=$id
+        WHERE id=$xid
         ";
 
 $result=mysqli_query($db,$query);

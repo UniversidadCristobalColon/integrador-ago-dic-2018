@@ -37,19 +37,18 @@
                     <br>
                     <input type="hidden" name="id">
                     <label for="inputTitulo">Título: </label>
-                    <input type="text" class="form-control" id="titulo" placeholder="Título" required>
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Título" required>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
-                    <select class="custom-select d-block w-100" id="disciplina" required>
+                    <select class="custom-select d-block w-100" name="disciplina" id="disciplina" required>
                         <option value="">Selecciona...</option>
-                        <option value="1">Crossfit</option>
                         <?php
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);
-                        while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id].'">'.$valores[disciplinas].'</option>';
+                        while ($valores=mysqli_fetch_assoc($result)) {
+                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplinas].'</option>';
                         }
                         ?>
                     </select>
@@ -58,7 +57,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" name="contenido" required></textarea>
                 </div>
             </div>
         </form>

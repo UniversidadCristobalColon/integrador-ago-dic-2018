@@ -75,6 +75,14 @@
                     <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
                 </td>
                 <td><?php echo $fecha; ?></td>
+<!--                --><?php
+//                $query="select * from disciplinas where id_disciplina=$disciplina";
+//                echo $query;
+//                $result=mysqli_query($db,$query);
+//                while ($valores=mysqli_fetch_assoc($result)) {
+//                    echo '<td>'.$valores[nombre_disciplinas].'</td>';
+//                }
+//                ?>
                 <td><?php echo $disciplina ?></td>
                 <td>
                     <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>

@@ -65,7 +65,7 @@ require_once '../../../scripts/config.php' ?>
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id].'">'.$valores[disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplinas].'</option>';
                         }
                         ?>
                     </select>
