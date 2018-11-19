@@ -33,11 +33,21 @@
         <p class="lead">
         <form method="get">
             <button type="submit" class="btn btn-success">Guardar</button>
+            <?php
+            $xid = $_GET['xid'];
+            $query="select * from egresos where id=$xid";
+            $result=mysqli_query($db,$query);
+            while ($row=mysqli_fetch_array($result)) {
+            $descripcion = $row['descripcion'];
+            $user = $row['id_usuario'];
+            $importe = $row['importe'];
+            $fecha = $row['actualizacion'];
+            ?>
             <div class="row mb-3">
                 <div class="col-md-10">
                     <br>
                     <label for="inputDescripcion">Descripción: </label>
-                    <input type="text" class="form-control" id="inputDescripcion" placeholder="Descripción" required>
+                    <input type="text" class="form-control" id="inputDescripcion" placeholder="Descripción" value="<?php echo $descripcion; ?>" required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -45,10 +55,20 @@
                     <label for="inputUsuario">Usuario: </label>
                     <select class="custom-select d-block w-100" id="usuario" required>
                         <option value="">Selecciona...</option>
-                        <option>Administración</option>
-                        <option>Entrenador #1</option>
-                        <option>Entrenador #2</option>
-                        <option>Recepción</option>
+                        <?php
+                        $query="select * from usuarios WHERE id_usuario=$user";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_array($result)) {
+                            echo '<option selected="true" value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                        }
+                        ?>
+                        <?php
+                        $query="select * from usuarios WHERE id_usuario!=$user";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_array($result)) {
+                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -59,10 +79,13 @@
                 </div>
                 <div class="col-md-3">
                     <label for="inputMonto">Monto: </label>
-                    <input type="text" class="form-control" id="inputMonto" placeholder="Monto" required>
+                    <input type="text" class="form-control" id="inputMonto" placeholder="Monto" value="<?php echo $importe; ?>" required>
                 </div>
             </div>
         </form>
+        <?php
+        }
+        ?>
         </p>
     </div>
 

@@ -45,10 +45,13 @@
                     <label for="inputUsuario">Usuario: </label>
                     <select class="custom-select d-block w-100" id="usuario" required>
                         <option value="">Selecciona...</option>
-                        <option>Administración</option>
-                        <option>Entrenador #1</option>
-                        <option>Entrenador #2</option>
-                        <option>Recepción</option>
+                        <?php
+                        $query="select * from usuarios";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_assoc($result)) {
+                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-md-3">

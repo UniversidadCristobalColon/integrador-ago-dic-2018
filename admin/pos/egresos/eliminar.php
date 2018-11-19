@@ -5,12 +5,14 @@
  * Date: 13/11/2018
  * Time: 09:40 AM
  */
-require ("conexion.php");
-$id = $_POST["idEliminar"];
 
-$query = "delete from egresos where id=$id";
+require_once '../../../scripts/config.php';
 
-$result = pg_query($dbcon,$query);
+$id = $_GET['xid'];
+
+$query="delete from egresos where id=$id";
+
+$result=mysqli_query($db,$query);
 
 if ($result){
     header("Location: index.php");

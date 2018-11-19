@@ -61,16 +61,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Se compraron 5 pesas</td>
-                <td>entrenador #2</td>
-                <td>$2,000</td>
-                <td>Hoy</td>
-                <td>
-                    <a href="editar.php" class="btn btn-link" role="button">Editar</a>
-                    <a href="editar.php" class="btn btn-link" role="button">Eliminar</a>
-                </td>
-            </tr>
+            <?php
+            $query="select * from egresos";
+            $result=mysqli_query($db,$query);
+            while ($row=mysqli_fetch_array($result)) {
+                $id = $row['id'];
+                $descripcion = $row['descripcion'];
+                $user = $row['id_usuario'];
+                $importe = $row['importe'];
+                $fecha = $row['actualizacion'];
+                ?>
+                <tr>
+                    <td><?php echo $descripcion ?></td>
+                    <td><?php echo $user ?></td>
+                    <td><?php echo $importe ?></td>
+                    <td><?php echo $fecha ?></td>
+                    <td>
+                        <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
+                        <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
+                           onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
             </tbody>
         </table>
         </p>
