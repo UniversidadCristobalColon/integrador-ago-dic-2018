@@ -46,7 +46,7 @@ require_once '../../../scripts/config.php' ?>
                 $titulo = $row['titulo'];
                 $contenido = $row['contenido'];
                 $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplina'];
+                $disciplina = $row['id_disciplinas'];
             ?>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -60,12 +60,11 @@ require_once '../../../scripts/config.php' ?>
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required disabled>
-                        <option value="">Selecciona...</option>
                         <?php
-                        $query="select * from disciplinas";
+                        $query="select * from disciplinas WHERE id_disciplinas=$disciplina";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
                         }
                         ?>
                     </select>

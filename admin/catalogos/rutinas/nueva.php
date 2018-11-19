@@ -48,7 +48,7 @@
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_assoc($result)) {
-                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
                         }
                         ?>
                     </select>

@@ -68,7 +68,7 @@
                 $titulo = $row['titulo'];
                 $contenido = $row['contenido'];
                 $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplina'];
+                $disciplina = $row['id_disciplinas'];
             ?>
             <tr>
                 <td>
@@ -76,7 +76,7 @@
                 </td>
                 <td><?php echo $fecha; ?></td>
 <!--                --><?php
-//                $query="select * from disciplinas where id_disciplina=$disciplina";
+//                $query="select * from disciplinas where id_disciplinas=$disciplina";
 //                echo $query;
 //                $result=mysqli_query($db,$query);
 //                while ($valores=mysqli_fetch_assoc($result)) {
@@ -86,7 +86,7 @@
                 <td><?php echo $disciplina ?></td>
                 <td>
                     <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
                 </td>
             </tr>
             <?php

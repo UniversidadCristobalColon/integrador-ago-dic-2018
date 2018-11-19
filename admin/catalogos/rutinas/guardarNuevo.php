@@ -11,25 +11,24 @@ $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
 
-$query = "INSERT INTO 'rutinas' (
-                            'id',
-                            'titulo', 
-                            'id_disciplina', 
-                            'contenido', 
-                            'actualizacion') VALUES (
+$query="INSERT INTO `rutinas` (
+                          `id`,
+                          `titulo`,
+                          `id_disciplinas`,
+                          `contenido`,
+                          `actualizacion`) VALUES (
                                     NULL,
                                     '$titulo',
                                     '$disciplina',
                                     '$contenido',
                                     NOW()
-                                    )";
-echo $query;
+                                    );";
 
 $result=mysqli_query($db,$query);
 
 if ($result === TRUE) {
-    echo "Los datos se han guardado, serás redirigido a la página principal.";
-
+    $message = "La nueva rutina se ha guardado.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
     ?>
     <!--Redireccionamiento al index de rutinas -->
     <meta http-equiv="refresh" content="1;url=index.php">
@@ -37,5 +36,6 @@ if ($result === TRUE) {
 }
 //Mostrar error
 else {
-    echo "No se ha podido completar el registro de la nueva rutina, inténtalo de nuevo." . $query . "<br>" . $db->error;
+    $message = "No se ha podido completar el registro de la nueva rutina, inténtalo de nuevo." . $query . "<br>" . $db->error;
+    echo "<script type='text/javascript'>alert('$message');</script>";
 }
