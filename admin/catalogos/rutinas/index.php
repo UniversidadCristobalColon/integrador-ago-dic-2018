@@ -68,18 +68,25 @@
                 $titulo = $row['titulo'];
                 $contenido = $row['contenido'];
                 $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplina'];
+                $disciplina = $row['id_disciplinas'];
             ?>
             <tr>
-
                 <td>
                     <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
                 </td>
                 <td><?php echo $fecha; ?></td>
+<!--                --><?php
+//                $query="select * from disciplinas where id_disciplinas=$disciplina";
+//                echo $query;
+//                $result=mysqli_query($db,$query);
+//                while ($valores=mysqli_fetch_assoc($result)) {
+//                    echo '<td>'.$valores[nombre_disciplinas].'</td>';
+//                }
+//                ?>
                 <td><?php echo $disciplina ?></td>
                 <td>
                     <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
                 </td>
             </tr>
             <?php
@@ -87,9 +94,7 @@
             ?>
             </tbody>
         </table>
-
     </div>
-
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
