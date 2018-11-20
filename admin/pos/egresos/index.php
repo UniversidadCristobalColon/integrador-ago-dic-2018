@@ -73,7 +73,14 @@
                 ?>
                 <tr>
                     <td><?php echo $descripcion ?></td>
-                    <td><?php echo $user ?></td>
+                    <?php
+                    $query2="select * from usuarios WHERE id_usuario=$user";
+                    $result2=mysqli_query($db,$query2);
+                    while ($valores2=mysqli_fetch_assoc($result2)) {
+                        echo '<td>'.$valores2['nombre_usuario'].'</td>';
+                    }
+                    ?>
+<!--                    <td>--><?php //echo $user ?><!--</td>-->
                     <td><?php echo $importe ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>
