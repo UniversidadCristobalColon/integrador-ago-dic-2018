@@ -55,7 +55,7 @@
             <tr>
                 <th width="30%">Rutina</th>
                 <th>Actualizada</th>
-                <th>Disciplinas</th>
+                <th>Disciplina</th>
                 <th>Opciones</th>
             </tr>
             </thead>
@@ -63,7 +63,7 @@
             <?php
             $query="select * from rutinas";
             $result=mysqli_query($db,$query);
-            while ($row=mysqli_fetch_array($result)) {
+            while ($row=mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
                 $titulo = $row['titulo'];
                 $contenido = $row['contenido'];
@@ -75,15 +75,13 @@
                     <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
                 </td>
                 <td><?php echo $fecha; ?></td>
-<!--                --><?php
-//                $query="select * from disciplinas where id_disciplinas=$disciplina";
-//                echo $query;
-//                $result=mysqli_query($db,$query);
-//                while ($valores=mysqli_fetch_assoc($result)) {
-//                    echo '<td>'.$valores[nombre_disciplinas].'</td>';
-//                }
-//                ?>
-                <td><?php echo $disciplina ?></td>
+                <?php
+                $query2="select * from disciplinas where id_disciplinas=$disciplina";
+                $result2=mysqli_query($db,$query2);
+                while ($valores2=mysqli_fetch_assoc($result2)) {
+                    echo '<td>'.$valores2['nombre_disciplinas'].'</td>';
+                }
+                ?>
                 <td>
                     <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
                     <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
