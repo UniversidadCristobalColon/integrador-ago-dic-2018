@@ -55,7 +55,7 @@
             <tr>
                 <th width="30%">Rutina</th>
                 <th>Actualizada</th>
-                <th>Disciplinas</th>
+                <th>Disciplina</th>
                 <th>Opciones</th>
             </tr>
             </thead>
@@ -63,23 +63,28 @@
             <?php
             $query="select * from rutinas";
             $result=mysqli_query($db,$query);
-            while ($row=mysqli_fetch_array($result)) {
+            while ($row=mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
                 $titulo = $row['titulo'];
                 $contenido = $row['contenido'];
                 $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplina'];
+                $disciplina = $row['id_disciplinas'];
             ?>
             <tr>
-
                 <td>
                     <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
                 </td>
                 <td><?php echo $fecha; ?></td>
-                <td><?php echo $disciplina ?></td>
+                <?php
+                $query2="select * from disciplinas where id_disciplinas=$disciplina";
+                $result2=mysqli_query($db,$query2);
+                while ($valores2=mysqli_fetch_assoc($result2)) {
+                    echo '<td>'.$valores2['nombre_disciplinas'].'</td>';
+                }
+                ?>
                 <td>
                     <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Eliminar</a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
                 </td>
             </tr>
             <?php
@@ -87,9 +92,7 @@
             ?>
             </tbody>
         </table>
-
     </div>
-
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
