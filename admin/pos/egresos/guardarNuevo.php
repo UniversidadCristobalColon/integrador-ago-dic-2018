@@ -8,9 +8,9 @@
 require_once '../../../scripts/config.php';
 
 $descripcion = $_POST['descripcion'];
-$user = $_POST['id_usuario'];
+$user = $_POST['user'];
 $importe = $_POST['importe'];
-$fecha = $_POST['actualizacion'];
+$fecha = $_POST['fecha'];
 
 $query="INSERT INTO `egresos` (
                           `id`,

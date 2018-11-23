@@ -9,9 +9,9 @@
 require_once '../../../scripts/config.php';
 $xid = $_POST['id'];
 $descripcion = $_POST['descripcion'];
-$user = $_POST['id_usuario'];
+$user = $_POST['user'];
 $importe = $_POST['importe'];
-$fecha = $_POST['actualizacion'];
+$fecha = $_POST['fecha'];
 
 $query="UPDATE `egresos` SET 
                       `descripcion` = '$descripcion',

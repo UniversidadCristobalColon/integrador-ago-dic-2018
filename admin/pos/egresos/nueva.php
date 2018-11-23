@@ -14,6 +14,10 @@
 
     <link rel="icon" href="../../../img/favicon.png">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Hojas de estilos -->
     <link href="../../../css/base.css" rel="stylesheet">
 
@@ -31,19 +35,19 @@
     <div class="starter-template">
         <h1>Nuevo egreso</h1>
         <p class="lead">
-        <form method="get">
+        <form action="guardarNuevo.php" method="post">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-10">
                     <br>
                     <label for="inputDescripcion">Descripción: </label>
-                    <input type="text" class="form-control" id="inputDescripcion" placeholder="Descripción" required>
+                    <input type="text" name="descripcion" class="form-control" id="inputDescripcion" placeholder="Descripción" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="inputUsuario">Usuario: </label>
-                    <select class="custom-select d-block w-100" id="usuario" required>
+                    <select class="custom-select d-block w-100" name="user" id="usuario" required>
                         <option value="">Selecciona...</option>
                         <?php
                         $query="select * from usuarios";
@@ -56,23 +60,17 @@
                 </div>
                 <div class="col-md-3">
                     <label for="inputMonto">Fecha: </label>
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                    </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $('#datetimepicker2').datetimepicker({
-                                locale: 'ru'
-                            });
+                    <input id="datepicker" name="fecha">
+                    <script>
+                        $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap4',
+                            format: 'yyyy-mm-dd'
                         });
                     </script>
                 </div>
                 <div class="col-md-3">
                     <label for="inputMonto">Monto: </label>
-                    <input type="text" class="form-control" id="inputMonto" placeholder="Monto" required>
+                    <input type="text" name="importe" class="form-control" id="inputMonto" placeholder="100.00" required>
                 </div>
             </div>
         </form>
