@@ -31,10 +31,44 @@
 <?php require_once '../../scripts/navbar2.php' ?>
 
 
-<main>
+<main role="main" class="container">
+  <h2>Sentadillas</h2>
+  <br>
+  <p>vijuhviñaehfdi ñljbiudbvaiusdsbuysdvbiuoew8bvasuigbuaeyfb uvyaefgyda</p>
+  <br><br>
+
+  <table id="example" class="display table table-hover"  style="width:100%">
+          <thead class="thead-dark">
+              <tr>
+                <th scope="col">Wod</th>
+                 <th scope="col">Records</th>
+                 <th scope="col">Fecha Creación</th>
+                 <th scope="col">Editar</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>sentadillas</td>
+               <td>50 repeticiones</td>
+               <td>20/10/18</td>
+               <td>
+                   <a class="icono" href="editarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="create"><ion-icon> </a>
+               </td>
+            </tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                <th scope="col">Wod</th>
+                 <th scope="col">Records</th>
+                 <th scope="col">Fecha Creación</th>
+                 <th scope="col">Editar</th>
+              </tr>
+          </tfoot>
+      </table>
 
 </main>
 
+<script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

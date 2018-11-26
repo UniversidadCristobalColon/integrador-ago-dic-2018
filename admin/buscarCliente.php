@@ -1,4 +1,17 @@
-<?php require_once '../scripts/config.php' ?>
+<?php
+        try {
+          require_once('../scripts/config.php');
+          $_SESSION['user'] = 4;
+          $sql = 'SELECT * FROM usuarios';
+          $resultado = $db->query($sql);
+        } catch (Exception $e) {
+
+
+
+        }
+
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -22,6 +35,7 @@
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../js/base.js"></script>
+    <script src="../js/tablas.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
@@ -40,35 +54,37 @@
   <table id="example" class="display table table-hover"  style="width:100%">
           <thead class="thead-dark">
               <tr>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre Completo</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Visualizar</th>
               </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>pepe</td>
-              <td>pepe212@gmail.com</td>
+            <?php while($registros = $resultado->fetch_assoc() ) { ?>
+            <tr id="<?php $registros['id_usuario']; ?>">
+              <td><?php echo $registros['nombre_completo']; ?></td>
+              <td><?php echo $registros['correo']; ?></td>
               <td>
-                    <form action="clases/generalExpediente.php" method="post" id="formulario_ver_expediente">
-                      <input type="hidden" value="" name="id">
-                      <input type="submit" class="btn btn-link" value="Visualizar Cliente" name="">
-                    </form>
+                <a class="icono" target="_blank" href="clases/generalExpediente.php?id=<?php echo $registros['id_usuario']; ?>"> <ion-icon name="eye"><ion-icon> </a>
               </td>
             </tr>
+            <?php } ?>
+
+
           </tbody>
           <tfoot>
               <tr>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre Completo</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Visualizar</th>
               </tr>
           </tfoot>
       </table>
 
+ <?php $db->close(); ?>
 </main>
 
-
+<script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>

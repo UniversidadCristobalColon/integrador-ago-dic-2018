@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistema de gestión de Sarx Wellness Center">
     <meta name="author" content="UCC Sistemas">
+    <base href="<?php echo BASE; ?>">
 
     <title>Sarx Wellness Center</title>
 
@@ -27,10 +28,7 @@
 
 <main role="main" class="container">
 
-    <div class="starter-template">
-        <h1>Esto es una plantilla</h1>
-        <p class="lead">Copia el archivo y cambia su nombre como requieras. No edites el original.</p>
-    </div>
+    <img src="../img/logo.png" class="img-fluid"/>
 
 </main>
 
