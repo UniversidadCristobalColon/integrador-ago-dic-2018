@@ -40,31 +40,45 @@ require_once '../../../scripts/config.php' ?>
             <button type="submit" class="btn btn-success">Regresar</button>
             <?php
             $xid = $_GET['xid'];
-            $query="select * from rutinas where id=$xid";
+            $query="select * from rutinas where id_rutina=$xid";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-                $titulo = $row['titulo'];
-                $contenido = $row['contenido'];
-                $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplinas'];
+                $titulo = $row['nombre_rutina'];
+                $contenido = $row['ejercicios_rutina'];
+                $fecha = $row['fecha_modificacion'];
+                $disciplina = $row['id_disciplina'];
+                $user = $row['id_usuario_modificacion'];
             ?>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <br>
                     <input type="hidden" name="id" value="<?php echo $xid; ?>" readonly>
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
                            value="<?php echo $titulo; ?>" readonly>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
                     <select class="custom-select d-block w-100" id="disciplina" required disabled>
                         <?php
-                        $query="select * from disciplinas WHERE id_disciplinas=$disciplina";
+                        $query="select * from disciplinas WHERE id_disciplina=$disciplina";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplina].'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <label for="inputPassword4">Usuario: </label>
+                    <select class="custom-select d-block w-100" id="user" required disabled>
+                        <?php
+                        $query2="select * from usuarios where id_usuario=$user";
+                        $result2=mysqli_query($db,$query2);
+                        while ($valores2=mysqli_fetch_assoc($result2)) {
+                            echo '<option value="'.$valores2[id_usuario].'">'.$valores2[nombre_corto].'</option>';
                         }
                         ?>
                     </select>

@@ -9,7 +9,7 @@ require_once '../../../scripts/config.php';
 
 $id = $_GET['xid'];
 
-$query="delete from rutinas where id=$id";
+$query="delete from rutinas where id_rutina=$id";
 
 $result=mysqli_query($db,$query);
 

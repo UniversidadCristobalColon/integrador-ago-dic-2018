@@ -35,18 +35,20 @@
             <button type="submit" class="btn btn-success">Guardar</button>
             <?php
             $xid = $_GET['xid'];
-            $query="select * from rutinas where id=$xid";
+            $query="select * from rutinas where id_rutina=$xid";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-                $titulo = $row['titulo'];
-                $contenido = $row['contenido'];
-                $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplinas'];
+                $titulo = $row['nombre_rutina'];
+                $contenido = $row['ejercicios_rutina'];
+                $fecha = $row['fecha_modificacion'];
+                $disciplina = $row['id_disciplina'];
+                $user = $row['id_usuario_modificacion'];
             ?>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
                     <input type="hidden" name="id" value="<?php echo $xid; ?>">
+                    <input type="hidden" name="user" value="<?php echo $user ?>">
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" id="inputTitulo" name="titulo"
                            placeholder="Título" required
@@ -58,17 +60,17 @@
                     <select class="custom-select d-block w-100" id="disciplina" name="disciplina" required>
                         <option value="">Selecciona...</option>
                         <?php
-                        $query="select * from disciplinas WHERE id_disciplinas=$disciplina";
+                        $query="select * from disciplinas WHERE id_disciplina=$disciplina";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option selected="true" value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option selected="true" value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplina].'</option>';
                         }
                         ?>
                         <?php
-                        $query="select * from disciplinas WHERE id_disciplinas!=$disciplina";
+                        $query="select * from disciplinas WHERE id_disciplina!=$disciplina";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplina].'</option>';
                         }
                         ?>
                     </select>

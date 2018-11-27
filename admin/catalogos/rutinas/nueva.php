@@ -36,6 +36,7 @@
                 <div class="col-md-6">
                     <br>
                     <input type="hidden" name="id">
+                    <input type="hidden" name="user" value="1">
                     <label for="inputTitulo">Título: </label>
                     <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Título" required>
                 </div>
@@ -48,7 +49,7 @@
                         $query="select * from disciplinas";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_assoc($result)) {
-                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
+                            echo '<option value="'.$valores[id_disciplina].'">'.$valores[nombre_disciplina].'</option>';
                         }
                         ?>
                     </select>

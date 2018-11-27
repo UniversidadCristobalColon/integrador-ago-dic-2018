@@ -10,18 +10,21 @@ require_once '../../../scripts/config.php';
 $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
+$user = $_POST['user'];
 
 $query="INSERT INTO `rutinas` (
-                          `id`,
-                          `titulo`,
-                          `id_disciplinas`,
-                          `contenido`,
-                          `actualizacion`) VALUES (
+                          `id_rutina`,
+                          `nombre_rutina`,
+                          `ejercicios_rutina`,
+                          `fecha_modificacion`,
+                          `id_disciplina`,
+                          `id_usuario_modificacion`) VALUES (
                                     NULL,
                                     '$titulo',
-                                    '$disciplina',
                                     '$contenido',
-                                    NOW()
+                                    NOW(),
+                                    '$disciplina',
+                                    '$user'
                                     );";
 
 $result=mysqli_query($db,$query);

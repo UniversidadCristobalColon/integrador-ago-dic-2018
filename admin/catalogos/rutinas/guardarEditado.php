@@ -11,13 +11,15 @@ $xid = $_POST['id'];
 $titulo = $_POST["titulo"];
 $disciplina = $_POST["disciplina"];
 $contenido = $_POST["contenido"];
+$user = $_POST["user"];
 
 $query="UPDATE `rutinas` SET 
-                      `titulo` = '$titulo',
-                      `id_disciplinas` = '$disciplina',
-                      `contenido` = '$contenido',
-                      `actualizacion` = NOW()
-                      WHERE `rutinas`.`id` = $xid;";
+                      `nombre_rutina` = '$titulo',
+                      `id_disciplina` = '$disciplina',
+                      `ejercicios_rutina` = '$contenido',
+                      `id_usuario_modificacion` = '$user',
+                      `fecha_modificacion` = NOW()
+                      WHERE `rutinas`.`id_rutina` = $xid;";
 
 $result=mysqli_query($db,$query);
 

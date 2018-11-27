@@ -53,9 +53,10 @@
         <table id="example" class="table">
             <thead>
             <tr>
-                <th width="30%">Rutina</th>
+                <th width="25%">Rutina</th>
                 <th>Actualizada</th>
                 <th>Disciplina</th>
+                <th>Usuario</th>
                 <th>Opciones</th>
             </tr>
             </thead>
@@ -64,11 +65,12 @@
             $query="select * from rutinas";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_assoc($result)) {
-                $id = $row['id'];
-                $titulo = $row['titulo'];
-                $contenido = $row['contenido'];
-                $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplinas'];
+                $id = $row['id_rutina'];
+                $titulo = $row['nombre_rutina'];
+                $contenido = $row['ejercicios_rutina'];
+                $fecha = $row['fecha_modificacion'];
+                $disciplina = $row['id_disciplina'];
+                $user = $row['id_usuario_modificacion'];
             ?>
             <tr>
                 <td>
@@ -76,10 +78,17 @@
                 </td>
                 <td><?php echo $fecha; ?></td>
                 <?php
-                $query2="select * from disciplinas where id_disciplinas=$disciplina";
+                $query2="select * from disciplinas where id_disciplina=$disciplina";
                 $result2=mysqli_query($db,$query2);
                 while ($valores2=mysqli_fetch_assoc($result2)) {
-                    echo '<td>'.$valores2['nombre_disciplinas'].'</td>';
+                    echo '<td>'.$valores2['nombre_disciplina'].'</td>';
+                }
+                ?>
+                <?php
+                $query3="select * from usuarios where id_usuario=$user";
+                $result3=mysqli_query($db,$query3);
+                while ($valores3=mysqli_fetch_assoc($result3)) {
+                    echo '<td>'.$valores3['nombre_corto'].'</td>';
                 }
                 ?>
                 <td>
