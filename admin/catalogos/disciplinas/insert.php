@@ -1,4 +1,4 @@
-<?php require_once '../../../scripts/config.php' ?>
+<?php require_once '../scripts/config.php' ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,57 +11,41 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="../../../img/favicon.png">
+    <link rel="icon" href="../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../../../css/base.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
 
     <!-- Archivos JS -->
-    <script src="../../../js/base.js"></script>
+    <script src="../js/base.js"></script>
 
 </head>
 
 <body>
 
-<?php require_once '../../../scripts/navbar.php' ?>
+<?php require_once '../scripts/navbar.php' ?>
 
 <main role="main" class="container">
 
-    <h1>Nueva Disciplina</h1>
+<?php
+$cod    = $_POST['codigo'];
+$nombre = $_POST['nombre'];
+$tel    = $_POST['telefono'];
+$dir    = $_POST['direccion'];
 
-    <br> <br>
+include "conex.php";
+$link = conectarse();
 
+if (isset($_POST['guardar'])) {
 
-    <form action="result.php" method="post">
+    mysqli_query("INSERT INTO alumnos(codigo,nombres,telefono,direccion)values('$cod','$nombre','$tel','$dir')", $link);
 
-
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Nombre</label>
-            <input type="text" class="form-control" name="nombre_disciplinas" placeholder="Ejemplo: CrossFit">
-        </div>
-
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Agregar una nueva descripción</label>
-            <textarea class="form-control" name="descripcion_disciplinas" rows="3"></textarea>
-        </div>
-
-
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Fecha</label>
-            <input type="text" class="form-control" name="fecha_modificacion" placeholder="Ejemplo: 2018/11/20">
-        </div>
-
-        <br>
-        <p><input type="submit" class="btn btn-success" value="Guardar"></p>
-
-
-
-
-    </form>
-
+    echo ' <script language="javascript">alert("Alumno registrado con éxito");</script> ';
+    header("Location:index.php");
+} else {
+    echo ("Presiona el botón guardar");
+}
+?>
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
