@@ -13,11 +13,11 @@ $importe = $_POST['importe'];
 $fecha = $_POST['fecha'];
 
 $query="INSERT INTO `egresos` (
-                          `id`,
-                          `descripcion`,
+                          `id_egresos`,
+                          `descripcion_egresos`,
                           `id_usuario`,
                           `importe`,
-                          `actualizacion`) VALUES (
+                          `fecha_modificacion`) VALUES (
                                     NULL,
                                     '$descripcion',
                                     '$user',

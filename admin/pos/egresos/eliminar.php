@@ -10,7 +10,7 @@ require_once '../../../scripts/config.php';
 
 $id = $_GET['xid'];
 
-$query="delete from egresos where id=$id";
+$query="delete from egresos where id_egresos=$id";
 
 $result=mysqli_query($db,$query);
 
