@@ -1,29 +1,28 @@
 <?php
 
+$id = htmlspecialchars($_GET['id']);
 
       try {
-        require_once('../scripts/config.php');
-          $_SESSION['user'] = 3;
-        ////RELLENA EL FORMULARIO DE DATOS DE USUARIO
-          $sql = "SELECT * FROM `usuarios` WHERE `id_usuario` LIKE  '{$_SESSION["user"]}'";
-          $resultado = $db->query($sql);
+        require_once('../../scripts/config.php');
 
-          /////INSERTA EN LA TABLA EXPEDIENTES SINO EXISTE EL USUARIO EN ELLA
-            $select = "SELECT * FROM `expedientes` WHERE `id_usuario` LIKE  '{$_SESSION["user"]}'";
-            $result = $db->query($select);
+      ////RELLENA EL FORMULARIO DE DATOS DE USUARIO
+        $sql = "SELECT * FROM `usuarios` WHERE `id_usuario` LIKE  '{$id}'";
+        $resultado = $db->query($sql);
 
-            $num = $result->num_rows;
+      /////INSERTA EN LA TABLA EXPEDIENTES SINO EXISTE EL USUARIO EN ELLA
+        $select = "SELECT * FROM `expedientes` WHERE `id_usuario` LIKE  '{$id}'";
+        $result = $db->query($select);
 
-            if($num == 0){
-                     $insert = "INSERT INTO `expedientes` (`id_expediente`, `peso`, `altura`, `fecha_nacimiento`, `cintura`, `IMC`, `antecedentes_salud`, `id_usuario`, `id_usuario_modificacion`, `eliminado`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL,'{$_SESSION["user"]}','{$_SESSION["user"]}', NULL)";
-                     $insert;
+        $num = $result->num_rows;
+
+        if($num == 0){
+                    $insert = "INSERT INTO `expedientes` (`id_expediente`, `peso`, `altura`, `fecha_nacimiento`, `cintura`, `IMC`, `antecedentes_salud`, `id_usuario`, `id_usuario_modificacion`, `eliminado`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL,'{$id}','{$_SESSION["user"]}', NULL)";
+                    $insert;
                     $db->query($insert);
-                }
-
-          /////RELLENA EL FORMULARIO DE EXPEDIENTE MEDICO
-          $sql2 = "SELECT `e`.`id_usuario` ,`peso` , `altura`, `fecha_nacimiento` ,`cintura` ,`IMC`,`antecedentes_salud` FROM `expedientes` `e` LEFT JOIN `usuarios` `u` ON `e`.`id_usuario` = `u`.`id_usuario` WHERE `e`.`id_usuario` LIKE '{$_SESSION["user"]}'";
-          $resultado2 = $db->query($sql2);
-
+            }
+            /////RELLENA EL FORMULARIO DE EXPEDIENTE MEDICO
+            $sql2 = "SELECT `e`.`id_usuario` ,`peso` , `altura`, `fecha_nacimiento` ,`cintura` ,`IMC`,`antecedentes_salud` FROM `expedientes` `e` LEFT JOIN `usuarios` `u` ON `e`.`id_usuario` = `u`.`id_usuario` WHERE `e`.`id_usuario` LIKE '{$id}' ";
+            $resultado2 = $db->query($sql2);
 
 
       } catch (Exception $e) {
@@ -31,7 +30,6 @@
       }
 
 ?>
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -44,17 +42,17 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="../img/favicon.png">
+    <link rel="icon" href="../../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/controlClientes.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/base.js"></script>
-    <script src="../js/tablas.js"></script>
+    <script src="../../js/base.js"></script>
+    <script src="../../js/tablas.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
@@ -62,11 +60,11 @@
 
 <body>
 
-<?php require_once '../scripts/navbar2.php' ?>
+<?php require_once '../../scripts/navbar2.php' ?>
 
 <main role="main" class="container">
 
-    <h1>Perfil</h1>
+    <h1>Expediente </h1>
     <br>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -92,7 +90,7 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
      <?php while($registros = $resultado->fetch_assoc() ) { ?>
-            <form action="perfil/modificacionDatosPersonales.php" method="post">
+            <form action="modificacionDatosPersonales.php" method="post">
                 <br>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Nombre Completo</label>
@@ -133,56 +131,61 @@
                     </div>
                 </div>
 
-
+                <input type="hidden" value="<?php echo $registros['id_usuario']; ?>" name="id_datos">
                 <input type="submit" class="btn btn-success btnGuardar" value="Guardar">
 
             </form>
          <?php  } ?>
         </div>
-
+<?php //$db->close(); ?>
 <!--************************************* Ficha médica ************************************************* -->
 
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                <?php while($registro = $resultado2->fetch_assoc() ) { ?>
+            <form action="modificacionExpediente.php" method="post">
                 <br>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Peso (Kg)</label>
                     <div class="col-10">
-                        <label class="form-control" ><?php echo $registro['peso']; ?></label>
+                        <input class="form-control" name="peso" type="number" value="<?php echo $registro['peso']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Altura (cm)</label>
                     <div class="col-10">
-                        <label class="form-control" ><?php echo $registro['altura']; ?></label>
+                        <input class="form-control" name="altura" type="number" value="<?php echo $registro['altura']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-10">
-                        <label class="form-control" ><?php echo $registro['fecha_nacimiento']; ?></label>
+                        <input class="form-control" name="fecha_nacimiento" type="date" id="" value="<?php echo $registro['fecha_nacimiento']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Cintura (cm)</label>
                     <div class="col-10">
-                        <label class="form-control" ><?php echo $registro['cintura']; ?></label>
+                        <input class="form-control" name="cintura" type="number" value="<?php echo $registro['cintura']; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">IMC</label>
                     <div class="col-10">
-                        <label class="form-control" ><?php echo $registro['IMC']; ?></label>
+                        <input class="form-control" name="imc" type="number" value="<?php echo $registro['IMC']; ?>">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="exampleTextarea" class="col-2 col-form-label">Comentarios de Salud</label>
                     <div class="col-10">
-                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3" readonly ><?php echo $registro['antecedentes_salud']; ?></textarea>
+                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3"><?php echo $registro['antecedentes_salud']; ?></textarea>
                     </div>
                 </div>
 
+                <input type="hidden" value="<?php echo $registro['id_usuario']; ?>" name="id_ficha">
+                <input type="submit" class="btn btn-success btnGuardar" value="Guardar">
+
+          </form>
            <?php  } ?>
         </div>
 
@@ -191,8 +194,8 @@
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <br><br>
 
-          <form action="perfil/nuevoRecord.php" method="post" id="formulario_nuevo">
-              <input type="hidden" value="<?php echo $_SESSION['user']?>" name="id_record">
+          <form action="nuevoRecord.php" method="post" id="formulario_nuevo">
+              <input type="hidden" value="<?php echo $id?>" name="id_record">
               <input type="submit" class="btn btn-success btnNuevoCliente" value="Nuevo +" >
           </form>
 
@@ -206,6 +209,7 @@
                           <th scope="col">Wod</th>
                            <th scope="col">Records</th>
                            <th scope="col">Visualizar</th>
+                           <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -217,6 +221,9 @@
                          <td>
                              <a class="icono" href="verRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="eye"><ion-icon> </a>
                          </td>
+                         <td>
+                            <a class="icono" href="eliminarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="trash"><ion-icon> </a>
+                         </td>
                       </tr>
                     </tbody>
                     <tfoot>
@@ -224,6 +231,7 @@
                           <th scope="col">Wod</th>
                            <th scope="col">Records</th>
                            <th scope="col">Visualizar</th>
+                           <th scope="col">Eliminar</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -238,9 +246,9 @@
                               <thead class="thead-dark">
                                   <tr>
                                     <th scope="col">Logro</th>
-                                     <th scope="col">Disciplina</th>
+                                     <th scope="col">Tipo</th>
                                      <th scope="col">Fecha Creación</th>
-
+                                     <th scope="col">Eliminar</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -248,14 +256,18 @@
                                    <td>50 repeticiones</td>
                                    <td>crossfit</td>
                                    <td>20/12/12</td>
+
+                                   <td>
+                                    <a class="icono" href="eliminarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="trash"><ion-icon> </a>
+                                   </td>
                                 </tr>
                               </tbody>
                               <tfoot>
                                   <tr>
                                     <th scope="col">Logro</th>
-                                     <th scope="col">Disciplina</th>
+                                     <th scope="col">Tipo</th>
                                      <th scope="col">Fecha Creación</th>
-
+                                     <th scope="col">Eliminar</th>
                                   </tr>
                               </tfoot>
                           </table>
@@ -268,5 +280,3 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
   </html>
-
-</html>
