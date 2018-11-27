@@ -1,4 +1,7 @@
 <?php
+ $tsesion= $_SESSION['correo']['id_tipo_usuario'];
+$user=$_SESSION['correo']['nombre_corto'];
+
 $usuario = !empty($_SESSION["user_name"]) ? $_SESSION["user_name"] : 'Usuario';
 
 $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -27,10 +30,10 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
+                       aria-haspopup="true" aria-expanded="false">'.$user.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#">Perfil</a>
-                        <a class="dropdown-item" href="#">Salir</a>                        
+                        <a class="dropdown-item" href="int7/salir.php">Salir</a>                        
                     </div>
                 </li>                                
             </ul>
@@ -55,10 +58,10 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
+                       aria-haspopup="true" aria-expanded="false">'.$user.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#">Perfil</a>
-                        <a class="dropdown-item" href="#">Salir</a>                        
+                        <a class="dropdown-item" href="int7/salir.php">Salir</a>                        
                     </div>
                 </li>                                
             </ul>
@@ -66,7 +69,23 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
     </div>
 </nav>';
 
-$navbar = 1 == 1 ? $navbar_admin : $navbar_clientes;
+//$navbar = 1 == 1 ? $navbar_admin : $navbar_clientes;
 
-echo $navbar;
+//echo $navbar;
+
+
+
+if(isset($_SESSION['correo'])){
+    
+    if($_SESSION['correo']['id_tipo_usuario'] == "1"){
+     echo $navbar_admin;  
+        
+    }else{
+        echo $navbar_clientes; 
+    }
+    
+}else{
+   header('Location: ../index.php');   
+}
+
 ?>
