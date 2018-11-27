@@ -39,13 +39,13 @@
             <button type="submit" class="btn btn-success">Guardar</button>
             <?php
             $xid = $_GET['xid'];
-            $query="select * from egresos where id=$xid";
+            $query="select * from egresos where id_egresos=$xid";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-            $descripcion = $row['descripcion'];
+            $descripcion = $row['descripcion_egresos'];
             $user = $row['id_usuario'];
             $importe = $row['importe'];
-            $fecha = $row['actualizacion'];
+            $fecha = $row['fecha_modificacion'];
             ?>
             <input type="hidden" name="id" value="<?php echo $xid; ?>">
             <div class="row mb-3">
@@ -64,14 +64,14 @@
                         $query="select * from usuarios WHERE id_usuario=$user";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option selected="true" value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                            echo '<option selected="true" value="'.$valores[id_usuario].'">'.$valores[nombre_corto].'</option>';
                         }
                         ?>
                         <?php
                         $query="select * from usuarios WHERE id_usuario!=$user";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_corto].'</option>';
                         }
                         ?>
                     </select>

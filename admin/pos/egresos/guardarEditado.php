@@ -14,11 +14,11 @@ $importe = $_POST['importe'];
 $fecha = $_POST['fecha'];
 
 $query="UPDATE `egresos` SET 
-                      `descripcion` = '$descripcion',
+                      `descripcion_egresos` = '$descripcion',
                       `id_usuario` = '$user',
                       `importe` = '$importe',
-                      `actualizacion` = '$fecha'
-                      WHERE `egresos`.`id` = $xid;";
+                      `fecha_modificacion` = '$fecha'
+                      WHERE `egresos`.`id_egresos` = $xid;";
 
 $result=mysqli_query($db,$query);
 

@@ -48,7 +48,8 @@
         <!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
         <!--            <strong>Success!</strong> Indicates a successful or positive action.-->
         <!--        </div>-->
-        <a href="nueva.php" class="btn btn-success" role="button">+ Nueva</a>
+        <a href="nueva.php" class="btn btn-success" role="button">Nueva</a>
+        <a href="pdf.php" class="btn btn-danger" role="button">Exportar</a>
         <p class="lead">
         <table id="example" class="table" style="width:100%">
             <thead>
@@ -65,11 +66,11 @@
             $query="select * from egresos";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_array($result)) {
-                $id = $row['id'];
-                $descripcion = $row['descripcion'];
+                $id = $row['id_egresos'];
+                $descripcion = $row['descripcion_egresos'];
                 $user = $row['id_usuario'];
                 $importe = $row['importe'];
-                $fecha = $row['actualizacion'];
+                $fecha = $row['fecha_modificacion'];
                 ?>
                 <tr>
                     <td><?php echo $descripcion ?></td>
@@ -77,10 +78,9 @@
                     $query2="select * from usuarios WHERE id_usuario=$user";
                     $result2=mysqli_query($db,$query2);
                     while ($valores2=mysqli_fetch_assoc($result2)) {
-                        echo '<td>'.$valores2['nombre_usuario'].'</td>';
+                        echo '<td>'.$valores2['nombre_corto'].'</td>';
                     }
                     ?>
-<!--                    <td>--><?php //echo $user ?><!--</td>-->
                     <td><?php echo $importe ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>

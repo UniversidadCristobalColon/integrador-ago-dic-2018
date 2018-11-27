@@ -53,7 +53,7 @@
                         $query="select * from usuarios";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_assoc($result)) {
-                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_usuario].'</option>';
+                            echo '<option value="'.$valores[id_usuario].'">'.$valores[nombre_corto].'</option>';
                         }
                         ?>
                     </select>
