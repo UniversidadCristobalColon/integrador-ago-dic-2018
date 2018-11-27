@@ -30,34 +30,37 @@
 
     <div class="starter-template">
         <h1>Nueva rutina</h1>
-        <p class="lead">
-        <form method="get">
+        <form action="guardarNuevo.php" method="post">
             <button type="submit" class="btn btn-success">Guardar</button>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
+                    <input type="hidden" name="id">
                     <label for="inputTitulo">Título: </label>
-                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required>
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Título" required>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
-                    <select class="custom-select d-block w-100" id="disciplina" required>
+                    <select class="custom-select d-block w-100" name="disciplina" id="disciplina" required>
                         <option value="">Selecciona...</option>
-                        <option>Crossfit</option>
-                        <option>Yoga</option>
-                        <option>Spinning</option>
+                        <?php
+                        $query="select * from disciplinas";
+                        $result=mysqli_query($db,$query);
+                        while ($valores=mysqli_fetch_assoc($result)) {
+                            echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" required></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" name="contenido" required></textarea>
                 </div>
             </div>
         </form>
-        </p>
     </div>
 
 </main>
