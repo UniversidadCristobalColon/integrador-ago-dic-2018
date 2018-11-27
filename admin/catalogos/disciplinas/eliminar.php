@@ -27,7 +27,7 @@
 
 <main role="main" class="container">
 
-    <h1>Nueva Disciplina</h1>
+    <h1>Eliminar Disciplina</h1>
 
     <br> <br>
 
@@ -38,21 +38,15 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Nombre</label>
-            <input type="text" class="form-control" name="nombre_disciplinas" placeholder="Ejemplo: CrossFit">
+            <input type="text" class="form-control" id="disciplina" placeholder="Ejemplo: CrossFit">
         </div>
 
 
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Agregar una nueva descripción</label>
-            <textarea class="form-control" name="descripcion_disciplinas" rows="3"></textarea>
+            <textarea class="form-control" name"sdbjivnai" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
 
-
-
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Fecha</label>
-            <input type="text" class="form-control" name="fecha_modificacion" placeholder="Ejemplo: 2018/11/20">
-        </div>
 
         <br>
         <p><input type="submit" class="btn btn-success" value="Guardar"></p>
