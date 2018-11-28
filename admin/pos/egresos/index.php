@@ -81,7 +81,7 @@
                         echo '<td>'.$valores2['nombre_corto'].'</td>';
                     }
                     ?>
-                    <td><?php echo $importe ?></td>
+                    <td><?php echo number_format($importe,2) ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>
                         <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
