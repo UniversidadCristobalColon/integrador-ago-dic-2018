@@ -23,6 +23,7 @@
     <script src="../../js/base.js"></script>
     <script src='../../js/fullcalendar/moment.min.js'></script>
     <script src='../../js/fullcalendar/fullcalendar.min.js'></script>
+    <script src="../../js/es.js"></script>
 
     <script>
 
@@ -32,13 +33,24 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay,listWeek'
+                    right: 'botonClase, month,agendaWeek,agendaDay,listMonth'
                 },
-                defaultDate: '2018-03-12',
+                customButtons:{
+                    botonClase:{
+                        text: "Nueva Clase",
+                        click:function(){
+                            window.location.href = '../clases/clasenueva.php';
+                        }
+                    }
+                },
+                /*dayClick:function(date, jsEvent, view){
+
+                },*/
+                /*defaultDate: '2018-03-12',*/
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
-                events: [
+                events: /*[
                     {
                         title: 'All Day Event',
                         start: '2018-03-01',
@@ -93,7 +105,8 @@
                         url: 'http://google.com/',
                         start: '2018-03-28'
                     }
-                ]
+                ]*/
+                'http://localhost:8888/int2018/admin/clases/eventoClases.php'
             });
 
         });
@@ -109,19 +122,24 @@
 <main role="main" class="container">
 
     <h2>Calendario de clases</h2>
-    <p><a class="btn btn-secondary" href="#" role="button">Nueva clase</a>
     <div class="col-md-5 mb-3">
         <label for="diciplinas">Diciplina</label>
         <select class="custom-select d-block w-100" id="country" required>
-            <option value="">Choose...</option>
-            <option>Crossfit</option>
-            <option>Yoga</option>
+            <?php
+            $sql="SELECT id_disciplina, nombre_disciplina FROM disciplinas";
+            $resul=$db->query($sql);
+            $html="<option value='0'>Elige una disciplina...</option>";
+            while ($rowm=mysqli_fetch_array($resul))
+            {
+                $html.="<option value='".$rowm['id_disciplina']."'>".$rowm['nombre_disciplina']."</option>";
+            }
+            echo $html;
+            ?>
         </select>
         <div class="invalid-feedback">
             Favor de seleccionar una diciplina valida..
         </div>
     </div>
-    </p>
     <div id='calendar'></div>
 
 </main>
