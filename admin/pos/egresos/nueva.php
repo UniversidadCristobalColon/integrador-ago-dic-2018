@@ -66,6 +66,7 @@
                             uiLibrary: 'bootstrap4',
                             format: 'yyyy-mm-dd'
                         });
+                        $("#datepicker").attr("readonly", true);
                     </script>
                 </div>
                 <div class="col-md-3">
