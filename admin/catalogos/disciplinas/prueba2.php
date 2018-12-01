@@ -15,7 +15,8 @@
 
     <!-- Hojas de estilos -->
     <link href="../../../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <!-- Archivos JS -->
     <script src="../../../js/funciones.js"></script>
@@ -65,7 +66,7 @@
                 <td>Yoga</td>
                 <td>2018-11-01</td>
                 <td><a href="editar.php"><ion-icon size="large" name="create"><ion-icon></a> </td>
-                <td><a href="eliminar.php"><ion-icon size="large" name="trash"><ion-icon></a> </td>
+                <td><a href="delete.php"><ion-icon size="large" name="trash"><ion-icon></a> </td>
 
 
             </tr>

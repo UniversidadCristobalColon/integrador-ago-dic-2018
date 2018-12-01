@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="jumbotron ">
                             <h1>
-                                Listado de Alumnos
+                                Listado de Disciplinas
                             </h1>
                         </div>
                         <div>
