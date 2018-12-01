@@ -1,14 +1,21 @@
 <?php
+    require_once '../../scripts/config.php';
     header('Content-Type: application/json');
-    /*$pdo= new PDO("mysql:dbname=sarx_db;host=35.225.5.28","sarx_user","oBSH6d4RicpMR8Ja");
 
-    $senSQL= $pdo -> prepare("SELECT * FROM clases");
-    $senSQL-> execute();
+    $sqlclass="SELECT id_clase, rutinas.id_rutina, nombre_rutina, fecha_clase, calentamiento, ejercicios_rutina FROM clases left join rutinas on clases.id_rutina=rutinas.id_rutina";
+    $resultado=$db->query($sqlclass);
+    $con=0;
 
-    $resultado= $senSQL -> fetchAll(PDO::FETCH_ASSOC);*/
+    while ($rowe=mysqli_fetch_array($resultado)){
+        $eventos[$con]["id"] = $rowe['id_clase'];
+        $eventos[$con]["title"] = $rowe['nombre_rutina'];
+        $eventos[$con]["start"] = $rowe['fecha_clase'];
+        $eventos[$con]["url"] = 'https://www.google.com';
 
-    $sqlclass="";
+        $con++;
+    }
 
+    /*
     $eventos[0]["title"] = 'evento 1';
     $eventos[0]["start"] = ' 2018-11-25';
 
@@ -18,7 +25,7 @@
     $eventos[2]["title"] = 'evento 3';
     $eventos[2]["start"] = ' 2018-11-27';
 
-
+    */
 
 
     /*$sql="SELECT id_disciplina, nombre_disciplina FROM disciplinas";
