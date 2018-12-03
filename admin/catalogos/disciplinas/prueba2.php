@@ -45,9 +45,6 @@
 <hr>
 
 
-
-
-
     <div class="container" style="padding-top: 1em;">
         <table id="example" class="table table-striped">
             <thead class="thead-dark" >

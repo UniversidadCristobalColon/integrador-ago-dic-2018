@@ -38,6 +38,7 @@
 
     <!-- Archivos JS -->
     <script src="../../../js/base.js"></script>
+    <script src="../../../js/validar.js"></script>
 
 </head>
 
@@ -52,11 +53,21 @@
         <h2>Registro de Usuario</h2>
         <?php
         if($correcto == 1){?>
-            <div id="anuncio" class="alert alert-success mb-3"> ¡El usuario ha sido registrado correctamente!</div>
+            <div id="anuncio" class="alert alert-success mb-3"> ¡El usuario ha sido registrado correctamente!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
             <?php $correcto=0; }?>
         <?php
         if($repetido == 1){?>
-            <div  id="anuncio"  class="alert alert-warning mb-3">¡Intentalo de nuevo! El nombre de usuario ya existe.</div>
+            <div  id="anuncio"  class="alert alert-warning mb-3">¡Intentalo de nuevo! El nombre de usuario ya existe.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <?php $repetido=0; }?>
 
         <div class="row mb-3">
@@ -68,43 +79,74 @@
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <input type="text" name="nombre" placeholder="Nombre completo" class="form-control" required>
+                <label>Nombre completo</label>
+                <input type="text" name="nombre" class="form-control" maxlength="100" required>
             </div>
 
             <div class="col-md-6">
-                <input type="text" name="nombrecorto" placeholder="Nombre usuario" class="form-control" required>
+                <label>Nombre usuario</label>
+                <input type="text" name="nombrecorto" class="form-control" maxlength="50" required>
             </div>
 
         </div>
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <input type="text" name="email" placeholder="E-mail" class="form-control" required>
+                <label for="email">Email <span class="text-muted"></span></label>
+                <input type="text" class="form-control" maxlength="45" name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
             </div>
 
+
             <div class="col-md-4">
-            <input type="text" name="celular" placeholder="Celular" class="form-control" required>
+                <label>Celular</label>
+            <input type="text" name="celular" class="form-control" maxlength="13" required>
             </div>
             <div class="col-md-4">
-                <input type="text" name="telefono" placeholder="Teléfono" class="form-control" required>
+                <label>Teléfono</label>
+                <input type="text" name="telefono" class="form-control" maxlength="13" required>
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
-                <input type="password" name="contrasena" placeholder="Contraseña" class="form-control" required>
+                <label>Contraseña</label>
+                <input type="password" name="contrasena" autofocus="autofocus" min="6" max="10" class="form-control" required>
             </div>
 
             <div class="col-md-6">
+                <label>Repetir contraseña</label>
+                <input type="password" name="contrasena2" min="6" max="10"  class="form-control" required>
+
             </div>
         </div>
+
 
         <div class="row mb-3">
             <div class="col-md-12">
                 <label>Seleccione el día de pago:</label>
-                <input type="date" name="dia_pago" placeholder="Dia de pago" class="form-control" required>
+                <select type="date" name="dia_pago" class="form-control" required>
+                    <option value="" selected="selected"></option>
+                    <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option>
+                    <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="8">9</option> <option value="8">10</option>
+                    <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option> <option value="15">15</option>
+                    <option value="16">16</option> <option value="17">17</option> <option value="18">18</option> <option value="19">19</option> <option value="20">20</option>
+                    <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="24">24</option> <option value="25">25</option>
+                    <option value="26">26</option> <option value="27">27</option> <option value="28">28</option> <option value="29">29</option> <option value="30">30</option> <option value="31">31</option>
+                </select>
+
             </div>
         </div>
+
+
+
+
+
+
+
+
 
         <div class="row mb-3">
             <div class="col-md-12">

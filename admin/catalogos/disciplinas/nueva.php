@@ -33,48 +33,36 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h2>Editar Disciplina</h2>
+        <h2>Nueva Disciplina</h2>
         <p class="lead">
-        <form action="guardarEdit.php" method="post">
-            <button type="submit" onclick="location.href='indexn.php'" class="btn btn-success">Guardar</button>
-            <?php
-            $xid = $_GET['xid'];
-            $query="select * from disciplinas where id_disciplina=$xid";
-            $result=mysqli_query($db,$query);
-            while ($row=mysqli_fetch_array($result)) {
-            $nombre_disciplina = $row['nombre_disciplina'];
-            $descripcion_disciplinas = $row['descripcion_disciplinas'];
-            $fecha_modificacion = $row['fecha_modificacion'];
-            ?>
-            <input type="hidden" name="id" value="<?php echo $xid; ?>">
+            <form action="result.php" method="post">
+                <button type="submit" onclick="location.href='indexn.php'" class="btn btn-success">Guardar</button>
+
             <br><br>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="exampleFormControlInput1">Nombre</label>
-                    <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit">
-                </div>
-                <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="exampleFormControlInput1">Nombre</label>
+                            <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit">
+                        </div>
+                        <div class="col-md-6">
 
-                    <label for="inputMonto">Fecha: </label>
-                    <input id="datepicker" name="fecha_modificacion">
-                    <script>
-                        $('#datepicker').datepicker({
-                            uiLibrary: 'bootstrap4',
-                            format: 'yyyy-mm-dd'
-                        });
-                    </script>
-                </div>
-            </div>
+                            <label for="inputMonto">Fecha: </label>
+                            <input id="datepicker" name="fecha_modificacion">
+                            <script>
+                                $('#datepicker').datepicker({
+                                    uiLibrary: 'bootstrap4',
+                                    format: 'yyyy-mm-dd'
+                                });
+                            </script>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Agregar una nueva descripción</label>
-                <textarea class="form-control" name="descripcion_disciplinas" rows="3"></textarea>
-            </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Agregar una nueva descripción</label>
+                        <textarea class="form-control" name="descripcion_disciplinas" rows="3"></textarea>
+                    </div>
 
-        </form>
-        <?php
-        }
-        ?>
+            </form>
         </p>
     </div>
 
