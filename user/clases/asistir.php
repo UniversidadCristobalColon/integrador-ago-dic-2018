@@ -14,31 +14,24 @@ $Horario =  $_POST["horario"];
 
 
 $asistir = "INSERT INTO asistencias (
-                            id_usuario,
-                            id_clase,
-                            id_horario,
-                            asistencia) VALUES (
-                        '$Usuario', '$Clase', '$Horario', 0
-                    );";
+                            `id_usuario`,
+                            `id_clase`,
+                            `id_horario`,
+                            `asistencia`) VALUES (
+                        '$Usuario', '$Clase', '$Horario', 0);";
 
-var_dump($Usuario);
-var_dump($Clase);
-var_dump($Horario);
 
 
 $result = mysqli_query($db, $asistir);
 
+
 if ($result === TRUE) {
-    $message = "Asistencia guardada";
-    echo "<script type='text/javascript'>alert('$message');</script>";
-    ?>
-    <!--Redireccionamiento al index de rutinas -->
-    <meta http-equiv="refresh" content="1;url=clase.php">
-    <?php
+
+    header("location: clase.php?guardado=1&id=$Clase");
 }
 //Mostrar error
 else {
-    $message = "No se ha podido completar el registro en la clase, inténtalo de nuevo." . $asistir . "<br>" . $db->error;
+    $message = "No se ha podido completar el registro en la clase, inténtalo de nuevo.". $asistir . "<br>" . $db->error;
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
