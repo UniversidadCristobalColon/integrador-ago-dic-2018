@@ -1,4 +1,11 @@
-<?php require_once '../../../scripts/config.php' ?>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Judith
+ * Date: 13/11/2018
+ * Time: 10:27 PM
+ */
+require_once '../../../scripts/config.php' ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -28,11 +35,9 @@
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Editar rutina</h1>
-        <p class="lead">
-        <form action="guardarEditado.php" method="post">
-            <input type="hidden" name="id" value="<?php echo $xid; ?>">
-            <button type="submit" class="btn btn-success">Guardar</button>
+        <h1>Ver detalles de rutina</h1>
+        <form action="index.php">
+            <button type="submit" class="btn btn-success">Regresar</button>
             <?php
             $xid = $_GET['xid'];
             $query="select * from rutinas where id=$xid";
@@ -46,26 +51,17 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <br>
-                    <input type="hidden" name="id" value="<?php echo $xid; ?>">
+                    <input type="hidden" name="id" value="<?php echo $xid; ?>" readonly>
                     <label for="inputTitulo">Título: </label>
-                    <input type="text" class="form-control" id="inputTitulo" name="titulo"
-                           placeholder="Título" required
-                           value="<?php echo $titulo; ?>">
+                    <input type="text" class="form-control" id="inputTitulo" placeholder="Título" required
+                           value="<?php echo $titulo; ?>" readonly>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <label for="inputPassword4">Disciplina: </label>
-                    <select class="custom-select d-block w-100" id="disciplina" name="disciplina" required>
-                        <option value="">Selecciona...</option>
+                    <select class="custom-select d-block w-100" id="disciplina" required disabled>
                         <?php
                         $query="select * from disciplinas WHERE id_disciplinas=$disciplina";
-                        $result=mysqli_query($db,$query);
-                        while ($valores=mysqli_fetch_array($result)) {
-                            echo '<option selected="true" value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
-                        }
-                        ?>
-                        <?php
-                        $query="select * from disciplinas WHERE id_disciplinas!=$disciplina";
                         $result=mysqli_query($db,$query);
                         while ($valores=mysqli_fetch_array($result)) {
                             echo '<option value="'.$valores[id_disciplinas].'">'.$valores[nombre_disciplinas].'</option>';
@@ -77,14 +73,13 @@
             <div class="row">
                 <div class="col-md-10">
                     <label for="contenido">Contenido:</label>
-                    <textarea class="form-control" rows="5" id="contenido" name="contenido" required><?php echo $contenido; ?></textarea>
+                    <textarea class="form-control" rows="5" id="contenido" required readonly><?php echo $contenido; ?></textarea>
                 </div>
             </div>
         </form>
         <?php
         }
         ?>
-        </p>
     </div>
 
 </main>

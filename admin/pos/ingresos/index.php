@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistema de gestión de Sarx Wellness Center">
     <meta name="author" content="UCC Sistemas">
-
+  
     <title>Sarx Wellness Center</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -19,11 +19,14 @@
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
 
+    <base href="<?php echo BASE; ?>">
+
     <!-- Hojas de estilos -->
     <link href="../../../css/base.css" rel="stylesheet">
 
     <!-- Archivos JS -->
     <script src="../../../js/base.js"></script>
+
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -50,7 +53,6 @@
             $(".datepicker1").attr("readonly", true);
         });
     </script>
-
 </head>
 
 <body>
@@ -58,6 +60,7 @@
 <?php require_once '../../../scripts/navbar.php' ?>
 
 <main role="main" class="container">
+
 
     <?php
     $fecha1 = !empty($_GET['fecha1']) ? $_GET['fecha1'] : date('Y-m-01');
