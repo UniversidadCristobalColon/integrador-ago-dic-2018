@@ -50,58 +50,49 @@
                         <div class="row pb-5 p-5">
                             <div class="col-md-6">
                                 <p class="font-weight-bold mb-4">Información del cliente</p>
-                                <p class="mb-1">Elba Lazo Duro</p>
-                                <p>Acme Inc</p>
-                                <p class="mb-1">Veracruz, Ver. México</p>
-                                <p class="mb-1">Urano #213</p>
+                                <p class="mb-1"><span class="text-muted">Nombre completo: </span>Elba Lazo Duro</p>
+                                <p class="mb-1"><span class="text-muted">Correo electronico: </span>golosa60@gmail.com</p>
+                                <p class="mb-1"><span class="text-muted">Numero de telefono </span>9586711</p>
                             </div>
 
-                            <div class="col-md-6 text-right">
-                                <p class="font-weight-bold mb-4">Detalles de pago</p>
-                                <p class="mb-1"><span class="text-muted">VAT: </span> 1425782</p>
-                                <p class="mb-1"><span class="text-muted">VAT ID: </span> 10253642</p>
-                                <p class="mb-1"><span class="text-muted">Tipo de pago: </span> Root</p>
-                                <p class="mb-1"><span class="text-muted">Nombre: </span> John Doe</p>
-                            </div>
                         </div>
 
                         <div class="row p-5">
+                            <div class="col-md-6 text-left">
+                                <p class="font-weight-bold mb-4">Historial de pagos del cliente</p>
+                            </div>
                             <div class="col-md-12">
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th class="border-0 text-uppercase small font-weight-bold">ID</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">Producto</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">Descripcion</th>
                                         <th class="border-0 text-uppercase small font-weight-bold">Cantidad</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">Costo unitario</th>
-                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Costo</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Fecha</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mensualidad</td>
                                         <td>Mensualidad de Septiembre</td>
-                                        <td>21</td>
-                                        <td>$321</td>
+                                        <td>1</td>
                                         <td>$3452</td>
+                                        <td>25/11/2018</td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mensualidad</td>
                                         <td>Mensualidad de Octubre</td>
-                                        <td>234</td>
-                                        <td>$6356</td>
-                                        <td>$23423</td>
+                                        <td>1</td>
+                                        <td>$2342</td>
+                                        <td>25/11/2018</td>
                                     </tr>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mensualidad</td>
                                         <td>Mensualidad de Noviembre</td>
-                                        <td>4534</td>
-                                        <td>$354</td>
-                                        <td>$23434</td>
+                                        <td>1</td>
+                                        <td>$2343</td>
+                                        <td>25/11/2018</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -112,16 +103,6 @@
                             <div class="py-3 px-5 text-right">
                                 <div class="mb-2">Total</div>
                                 <div class="h2 font-weight-light">$234,234</div>
-                            </div>
-
-                            <div class="py-3 px-5 text-right">
-                                <div class="mb-2">Descuento</div>
-                                <div class="h2 font-weight-light">10%</div>
-                            </div>
-
-                            <div class="py-3 px-5 text-right">
-                                <div class="mb-2">Sub - Total</div>
-                                <div class="h2 font-weight-light">$32,432</div>
                             </div>
                         </div>
                     </div>

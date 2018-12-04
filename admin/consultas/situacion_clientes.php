@@ -75,9 +75,8 @@
                             <td>eluz@counterpath.com</td>
                             <td>Activo</td>
                             <td>
-                                <a title="Ver este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
-                                <a title="Editar este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                                <a title="Borrar este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
+
+                                <a title="Ver este usuario" href="estado_cliente.php" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
 
                             </td>
                         </tr>
