@@ -15,6 +15,10 @@ if (!$db) {
     exit;
 }
 
+////CODIFICACION//
+
+//$codifica1 = base64_encode($cadena);
+//$decodifica2 = base64_decode($codifica1);
 
 
 ?>

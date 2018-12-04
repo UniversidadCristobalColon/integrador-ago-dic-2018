@@ -1,6 +1,8 @@
 <?php
+
+
         try {
-          require_once('../scripts/config.php');
+          require_once('../../../scripts/config.php');
           $_SESSION['user'] = 4;
           $sql = 'SELECT * FROM usuarios';
           $resultado = $db->query($sql);
@@ -24,18 +26,18 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="../img/favicon.png">
+    <link rel="icon" href="../../../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/controlClientes.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link href="../../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/base.js"></script>
-    <script src="../js/tablas.js"></script>
+    <script src="../../../js/base.js"></script>
+    <script src="../../../js/tablas.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
@@ -44,15 +46,15 @@
 
 <body>
 
-<?php require_once '../scripts/navbar2.php' ?>
+<?php require_once '../../../scripts/navbar2.php' ?>
 
 <main role="main" class="container">
 
   <h1>Clientes</h1>
   <br>
 
-  <table id="example" class="display table table-hover"  style="width:100%">
-          <thead class="thead-dark">
+  <table id="example" class="table" >
+          <thead class="">
               <tr>
                 <th scope="col">Nombre Completo</th>
                 <th scope="col">Correo</th>
@@ -65,7 +67,8 @@
               <td><?php echo $registros['nombre_completo']; ?></td>
               <td><?php echo $registros['correo']; ?></td>
               <td>
-                <a class="icono" target="_blank" href="clases/generalExpediente.php?id=<?php echo $registros['id_usuario']; ?>"> <ion-icon name="eye"><ion-icon> </a>
+                <a class="icono" target="_blank" href="generalExpediente.php?id=<?php echo base64_encode($registros['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
+
               </td>
             </tr>
             <?php } ?>

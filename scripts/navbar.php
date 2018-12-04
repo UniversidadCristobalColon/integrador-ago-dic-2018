@@ -39,10 +39,10 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                     <a class="dropdown-item" href="'. $base .'/admin/catalogos/rutinas/">Rutinas</a>
                     <a class="dropdown-item" href="'. $base .'/admin/catalogos/usuarios/">Usuarios</a>
                 </div>
-            </li> 
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Nueva clase</a>
-            </li>                      
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
@@ -51,9 +51,9 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                        aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="'. $base .'/user/perfil/">Perfil</a>
-                        <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>                        
+                        <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>
                     </div>
-                </li>                                
+                </li>
             </ul>
         </form>
     </div>
@@ -67,10 +67,10 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">            
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="'. $base .'/user/clases/">Clases</a>
-            </li>                      
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
@@ -79,9 +79,9 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
                        aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="'. $base .'/user/perfil/">Perfil</a>
-                        <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>                        
+                        <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>
                     </div>
-                </li>                                
+                </li>
             </ul>
         </form>
     </div>

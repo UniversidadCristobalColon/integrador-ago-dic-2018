@@ -17,14 +17,14 @@ a.icono{
 table thead th,
 table tfoot th,
 table tr td{
-  text-align: center !important;
+  /*text-align: center !important;*/
 }
 
 table tr td{
-  padding-bottom:0px!important;
+  /*padding-bottom:0px!important;*/
 }
 
 div.repeticiones,div.unidad,
-div.peso,div.tiempo{
+div.peso,div.tiempo,div.segundos,div.hora{
   display: none!important;
 }
