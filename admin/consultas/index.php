@@ -44,74 +44,67 @@
 
 <main role="main" class="container">
 
+    <div class="starter-template">
+        <h1>Historial de pagos</h1>
+
+        </br><div class="pull-right">
+            <a href="index.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
+            <a href= "situacion_clientes.php" class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
+        </div></br>
+
+    </div>
+
     <div class="container">
-
-
-        <div class="row pb-5 p-5">
-            <div class="col-md-6">
-                <p class="font-weight-bold mb-4">Información del cliente</p>
-                <p class="mb-1"><span class="text-muted">Nombre completo: </span>Elba Lazo Duro</p>
-                <p class="mb-1"><span class="text-muted">Correo electronico: </span>golosa60@gmail.com</p>
-                <p class="mb-1"><span class="text-muted">Numero de telefono </span>9586711</p>
-            </div>
-
-        </div>
-
-        <div class="row p-5">
-            <div class="col-md-6 text-left">
-                <p class="font-weight-bold mb-4">Historial de pagos del cliente</p>
-            </div>
-            <div class="col-md-12">
-                <table class="table">
+        <div class="row">
+            <div class="table-responsive">
+                <table id="example" class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="border-0 text-uppercase small font-weight-bold">ID</th>
-                        <th class="border-0 text-uppercase small font-weight-bold">Descripcion</th>
-                        <th class="border-0 text-uppercase small font-weight-bold">Cantidad</th>
-                        <th class="border-0 text-uppercase small font-weight-bold">Costo</th>
-                        <th class="border-0 text-uppercase small font-weight-bold">Fecha</th>
+                        <th>#</th>
+                        <th>Pago</th>
+                        <th>Nombre completo</th>
+                        <th>Correo Electronico</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Mensualidad de Septiembre</td>
-                        <td>1</td>
-                        <td>$3452</td>
-                        <td>25/11/2018</td>
+                        <td>Mensualidad mes de Octubre</td>
+                        <td>Waqas Hussain</td>
+                        <td>example@mirchu.net</td>
+                        <td>11/6/2018</td>
+                        <td>$899.00</td>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>Mensualidad de Octubre</td>
-                        <td>1</td>
-                        <td>$2342</td>
-                        <td>25/11/2018</td>
+                        <td>2</td>
+                        <td>Mensualidad mes de Octubre</td>
+                        <td>Basit Raza</td>
+                        <td>example@bugpluss.com</td>
+                        <td>10/6/2018</td>
+                        <td>$621.00</td>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>Mensualidad de Noviembre</td>
-                        <td>1</td>
-                        <td>$2343</td>
-                        <td>25/11/2018</td>
+                        <td>3</td>
+                        <td>Mensualidad mes de Octubre</td>
+                        <td>Raza Ahmed</td>
+                        <td>example@therazz.net</td>
+                        <td>11/9/2018</td>
+                        <td>$640.00</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Botella de agua</td>
+                        <td>Mirchu net</td>
+                        <td>example@mirchu.net</td>
+                        <td>11/6/2018</td>
+                        <td>$12.00</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <div class="d-flex flex-row-reverse bg-dark text-white p-4">
-            <div class="py-3 px-5 text-right">
-                <div class="mb-2">Total</div>
-                <div class="h2 font-weight-light">$234,234</div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-    <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>
-
     </div>
 
 
