@@ -26,7 +26,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Clientes</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="../../../integrador-ago-dic-2018/admin/buscarCliente.php">Buscar</a>
+                    <a class="dropdown-item" href="../../../../integrador-ago-dic-2018/admin/catalogos/clientes/buscarCliente.php">Buscar</a>
                 </div>
             </li>
         </ul>
@@ -36,7 +36,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="../../../integrador-ago-dic-2018/user/index.php">Perfil</a>
+                        <a class="dropdown-item" href="../../../../integrador-ago-dic-2018/user/perfil/perfil.php">Perfil</a>
                         <a class="dropdown-item" href="#">Salir</a>
                     </div>
                 </li>
@@ -64,7 +64,7 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="../../../user/index.php">Perfil</a>
+                        <a class="dropdown-item" href="../../../../integrador-ago-dic-2018/user/perfil/perfil.php">Perfil</a>
                         <a class="dropdown-item" href="#">Salir</a>
                     </div>
                 </li>

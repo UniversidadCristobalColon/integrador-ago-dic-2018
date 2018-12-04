@@ -1,9 +1,18 @@
 <?php
 
-$id = htmlspecialchars($_GET['id']);
+$id= $_SESSION['user'] = 2;
 
       try {
         require_once('../../scripts/config.php');
+
+        /////RELLENA RECORDS TABLA
+
+        $records = "SELECT `nombre_rutina`,`tipo_record`,`t1`.`repeticiones/puntos`,`t1`.`peso`,`t1`.`tiempo`,`t1`.`id_usuario`,`ejercicios_rutina`,`t1`.`id_record` ,`t1`.`id_rutina` FROM `records` `t1`";
+        $records .= "INNER JOIN (SELECT `id_rutina`,MAX(`fecha_creacion`) as `fecha` FROM `records` GROUP BY `id_rutina`) `t2` ";
+        $records .= "ON (`t1`.`id_rutina` = `t2`.`id_rutina` and `t1`.`fecha_creacion` = `t2`.`fecha`) ";
+        $records .= "LEFT JOIN `rutinas` `rut` on `rut`.`id_rutina` = `t1`.`id_rutina` LEFT JOIN `tiporecord` `tp`";
+        $records .= "ON `tp`.`id_tipo_record` = `t1`.`id_tipo_record` WHERE `id_usuario` = '{$id}' ";
+        $resultado5 = $db->query($records);
 
       ////RELLENA EL FORMULARIO DE DATOS DE USUARIO
         $sql = "SELECT * FROM `usuarios` WHERE `id_usuario` LIKE  '{$id}'";
@@ -23,6 +32,7 @@ $id = htmlspecialchars($_GET['id']);
             /////RELLENA EL FORMULARIO DE EXPEDIENTE MEDICO
             $sql2 = "SELECT `e`.`id_usuario` ,`peso` , `altura`, `fecha_nacimiento` ,`cintura` ,`IMC`,`antecedentes_salud` FROM `expedientes` `e` LEFT JOIN `usuarios` `u` ON `e`.`id_usuario` = `u`.`id_usuario` WHERE `e`.`id_usuario` LIKE '{$id}' ";
             $resultado2 = $db->query($sql2);
+
 
 
       } catch (Exception $e) {
@@ -45,16 +55,20 @@ $id = htmlspecialchars($_GET['id']);
     <link rel="icon" href="../../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../../css/base.css" rel="stylesheet">
     <link href="../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../js/base.js"></script>
     <script src="../../js/tablas.js"></script>
+    <script src="../../js/formulariosValidar.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 </head>
 
@@ -63,7 +77,7 @@ $id = htmlspecialchars($_GET['id']);
 <?php require_once '../../scripts/navbar2.php' ?>
 
 <main role="main" class="container">
-
+  <br>  <br><br>  <br>
     <h1>Expediente </h1>
     <br>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -90,49 +104,62 @@ $id = htmlspecialchars($_GET['id']);
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
      <?php while($registros = $resultado->fetch_assoc() ) { ?>
-            <form action="modificacionDatosPersonales.php" method="post">
+
+
+            <form action="modificacionDatosPersonalesPerfil.php" method="post">
                 <br>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Nombre Completo</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Nombre Completo*</label>
                     <div class="col-10">
-                        <input class="form-control" name="nombre_completo" type="text" value="<?php echo $registros['nombre_completo']; ?>">
+                        <input class="form-control" name="nombre_completo" id="nombre_completo" type="text" value="<?php echo $registros['nombre_completo']; ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">E-mail</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Nombre Corto*</label>
                     <div class="col-10">
-                        <input class="form-control" name="correo" type="text" value="<?php echo $registros['correo']; ?>">
+                        <input class="form-control" name="nombre_corto" id="nombre_corto" type="text" value="<?php echo $registros['nombre_corto']; ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-2 col-form-label">E-mail*</label>
+                    <div class="col-10">
+                        <input class="form-control" name="correo" id="correo" type="text" value="<?php echo $registros['correo']; ?>" required>
+                      <div id="emailOk">  </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Telefono</label>
                     <div class="col-10">
-                        <input class="form-control" name="telefono" type="number" value="<?php echo $registros['telefono']; ?>">
+                        <input class="form-control" name="telefono" id="telefono"  type="text" maxlength="10"  value="<?php echo $registros['telefono']; ?>">
+                        <div id="telefonoOk">  </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Celular</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Celular*</label>
                     <div class="col-10">
-                        <input class="form-control" name="cel" type="number" value="<?php echo $registros['celular']; ?>">
+                        <input class="form-control" name="celular" id="celular" type="text" maxlength="10" value="<?php echo $registros['celular']; ?>" required>
+                        <div id="celOk">  </div>
                     </div>
                 </div>
                 <br>
                 <h2>Contacto en caso de Emergencia</h2>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Nombre Completo</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Nombre Completo*</label>
                     <div class="col-10">
-                        <input class="form-control" name="nombre_emergencia" type="text" value="<?php echo $registros['nombre_emergencia']; ?>">
+                        <input class="form-control" name="nombre_emergencia" id="nombre_emergencia" type="text" value="<?php echo $registros['nombre_emergencia']; ?>" required>
+                        <div id="emernomOk">  </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Telefono</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Celular*</label>
                     <div class="col-10">
-                        <input class="form-control" name="telefono_emergencia" type="number" value="<?php echo $registros['telefono_emergencia']; ?>">
+                        <input class="form-control" name="telefono_emergencia" id="numero_emergencia" type="text" maxlength="10" value="<?php echo $registros['telefono_emergencia']; ?>" required>
+                        <div id="emernumOk">  </div>
                     </div>
                 </div>
 
-                <input type="hidden" value="<?php echo $registros['id_usuario']; ?>" name="id_datos">
-                <input type="submit" class="btn btn-success btnGuardar" value="Guardar">
+                <input type="hidden" value="<?php echo base64_encode($registros['id_usuario']); ?>" name="id_datos">
+                <input type="submit" id="bu" class="btn btn-success btnGuardar" value="Guardar">
 
             </form>
          <?php  } ?>
@@ -145,132 +172,101 @@ $id = htmlspecialchars($_GET['id']);
             <form action="modificacionExpediente.php" method="post">
                 <br>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Peso (Kg)</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Peso (Kg)*</label>
                     <div class="col-10">
-                        <input class="form-control" name="peso" type="number" value="<?php echo $registro['peso']; ?>">
+                        <input class="form-control" name="peso" id="peso" type="text" maxlength="4" value="<?php echo $registro['peso']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Altura (cm)</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Altura (cm)*</label>
                     <div class="col-10">
-                        <input class="form-control" name="altura" type="number" value="<?php echo $registro['altura']; ?>">
+                        <input class="form-control" name="altura" id="altura" type="text" maxlength="4" value="<?php echo $registro['altura']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-2 col-form-label">Fecha de Nacimiento</label>
+                    <label for="example-text-input" class="col-2 col-form-label">Fecha de Nacimiento*</label>
                     <div class="col-10">
-                        <input class="form-control" name="fecha_nacimiento" type="date" id="" value="<?php echo $registro['fecha_nacimiento']; ?>">
+                        <input class="form-control" name="fecha_nacimiento" type="text" id="datepicker" value="<?php echo $registro['fecha_nacimiento']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Cintura (cm)</label>
                     <div class="col-10">
-                        <input class="form-control" name="cintura" type="number" value="<?php echo $registro['cintura']; ?>">
+                        <input class="form-control" name="cintura"  type="text" maxlength="4" value="<?php echo $registro['cintura']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">IMC</label>
                     <div class="col-10">
-                        <input class="form-control" name="imc" type="number" value="<?php echo $registro['IMC']; ?>">
+                        <input class="form-control" name="imc"  type="text" maxlength="4" value="<?php echo $registro['IMC']; ?>" disabled>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="exampleTextarea" class="col-2 col-form-label">Comentarios de Salud</label>
                     <div class="col-10">
-                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3"><?php echo $registro['antecedentes_salud']; ?></textarea>
+                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3" disabled> <?php echo $registro['antecedentes_salud']; ?> </textarea>
                     </div>
                 </div>
-
-                <input type="hidden" value="<?php echo $registro['id_usuario']; ?>" name="id_ficha">
-                <input type="submit" class="btn btn-success btnGuardar" value="Guardar">
 
           </form>
            <?php  } ?>
         </div>
 
 <!--************************************* Records ************************************************* -->
-
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <br><br>
 
-          <form action="nuevoRecord.php" method="post" id="formulario_nuevo">
-              <input type="hidden" value="<?php echo $id?>" name="id_record">
-              <input type="submit" class="btn btn-success btnNuevoCliente" value="Nuevo +" >
+          <form action="nuevoRecordPerfil.php" method="post" id="formulario_nuevo">
+              <input type="hidden" value="<?php echo base64_encode($id);?>" name="id_record">
+              <input type="submit" class="btn btn-success btnNuevoCliente"  value="Nuevo +" >
           </form>
-
-
             <br><br>
-
-
-            <table id="example2" class="display table table-hover"  style="width:100%">
-                    <thead class="thead-dark">
+  <h2>Ultimos Records por Rutina</h2>
+  <br>
+<table id="example2" class="table" >
+            <thead class="">
                         <tr>
                           <th scope="col">Wod</th>
-                           <th scope="col">Records</th>
+                          <th scope="col">Tipo Record</th>
+                          <th scope="col">Peso</th>
+                          <th scope="col">Tiempo</th>
+                          <th scope="col">Repeticiones/puntos</th>
                            <th scope="col">Visualizar</th>
-                           <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
+                      <?php while($records = $resultado5->fetch_assoc() ) { ?>
                       <tr>
-                        <td>
-                          sentadillas
-                        </td>
-                         <td>50 repeticiones</td>
+                        <td><?php echo $records['nombre_rutina']; ?></td>
+                         <td><?php echo $records['tipo_record']; ?></td>
+                         <td><?php echo $records['peso']; ?></td>
+                         <td><?php echo $records['tiempo']; ?></td>
+                         <td><?php echo $records['repeticiones/puntos']; ?></td>
                          <td>
-                             <a class="icono" href="verRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="eye"><ion-icon> </a>
-                         </td>
-                         <td>
-                            <a class="icono" href="eliminarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="trash"><ion-icon> </a>
+                             <a class="icono" target="_blank" href="verRecordPerfil.php?id=<?php echo base64_encode($records['id_record']);?>&id2=<?php echo base64_encode($records['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
                          </td>
                       </tr>
+                     <?php  } ?>
                     </tbody>
                     <tfoot>
                         <tr>
-                          <th scope="col">Wod</th>
-                           <th scope="col">Records</th>
+                           <th scope="col">Wod</th>
+                           <th scope="col">Tipo Record</th>
+                           <th scope="col">Peso</th>
+                           <th scope="col">Tiempo</th>
+                           <th scope="col">Repeticiones/puntos</th>
                            <th scope="col">Visualizar</th>
-                           <th scope="col">Eliminar</th>
                         </tr>
                     </tfoot>
-                </table>
+           </table>
         </div>
 <?php $db->close(); ?>
-
 <!--************************************* Logros ************************************************* -->
 
                 <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
                     <br>
-                      <table id="example" class="display table table-hover"  style="width:100%">
-                              <thead class="thead-dark">
-                                  <tr>
-                                    <th scope="col">Logro</th>
-                                     <th scope="col">Tipo</th>
-                                     <th scope="col">Fecha Creación</th>
-                                     <th scope="col">Eliminar</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                   <td>50 repeticiones</td>
-                                   <td>crossfit</td>
-                                   <td>20/12/12</td>
 
-                                   <td>
-                                    <a class="icono" href="eliminarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="trash"><ion-icon> </a>
-                                   </td>
-                                </tr>
-                              </tbody>
-                              <tfoot>
-                                  <tr>
-                                    <th scope="col">Logro</th>
-                                     <th scope="col">Tipo</th>
-                                     <th scope="col">Fecha Creación</th>
-                                     <th scope="col">Eliminar</th>
-                                  </tr>
-                              </tfoot>
-                          </table>
                     </div>
          </div>
     </main>
