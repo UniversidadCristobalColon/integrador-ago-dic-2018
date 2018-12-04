@@ -1,0 +1,30 @@
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+a.btnRegresar,input.btnGuardar,
+input[type=submit].btnNuevoCliente{
+  float: right;
+
+}
+
+a.icono{
+ font-size: 30px;
+}
+
+table thead th,
+table tfoot th,
+table tr td{
+  text-align: center !important;
+}
+
+table tr td{
+  padding-bottom:0px!important;
+}
+
+div.repeticiones,div.unidad,
+div.peso,div.tiempo{
+  display: none!important;
+}
