@@ -70,7 +70,7 @@
                     </script>
                 </div>
                 <div class="col-md-3">
-                    <label for="inputMonto">Monto: </label>
+                    <label for="inputMonto">Monto:  </label>
                     <input type="text" name="importe" class="form-control" id="inputMonto" placeholder="100.00" required>
                 </div>
             </div>
