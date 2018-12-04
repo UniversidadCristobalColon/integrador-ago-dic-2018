@@ -32,6 +32,10 @@
         $(document).ready( function () {
             $('#example').DataTable();
         } );
+
+        function confirmar() {
+            return confirm("¿Estás seguro que quieres eliminar esta rutina? ");
+        }
     </script>
 
 </head>
@@ -53,8 +57,7 @@
         <table id="example" class="table">
             <thead>
             <tr>
-                <th width="30%">Rutina</th>
-                <th>Actualizada</th>
+                <th width="25%">Rutina</th>
                 <th>Disciplina</th>
                 <th>Opciones</th>
             </tr>
@@ -64,27 +67,27 @@
             $query="select * from rutinas";
             $result=mysqli_query($db,$query);
             while ($row=mysqli_fetch_assoc($result)) {
-                $id = $row['id'];
-                $titulo = $row['titulo'];
-                $contenido = $row['contenido'];
-                $fecha = $row['actualizacion'];
-                $disciplina = $row['id_disciplinas'];
+                $id = $row['id_rutina'];
+                $titulo = $row['nombre_rutina'];
+                $contenido = $row['ejercicios_rutina'];
+                $fecha = $row['fecha_modificacion'];
+                $disciplina = $row['id_disciplina'];
+                $user = $row['id_usuario_modificacion'];
             ?>
             <tr>
                 <td>
-                    <a href="mostrar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><?php echo $titulo; ?></a>
+                    <a href="mostrar.php?xid=<?php echo $id; ?>"><?php echo $titulo; ?></a>
                 </td>
-                <td><?php echo $fecha; ?></td>
                 <?php
-                $query2="select * from disciplinas where id_disciplinas=$disciplina";
+                $query2="select * from disciplinas where id_disciplina=$disciplina";
                 $result2=mysqli_query($db,$query2);
                 while ($valores2=mysqli_fetch_assoc($result2)) {
-                    echo '<td>'.$valores2['nombre_disciplinas'].'</td>';
+                    echo '<td>'.$valores2['nombre_disciplina'].'</td>';
                 }
                 ?>
                 <td>
-                    <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Estás seguro que quieres eliminar esta rutina? ");'>Eliminar</a>
+                    <a href="editar.php?xid=<?php echo $id; ?>">Editar</a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" onclick='return confirmar();'>Eliminar</a>
                 </td>
             </tr>
             <?php
