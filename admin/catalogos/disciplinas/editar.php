@@ -1,4 +1,17 @@
-<?php require_once '../../../scripts/config.php' ?>
+<?php
+require_once '../../../scripts/config.php';
+
+$id_disciplina = $_GET["xid"];
+
+$sql = "select * from disciplinas where id_disciplina = $id_disciplina";
+$res = mysqli_query($db, $sql);
+if($res){
+    $f = mysqli_fetch_assoc($res);
+    $nombre_disciplina = $f["nombre_disciplina"];
+    $descripcion_disciplinas = $f["descripcion_disciplinas"];
+
+}
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -51,7 +64,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exampleFormControlInput1">Nombre</label>
-                    <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit">
+                    <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit" value="<?php echo $nombre_disciplina ?>">
                 </div>
                 <div class="col-md-6">
 
@@ -68,7 +81,7 @@
 
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Agregar una nueva descripción</label>
-                <textarea class="form-control" name="descripcion_disciplinas" rows="3"></textarea>
+                <textarea class="form-control" name="descripcion_disciplinas" rows="3"><?php echo $descripcion_disciplinas ?></textarea>
             </div>
 
         </form>
