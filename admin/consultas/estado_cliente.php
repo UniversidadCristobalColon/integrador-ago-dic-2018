@@ -67,6 +67,10 @@ try {
                 <p class="mb-1"><span class="text-muted">Numero de telefono </span><?php echo $registros['telefono']; ?></p>
             </div>
 
+            <div class="pull-center">
+                <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
+            </div>
+
             <?php  } ?>
         </div>
 
