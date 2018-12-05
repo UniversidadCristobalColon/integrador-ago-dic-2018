@@ -1,4 +1,12 @@
-<?php require_once '../../scripts/config.php' ?>
+<?php
+try {
+    require_once('../../scripts/config.php');
+    $_SESSION['user'] = 4;
+    $sql = 'SELECT id_ingresos, descripcion_ingresos, u.nombre_completo, u.correo, importe FROM ingresos i LEFT JOIN usuarios u ON i.id_usuario = u.id_usuario';
+    $resultado = $db->query($sql);
+} catch (Exception $e) {
+}
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -61,51 +69,26 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Pago</th>
+                        <th>Descripción</th>
                         <th>Nombre completo</th>
                         <th>Correo Electronico</th>
                         <th>Fecha</th>
                         <th>Monto</th>
-                        <th>Estado</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mensualidad mes de Octubre</td>
-                        <td>Waqas Hussain</td>
-                        <td>example@mirchu.net</td>
-                        <td>11/6/2018</td>
-                        <td>$899.00</td>
-                        <td><span class="label label-info">Procesando pago</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Mensualidad mes de Octubre</td>
-                        <td>Basit Raza</td>
-                        <td>example@bugpluss.com</td>
-                        <td>10/6/2018</td>
-                        <td>$621.00</td>
-                        <td><span class="label label-danger">Retrasado</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Mensualidad mes de Octubre</td>
-                        <td>Raza Ahmed</td>
-                        <td>example@therazz.net</td>
-                        <td>11/9/2018</td>
-                        <td>$640.00</td>
-                        <td><span class="label label-info">Procesando pago</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Botella de agua</td>
-                        <td>Mirchu net</td>
-                        <td>example@mirchu.net</td>
-                        <td>11/6/2018</td>
-                        <td>$12.00</td>
-                        <td><span class="label label-success">Pagado</span></td>
-                    </tr>
+                    <?php while($registros = $resultado->fetch_assoc() ) { ?>
+
+                        <tr>
+                            <td><?php echo $registros['id_ingresos']; ?></td>
+                            <td><?php echo $registros['descripcion_ingresos']; ?></td>
+                            <td><?php echo $registros['nombre_completo']; ?></td>
+                            <td><?php echo $registros['correo']; ?></td>
+                            <td>n/a</td>
+                            <td><?php echo $registros['importe']; ?></td>
+                        </tr>
+
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>

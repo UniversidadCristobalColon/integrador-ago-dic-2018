@@ -44,8 +44,9 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Nueva clase</a>
-            </li>
+
+                <a class="nav-link" href="'. $base .'/admin/consultas/">Consultas</a>
+            </li>                                      
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
