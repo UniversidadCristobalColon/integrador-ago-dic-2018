@@ -69,11 +69,13 @@ if($res){
                 <div class="col-md-6">
 
                     <label for="inputMonto">Fecha: </label>
-                    <input id="datepicker" name="fecha_modificacion">
+                    <input id="datepicker" class="form-control" readonly name="fecha_modificacion" value="<?php echo $fecha_modificacion ?>">
                     <script>
                         $('#datepicker').datepicker({
                             uiLibrary: 'bootstrap4',
                             format: 'yyyy-mm-dd'
+                            changeMonth:true,
+                            changeYear:true,
                         });
                     </script>
                 </div>
