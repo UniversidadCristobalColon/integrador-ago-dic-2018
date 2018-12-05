@@ -1,4 +1,6 @@
-<?php require_once '../scripts/config.php' ?>
+<?php require_once '../scripts/config.php'
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
