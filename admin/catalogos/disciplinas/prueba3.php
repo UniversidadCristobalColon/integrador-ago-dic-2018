@@ -27,18 +27,24 @@
 
 <main role="main" class="container">
 
-    <h1>Nueva Disciplina</h1>
+    <h2>Nueva Disciplina</h2>
 
-    <br> <br>
+    <br>
 
 
     <form action="result.php" method="post">
 
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <input type="submit" onclick="location.href='prueba2.php'" value="Guardar" class="btn btn-success">
 
+
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Nombre</label>
-            <input type="text" class="form-control" name="nombre_disciplinas" placeholder="Ejemplo: CrossFit">
+            <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit">
         </div>
 
 
@@ -53,10 +59,6 @@
             <label for="exampleFormControlInput1">Fecha</label>
             <input type="text" class="form-control" name="fecha_modificacion" placeholder="Ejemplo: 2018/11/20">
         </div>
-
-        <br>
-        <p><input type="submit" class="btn btn-success" value="Guardar"></p>
-
 
 
 
