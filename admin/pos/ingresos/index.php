@@ -32,13 +32,11 @@
     <script>
         $(document).ready(function () {
             $('#tabla').DataTable();
-
             $('.datepicker').datepicker({
                 uiLibrary: 'bootstrap4',
                 format: 'yyyy-mm-dd'
             });
             $(".datepicker").attr("readonly", true);
-
             $('.datepicker1').datepicker({
                 uiLibrary: 'bootstrap4',
                 format: 'yyyy-mm-dd'
@@ -76,7 +74,6 @@
                     <label for="inputFecha1">De: </label>
                     <input class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>">
                     <script>
-
                     </script>
                 </div>
                 <div class="col-md-3">

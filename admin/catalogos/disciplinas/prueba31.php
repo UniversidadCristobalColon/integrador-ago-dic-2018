@@ -1,4 +1,4 @@
-<?php require_once '../scripts/config.php' ?>
+<?php require_once '../../../scripts/config.php' ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,26 +11,42 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="../img/favicon.png">
+    <link rel="icon" href="../../../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../css/base.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
 
     <!-- Archivos JS -->
-    <script src="../js/base.js"></script>
+    <script src="../../../js/base.js"></script>
 
 </head>
 
 <body>
 
-<?php require_once '../scripts/navbar.php' ?>
+<?php require_once '../../../scripts/navbar.php' ?>
 
 <main role="main" class="container">
 
-    <div class="starter-template">
-        <h1>Esto es una plantilla</h1>
-        <p class="lead">Copia el archivo y cambia su nombre como requieras. No edites el original.</p>
-    </div>
+
+
+    <h1>Editar Disciplina</h1>
+
+    <br>
+    <p><input type="submit" class="btn btn-success" value="Guardar"></p>
+
+
+    <form action="../../form-result.php" target="_blank">
+
+
+        <p>Título</p>
+        <p><textarea name="descripcion" cols="80" rows="1"></textarea></p>
+
+        <p>Agregar una nueva descripción:</p>
+        <p><textarea name="descripcion" cols="80" rows="10"></textarea></p>
+
+
+    </form>
+
 
 </main>
 
