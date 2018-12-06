@@ -39,18 +39,23 @@ body {
 
 
 .cuadro{
-    padding: 2rem 1rem;
+    padding: 2rem 3rem;
     margin-bottom: 2rem;
     background-color: #CCD1D1  ;
     border-radius: .3rem;
+    height: 20%; 
+    width: 60%;
+    /*width: 600px;*/
+    
 }
 
 .container {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    padding-right: auto;
+    padding-left: auto ;
+    margin-right: 0%;
+    /* margin-left: 0%;*/
+    text-align: auto;
 }
 
 .btn {

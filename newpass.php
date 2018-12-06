@@ -1,4 +1,27 @@
-<?php require_once 'scripts/config.php' ?>
+<?php 
+
+require 'scripts/conexionlog.php';
+	require 'funcs.php';
+	
+	if(empty($_GET['user_id'])){
+		header('Location: index.php');
+	}
+	
+	if(empty($_GET['token'])){
+		header('Location: index.php');
+	}
+	
+	$user_id = $mysqli->real_escape_string($_GET['user_id']);
+	$token = $mysqli->real_escape_string($_GET['token']);
+	
+	if(!verificaTokenPass($user_id, $token))
+	{
+echo 'No se pudo verificar los Datos';
+exit;
+	}
+
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -40,7 +63,13 @@ echo $navbar?>
 
 
     <div class="container">
-        <form class="form-signin">
+        <!-- <form class="form-signin"> -->
+        
+            <form id="loginform" class="form-horizontal" role="form" action="guarda_pass.php" method="POST" autocomplete="off">
+            
+            	<input type="hidden" id="user_id" name="user_id" value ="<?php echo $user_id; ?>" />
+                
+                <input type="hidden" id="token" name="token" value ="<?php echo $token; ?>" />
             <div class="cuadro">
 
 
@@ -48,15 +77,15 @@ echo $navbar?>
                 <br>
                 <p>Ingrese nueva contraseña.</p>
 
-                <input type="password" id="inputpass" class="form-control" placeholder="Nueva Contraseña" name="newpass" required autofocus>
+                <input type="password" id="inputpass" class="form-control" placeholder="Nueva Contraseña" name="password"  required autofocus>
                 <br>
-                <input type="password" id="inputpass" class="form-control" placeholder="Confirmar nueva Contraseña" name="newcpass" required autofocus>
+                <input type="password" id="inputpass" class="form-control" placeholder="Confirmar Contraseña" name="con_password" required autofocus>
 
 
 
                 <br>
 
-                <button class="btn btn-lg btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-lg btn-primary" id="btn-login" type="submit">Guardar</button>
             </div>
         </form>
     </div>

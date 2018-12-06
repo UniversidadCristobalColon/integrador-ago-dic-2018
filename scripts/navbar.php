@@ -1,9 +1,7 @@
 <?php
  $tsesion= $_SESSION['correo']['id_tipo_usuario'];
 $user=$_SESSION['correo']['nombre_corto'];
-
 $usuario = !empty($_SESSION["user_name"]) ? $_SESSION["user_name"] : 'Usuario';
-
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 var_dump($doc_root);
 $realpath   = str_replace('\\', '/', realpath ("."));
@@ -14,14 +12,12 @@ $pos        = strpos($base, '/',1);
 $base       = substr($base,0, $pos);
 var_dump($base);
 $base       == '/' ? '' : $base;
-
 $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <span class="navbar-brand">Sarx</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -44,7 +40,6 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 </div>
             </li>
             <li class="nav-item">
-
                 <a class="nav-link" href="'. $base .'/admin/consultas/">Consultas</a>
             </li>                                      
         </ul>
@@ -62,14 +57,12 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
         </form>
     </div>
 </nav>';
-
 $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">Sarx</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -79,7 +72,6 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-
                     <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -91,13 +83,8 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
         </form>
     </div>
 </nav>';
-
 //$navbar = 1 == 1 ? $navbar_admin : $navbar_clientes;
-
 //echo $navbar;
-
-
-
 if(isset($_SESSION['correo'])){
     
     if($_SESSION['correo']['id_tipo_usuario'] == "1"){
