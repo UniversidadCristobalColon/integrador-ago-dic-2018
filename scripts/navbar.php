@@ -17,7 +17,7 @@ $sql = "SELECT id_usuario, nombre_corto, id_tipo_usuario FROM usuarios WHERE id_
 	
 	$row = $result->fetch_assoc();
 $user =  $row['nombre_corto'];
-print($_SESSION["id_usuario"]);
+//print($_SESSION["id_usuario"]);
 
 
 
