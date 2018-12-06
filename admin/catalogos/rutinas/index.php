@@ -30,7 +30,11 @@
     </script>
     <script>
         $(document).ready( function () {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
         } );
 
         function confirmar() {
@@ -86,8 +90,8 @@
                 }
                 ?>
                 <td>
-                    <a href="editar.php?xid=<?php echo $id; ?>">Editar</a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" onclick='return confirmar();'>Eliminar</a>
+                    <a href="editar.php?xid=<?php echo $id; ?>"><img src="../../../img/icons8-edit-24.png"></a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" onclick='return confirmar();'><img src="../../../img/icons8-trash-24.png"></a>
                 </td>
             </tr>
             <?php
