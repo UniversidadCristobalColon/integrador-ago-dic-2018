@@ -5,12 +5,20 @@ $decodificar = ($_GET['id']);
 
 $id= htmlspecialchars(base64_decode($decodificar));
 
+
       try {
         require_once('../../../scripts/config.php');
+		  
+		  /////////logros
+		  $sqlogro = "SELECT * FROM logros";
+		  $logros = $db->query($sqlogro);
+		  
+		  $sqlogrou = "SELECT * FROM `logrosclientes` WHERE id_usuario = '{$id}'";
+		  $logrosu = $db->query($sqlogrou);
 
         /////RELLENA RECORDS TABLA
 
-        $records = "SELECT `nombre_rutina`,`tipo_record`,`t1`.`repeticiones/puntos`,`t1`.`peso`,`t1`.`tiempo`,`t1`.`id_usuario`,`ejercicios_rutina`,`t1`.`id_record` ,`t1`.`id_rutina` FROM `records` `t1`";
+        $records = "SELECT `nombre_rutina`,`tipo_record`,`t1`.`repeticiones_puntos`,`t1`.`peso`,`t1`.`tiempo`,`t1`.`id_usuario`,`ejercicios_rutina`,`t1`.`id_record` ,`t1`.`id_rutina` FROM `records` `t1`";
         $records .= "INNER JOIN (SELECT `id_rutina`,MAX(`fecha_creacion`) as `fecha` FROM `records` GROUP BY `id_rutina`) `t2` ";
         $records .= "ON (`t1`.`id_rutina` = `t2`.`id_rutina` and `t1`.`fecha_creacion` = `t2`.`fecha`) ";
         $records .= "LEFT JOIN `rutinas` `rut` on `rut`.`id_rutina` = `t1`.`id_rutina` LEFT JOIN `tiporecord` `tp`";
@@ -252,7 +260,7 @@ $id= htmlspecialchars(base64_decode($decodificar));
                          <td><?php echo $records['tipo_record']; ?></td>
                          <td><?php echo $records['peso']; ?></td>
                          <td><?php echo $records['tiempo']; ?></td>
-                         <td><?php echo $records['repeticiones/puntos']; ?></td>
+                         <td><?php echo $records['repeticiones_puntos']; ?></td>
                          <td>
                              <a class="icono" target="_blank" href="verRecord.php?id=<?php echo base64_encode($records['id_record']);?>&id2=<?php echo base64_encode($records['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
                          </td>
@@ -276,37 +284,39 @@ $id= htmlspecialchars(base64_decode($decodificar));
 
                 <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
                     <br>
-                      <table id="example" class="display table table-hover"  style="width:100%">
-                              <thead class="thead-dark">
-                                  <tr>
-                                    <th scope="col">Logro</th>
-                                     <th scope="col">Tipo</th>
-                                     <th scope="col">Fecha Creación</th>
-                                     <th scope="col">Eliminar</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                   <td>50 repeticiones</td>
-                                   <td>crossfit</td>
-                                   <td>20/12/12</td>
+							<!-- logros view -->
+					
+							  <div class="row">
+								<div class="col-lg-12">
+								  <h2 class="my-4">Tus Logros</h2>
+								</div>
+							  
+								  <?php while($logro = $logros->fetch_assoc() ) { ?>	
+								  <?php while($logrou = $logrosu->fetch_assoc() ) { ?>	
+								<div class="col-lg-4 col-sm-6 text-center mb-4">
+									<img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen']+"b"} 
+									 echo $logro['imagen']; ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+								  <h3>
+									<?php echo $logro['nombre_logro']; ?>
+								  </h3>
+								  <p><?php echo $logro['descripcion_logro']; ?></p>
+								</div>
+								  <?php  } ?>
+								  <?php  } ?>
+								  
+							 
+							  </div>
+					
 
-                                   <td>
-                                    <a class="icono" href="eliminarRecord.php?id=<?php //echo $registro['cve_ofertas']; ?>"> <ion-icon name="trash"><ion-icon> </a>
-                                   </td>
-                                </tr>
-                              </tbody>
-                              <tfoot>
-                                  <tr>
-                                    <th scope="col">Logro</th>
-                                     <th scope="col">Tipo</th>
-                                     <th scope="col">Fecha Creación</th>
-                                     <th scope="col">Eliminar</th>
-                                  </tr>
-                              </tfoot>
-                          </table>
+							</div>
                     </div>
+
+		
          </div>
+	
+		
+	
+	
     </main>
 
       <script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>

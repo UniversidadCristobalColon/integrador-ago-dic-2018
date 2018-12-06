@@ -145,7 +145,7 @@ $id = htmlspecialchars(base64_decode($decodificar));
           <a href="generalExpediente.php?id=<?php echo base64_encode($id);?>" class="btn btn-link"> Regresar</a>
 
           <input type="hidden" value="<?php echo base64_encode($id); ?>" name="id_nuevo_record">
-          <input type="submit" id="bu" disabled class="btn btn-success btnGuardar" value="Guardar">
+          <input type="submit" id="bu" disabled class="btn btn-success btnGuardar" value="Guardar" >
 
       </form>
 
