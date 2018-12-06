@@ -35,7 +35,11 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
 
             $('.datepicker').datepicker({
                 uiLibrary: 'bootstrap4',
@@ -130,9 +134,9 @@
                     <td><?php echo number_format($importe, 2) ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>
-                        <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
+                        <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><img src="../../../img/icons8-edit-24.png"></a>
                         <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
-                           onclick='return confirm("¿Estás seguro que quieres eliminar este egreso? ");'>Eliminar</a>
+                           onclick='return confirm("¿Estás seguro que quieres eliminar este egreso? ");'><img src="../../../img/icons8-trash-24.png"></a>
                     </td>
                 </tr>
                 <?php
