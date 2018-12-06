@@ -16,8 +16,7 @@ include 'funcs.php';
 	{
 		$usuario = $mysqli->real_escape_string($_POST['usuario']);
 		$password = $mysqli->real_escape_string($_POST['password']);
-		print($usuario);
-		print($password);
+		
 		if(isNullLogin($usuario, $password))
 		{
 			$errors[] = "Debe llenar todos los campos";
