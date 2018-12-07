@@ -191,4 +191,9 @@ function logro6($id_usuario){
     return false;
 }
 
+function fechaConDia($fecha){
+	setlocale(LC_TIME, 'es_MX');
+	return !empty($fecha) ? strftime("%A %e de %B de %Y",strtotime($fecha)) : '';
+}
+
 ?>
