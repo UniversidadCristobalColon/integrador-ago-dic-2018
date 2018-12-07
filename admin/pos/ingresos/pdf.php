@@ -35,8 +35,8 @@ class PDF extends FPDF
         $this->SetFont('Times','B',12);
         $this->Cell(100,10,'Descripcion',1,0,'C');
         $this->Cell(30,10,'Cantidad',1,0,'C');
-        $this->Cell(50,10,'Importe',1,0,'C');
-        $this->Cell(20,10,'Cliente',1,0,'C');
+        $this->Cell(35,10,'Importe',1,0,'C');
+        $this->Cell(30,10,'Cliente',1,0,'C');
         $this->Cell(30,10,'Usuario',1,0,'C');
         $this->Cell(40,10,'Fecha',1,0,'C');
         $this->Ln();
@@ -45,6 +45,7 @@ class PDF extends FPDF
     function viewTable($db){
         $fecha1=$_POST['fecha1'];
         $fecha2=$_POST['fecha2'];
+
         $this->SetFont('Times','',12);
         $query = "select id_ingresos,
                 descripcion_ingresos,
@@ -59,10 +60,19 @@ class PDF extends FPDF
         while($row = mysqli_fetch_array($result)){
             $monto = $row['importe'];
             $importe = number_format($monto,2);
+            $t = $row['idingrecli'];
+
             $this->Cell(100,10,$row['descripcion_ingresos'],1,0,'L');
             $this->Cell(30,10,$row['cantidad'],1,0,'L');
-            $this->Cell(50,10,$importe,1,0,'L');
-            $this->Cell(20,10,$row['idingrecli'],1,0,'L');
+            $this->Cell(35,10,$importe,1,0,'L');
+
+            if($t==1){
+                $client="admin";
+                $this->Cell(30,10,$client,1,0,'L');
+            }elseif ($t==2) {
+                $client = "cliente";
+                $this->Cell(30, 10, $client, 1, 0, 'L');
+            }
             $this->Cell(30,10,$row['nombre_corto'],1,0,'L');
             $this->Cell(40,10,$row['ingrefecha'],1,0,'L');
             $this->Ln();
