@@ -227,6 +227,7 @@ function logro6($id_usuario){
         $f = mysqli_fetch_array($res);
         $creacion = $f[0];
         if(!empty($creacion)) {
+            $creacion = substr($creacion,0,10);
 
             $date1 = new DateTime($creacion);
             $date2 = new DateTime();
