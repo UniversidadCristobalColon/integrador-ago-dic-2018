@@ -1,4 +1,12 @@
-<?php require_once '../../scripts/config.php' ?>
+<?php
+try {
+    require_once('../../scripts/config.php');
+    $_SESSION['user'] = 4;
+    $sql = 'SELECT * FROM usuarios';
+    $resultado = $db->query($sql);
+} catch (Exception $e) {
+}
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -15,6 +23,9 @@
 
     <!-- Hojas de estilos -->
     <link href="../../css/base.css" rel="stylesheet">
+
+    <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 
     <!-- Archivos JS -->
     <script src="../../js/base.js"></script>
@@ -46,8 +57,7 @@
     <div class="container">
         <div class="row">
 
-            <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
-            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
 
             <!-- LIST -->
             <div class=col-md-12>
@@ -59,7 +69,7 @@
                         <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
                         <a href="index.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
                     </div>
-                    <table class="table table-bordered table-condensed table-hover">
+                    <table  id="example" class="table table-bordered table-condensed table-hover">
                         <thead>
                         <tr>
                             <td>Nombre</td>
@@ -70,17 +80,20 @@
 
                         </thead>
                         <tbody id="form-list-client-body">
-                        <tr>
-                            <td>Eduardo</td>
-                            <td>eluz@counterpath.com</td>
-                            <td>Activo</td>
-                            <td>
-                                <a title="Ver este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
-                                <a title="Editar este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-edit text-primary"></i> </a>
-                                <a title="Borrar este usuario" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-trash text-danger"></i> </a>
 
-                            </td>
-                        </tr>
+                        <?php while($registros = $resultado->fetch_assoc() ) { ?>
+                            <tr id="<?php $registros['id_usuario']; ?>">
+                                <td><?php echo $registros['nombre_completo']; ?></td>
+                                <td><?php echo $registros['correo']; ?></td>
+                                <td>Activo</td>
+                                <td>
+                                    <a title="Ver este usuario" href="estado_cliente.php?id=<?php echo $registros['id_usuario']; ?>" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+
+
                         </tbody>
                     </table>
                 </form>
