@@ -21,6 +21,58 @@ if (!$db) {
 //$decodifica2 = base64_decode($codifica1);
 
 ////// FUNCIONES PARA CALCULAR LOGROS
+function muestralogros($id_usuario){
+    global $db;
+
+    if(!empty($id_usuario)){
+        $sql = "SELECT * FROM logros where id_logro not in (select id_logro from logrosclientes where id_usuario = $id_usuario)";
+        $res = mysqli_query($db, $sql);
+        if($res){
+            while($l = mysqli_feth_assoc($res)){
+                $id_logro = $l["id_logro"];
+                switch($id_logro){
+                    case 1:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen']."; ?>.png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+
+                        break;
+                    case 2:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+    
+                        break;
+                    case 3:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+   
+                        break;
+                    case 4:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+        
+                        break;
+                    case 5:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+                    
+                        break;
+                    case 6:
+						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
+									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
+								  <h3>";
+                       
+                        break;
+                }
+            }
+        }
+    }
+}
+////// FUNCIONES PARA CALCULAR LOGROS
 //////////////////////////////////////////////////////////////////////////
 function logros($id_usuario){
     global $db;

@@ -10,12 +10,7 @@ $id= htmlspecialchars(base64_decode($decodificar));
         require_once('../../../scripts/config.php');
 		  
 		  /////////logros
-		  $logro1 = "medalla1b";
-		  $logro2 = "medalla2b";
-		  $logro3 = "medalla3b";
-		  $logro4 = "medalla4b";
-		  $logro5 = "medalla5b";
-		  $logro6 = "medalla6b";
+
 		  $sqlogro = "SELECT * FROM logros";
 		  $logros = $db->query($sqlogro);
 		  
@@ -297,11 +292,16 @@ $id= htmlspecialchars(base64_decode($decodificar));
 								  <h2 class="my-4">Tus Logros</h2>
 								</div>
 							  
-								  <?php while($logro = $logros->fetch_assoc()  && $logrou = $logrosu->fetch_assoc() ) { ?>	
+								 
+
+								  <?php while($logrou = $logrosu->fetch_assoc() ) { 	
+								   while($logro = $logros->fetch_assoc() ) { ?>
 								  
+								   
 								<div class="col-lg-4 col-sm-6 text-center mb-4">
 									
-									<img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];} 
+									<img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
+																			if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";} 
 									 ?>.png" class="rounded-circle img-fluid d-block mx-auto">
 									
 								  <h3>
@@ -309,8 +309,8 @@ $id= htmlspecialchars(base64_decode($decodificar));
 								  </h3>
 								  <p><?php echo $logro['descripcion_logro']; ?></p>
 								</div>
-								   
-								  <?php  } ?>
+								   <?php }
+								  } ?>
 								  
 							 
 							  </div>
