@@ -84,7 +84,7 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
     </div>
 </nav>';
 $navbar = 1 == 1 ? $navbar_admin : $navbar_clientes;
-//echo $navbar;
+echo $navbar;
 /*if(isset($_SESSION['correo'])){
     
     if($_SESSION['correo']['id_tipo_usuario'] == "1"){
