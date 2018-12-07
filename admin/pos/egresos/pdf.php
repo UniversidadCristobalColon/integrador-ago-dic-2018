@@ -55,9 +55,11 @@ class PDF extends FPDF
                 from egresos INNER JOIN usuarios on usuarios.id_usuario = egresos.id_usuario WHERE egresos.fecha_modificacion between '$fecha1' AND '$fecha2'");
         $result = mysqli_query($db, $query);
         while($row = mysqli_fetch_array($result)){
+            $monto = $row['importe'];
+            $importe = number_format($monto,2);
             $this->Cell(100,10,$row['descripcion_egresos'],1,0,'L');
             $this->Cell(65,10,$row['nombre_corto'],1,0,'L');
-            $this->Cell(50,10,$row['importe'],1,0,'L');
+            $this->Cell(50,10,$importe,1,0,'L');
             $this->Cell(50,10,$row['egrefecha'],1,0,'L');
             $this->Ln();
         }
@@ -70,8 +72,10 @@ class PDF extends FPDF
         $this->SetY(-15);
         // Arial italic 8
         $this->SetFont('Arial','I',8);
-        // Número de página
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        // Fecha de página
+        date_default_timezone_set("America/Mexico_City");
+        $date = date("d/m/Y H:i:s");
+        $this->Cell(0,10,$date,0,0,'C');
     }
 }
 
