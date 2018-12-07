@@ -2,90 +2,84 @@
 /**
  * Created by PhpStorm.
  * User: Judith
- * Date: 23/11/2018
- * Time: 06:46 PM
+ * Date: 06/12/2018
+ * Time: 08:02 PM
  */
 
-require_once('../../../scripts/TCPDF-master/tcpdf.php');
-require_once ('../../../scripts/config.php');
+require '../../../scripts/fpdf/fpdf.php';
+
+require_once '../../../scripts/config.php';
 
 
-// create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-$pdf->SetAuthor('Solicitud de Egresos');
-$pdf->SetTitle('SarX Wellness Center');
-$pdf->SetSubject('');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+class PDF extends FPDF
+{
+// Cabecera de página
+    function Header()
+    {
+        // Logo
+        $this->Image('../../../img/logo.png',10,8,33);
+        // Arial bold 15
+        $this->SetFont('Arial','B',15);
+        // Movernos a la derecha
+        $this->Cell(80);
+        // Título
+        $this->SetFont('Arial','B',14);
+        $this->Cell(30,10,'SarX Wellness Center',0,0,'C');
+        $this->SetFont('Arial','',12);
+        $this->Cell(10);
+        $this->Cell(30,10,'Egresos',0,0,'C');
+        // Salto de línea
+        $this->Ln(20);
+    }
 
-$fecha1=$_POST['fecha1'];
-$fecha2=$_POST['fecha2'];
+    function headerTable(){
+        $this->SetFont('Times','B',12);
+        $this->Cell(100,10,'Descripcion',1,0,'C');
+        $this->Cell(65,10,'Usuario',1,0,'C');
+        $this->Cell(50,10,'Importe',1,0,'C');
+        $this->Cell(50,10,'Fecha',1,0,'C');
+        $this->Ln();
+    }
 
-$query="select id_egresos,
+    function viewTable($db){
+        $fecha1=$_POST['fecha1'];
+        $fecha2=$_POST['fecha2'];
+        $this->SetFont('Times','',12);
+        $que = $db->query($query = "select id_egresos,
                 descripcion_egresos,
                 egresos.id_usuario AS idegreuser,
                 importe,
                 egresos.fecha_modificacion AS egrefecha,
                 nombre_corto 
-                from egresos INNER JOIN usuarios on usuarios.id_usuario = egresos.id_usuario WHERE egresos.fecha_modificacion between '$fecha1' AND '$fecha2'";
-
-
-$result=mysqli_query($db,$query);
-while ($row=mysqli_fetch_array($result)) {
-    $id = $row['id_egresos'];
-    $descripcion = $row['descripcion_egresos'];
-    $user = $row['idegreuser'];
-    $monto = $row['importe'];
-    $importe = number_format($monto,2);
-    $fecha = $row['egrefecha'];
-    $usuario = $row['nombre_corto'];
-
-// add a page
-        $pdf->AddPage('L');
-
-        $html = "<table cellpadding='1' cellspacing='1' border='0' style='text-align:right;'>
-        <tr>
-            <th><img src='../../../img/favicon.png' alt='test alt attribute' width='150' height='100' border='0' /></th>
-            <th><b>SarX Wellness Center</b></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th><b>Reporte de egresos</b></th>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <table cellpadding='1' cellspacing='1' border='1' style='text-align:center;'>
-            <thead>
-            <tr>
-                <th><b>Descripción</b></th>
-                <th><b>Usuario</b></th>
-                <th><b>Importe</b></th>
-                <th><b>Fecha</b></th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>$descripcion</td>
-                    <td>$usuario</td>
-                    <td>$importe</td>
-                    <td>$fecha</td>
-                </tr>
-            </tbody>
-        </table>
-    ";
+                from egresos INNER JOIN usuarios on usuarios.id_usuario = egresos.id_usuario WHERE egresos.fecha_modificacion between '$fecha1' AND '$fecha2'");
+        $result = mysqli_query($db, $query);
+        while($row = mysqli_fetch_array($result)){
+            $this->Cell(100,10,$row['descripcion_egresos'],1,0,'L');
+            $this->Cell(65,10,$row['nombre_corto'],1,0,'L');
+            $this->Cell(50,10,$row['importe'],1,0,'L');
+            $this->Cell(50,10,$row['egrefecha'],1,0,'L');
+            $this->Ln();
+        }
     }
-// output the HTML content
-$pdf->writeHTML($html, true, false, true, false, 'l');
 
+// Pie de página
+    function Footer()
+    {
+        // Posición: a 1,5 cm del final
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('Arial','I',8);
+        // Número de página
+        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    }
+}
 
-// ---------------------------------------------------------
-
-//Close and output PDF document
-$pdf->Output("egresos.pdf", 'I');
-
-//============================================================+
-// END OF FILE
-//============================================================+
-
+// Creación del objeto de la clase heredada
+$pdf = new PDF();
+$pdf->SetTitle('SarX Wellness Center');
+$pdf->AliasNbPages();
+$pdf->AddPage('L','A4',0);
+$pdf->headerTable();
+$pdf->viewTable($db);
+$pdf->Output();
