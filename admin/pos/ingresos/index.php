@@ -142,7 +142,7 @@
                     <td>
                         <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
                         <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
-                           onclick='return confirm("¿Estás seguro que quieres eliminar este egreso? ");'>Eliminar</a>
+                           onclick='return confirm("¿Estás seguro que quieres eliminar este ingreso? ");'>Eliminar</a>
                     </td>
                 </tr>
                 <?php
