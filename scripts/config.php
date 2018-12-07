@@ -31,7 +31,7 @@ function muestralogros($id_usuario){
         $sql = "SELECT * FROM logros where id_logro not in (select id_logro from logrosclientes where id_usuario = $id_usuario)";
         $res = mysqli_query($db, $sql);
         if($res){
-            while($l = mysqli_feth_assoc($res)){
+            while($l = mysqli_fetch_assoc($res)){
                 $id_logro = $l["id_logro"];
                 switch($id_logro){
                     case 1:
@@ -84,7 +84,7 @@ function logros($id_usuario){
         $sql = "SELECT * FROM logros where id_logro not in (select id_logro from logrosclientes where id_usuario = $id_usuario)";
         $res = mysqli_query($db, $sql);
         if($res){
-            while($f = mysqli_feth_assoc($res)){
+            while($f = mysqli_fetch_assoc($res)){
                 $id_logro = $f["id_logro"];
 
                 switch($id_logro){
