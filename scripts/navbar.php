@@ -1,16 +1,16 @@
 <?php
- $tsesion= $_SESSION['correo']['id_tipo_usuario'];
-$user=$_SESSION['correo']['nombre_corto'];
-$usuario = !empty($_SESSION["user_name"]) ? $_SESSION["user_name"] : 'Usuario';
+$tsesion    = !empty($_SESSION['correo']['id_tipo_usuario']) ? $_SESSION['correo']['id_tipo_usuario'] : '';
+$user       = !empty($_SESSION['correo']['nombre_corto']) ? $_SESSION['correo']['nombre_corto'] : '';
+$usuario    = !empty($_SESSION["user_name"]) ? $_SESSION["user_name"] : 'Usuario';
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
-var_dump($doc_root);
+//var_dump($doc_root);
 $realpath   = str_replace('\\', '/', realpath ("."));
-var_dump($realpath);
+//var_dump($realpath);
 $base       = str_replace($doc_root, '', $realpath);
-var_dump($base);
+//var_dump($base);
 $pos        = strpos($base, '/',1);
 $base       = substr($base,0, $pos);
-var_dump($base);
+//var_dump($base);
 $base       == '/' ? '' : $base;
 $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <span class="navbar-brand">Sarx</span>
