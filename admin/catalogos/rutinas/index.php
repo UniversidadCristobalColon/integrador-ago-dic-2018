@@ -90,8 +90,8 @@
                 }
                 ?>
                 <td>
-                    <a href="editar.php?xid=<?php echo $id; ?>"><img src="../../../img/icons8-edit-24.png"></a>
-                    <a href="eliminar.php?xid=<?php echo $id; ?>" onclick='return confirmar();'><img src="../../../img/icons8-trash-24.png"></a>
+                    <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"><img src="../../../img/icons8-edit-24.png"></a>
+                    <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirmar();'><img src="../../../img/icons8-trash-24.png"></a>
                 </td>
             </tr>
             <?php
