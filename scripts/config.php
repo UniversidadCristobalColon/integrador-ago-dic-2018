@@ -15,6 +15,9 @@ if (!$db) {
     exit;
 }
 
+mysqli_set_charset($db, 'utf8');
+
+
 ////CODIFICACION//
 
 //$codifica1 = base64_encode($cadena);
