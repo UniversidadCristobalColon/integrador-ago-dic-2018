@@ -7,6 +7,6 @@ $result=mysqli_query($db,$query);
 if ($result){
     header("Location: indexn.php");
 }else{
-    echo "No se pudo llevar a acabo la operacion.";
+    echo "No se pudo llevar a acabo la operación.";
     header("refresh:2; url=indexn.php");
 }

@@ -1,19 +1,34 @@
 <?php
 
-                    try {
+try {
 
-                        require_once('../../../scripts/config.php');
+    require_once('../../../scripts/config.php');
 
-                        $correcto= isset($_GET['success']);
-                        $repetido= isset($_GET['repetido']);
-                        $_SESSION['user'] = 4;
+    $correcto= isset($_GET['success']);
+    $repetido= isset($_GET['repetido']);
+    $_SESSION['user'] = 4;
 
-                        $record = "SELECT * FROM `tipousuario`";
-                        $resultado3 = $db->query($record);
+    $record = "SELECT * FROM `tipousuario`";
+    $resultado3 = $db->query($record);
 
-                    } catch (Exception $e) {
+} catch (Exception $e) {
 
-                       }
+}
+
+
+$id_usuario = $_GET["xid"];
+
+$sql = "select * from usuarios where id_usuario = $id_usuario";
+$res = mysqli_query($db, $sql);
+if($res){
+    $f = mysqli_fetch_assoc($res);
+    $nombre_completo = $f["nombre_completo"];
+    $nombre_corto = $f["nombre_corto"];
+    $correo = $f["correo"];
+    $celular = $f["celular"];
+    $telefono = $f["telefono"];
+    $fecha = $f["dias_pago"];
+}
 
 ?>
 
@@ -42,8 +57,6 @@
     <script src="../../../js/validar.js"></script>
 
 
-
-
 </head>
 
 <body>
@@ -52,9 +65,22 @@
 
 <main role="main" class="container">
 
-    <form action="guardarbase.php" method="post" onsubmit="return validar()">
+    <form action="guardarEditu.php" method="post">
+        <?php
+        $xid = $_GET['xid'];
+        $query="select * from usuarios where id_usuario=$xid";
+        $guardarbase=mysqli_query($db,$query);
+        while ($row=mysqli_fetch_array($guardarbase)) {
+        $nombre_completo= $row['nombre_completo'];
+        $nombre_corto = $row['nombre_corto'];
+        $correo = $row['correo'];
+        $celular = $row['celular'];
+        $telefono = $row['telefono'];
+        $dias_pago = $row['dias_pago'];
+        ?>
+        <input type="hidden" name="id" value="<?php echo $xid; ?>">
 
-        <h2>Registro de Usuario</h2>
+        <h2>Editar usuario</h2>
         <?php
         if($correcto == 1){?>
             <div id="anuncio" class="alert alert-success mb-3"> ¡El usuario ha sido registrado correctamente!
@@ -84,12 +110,12 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label>Nombre completo</label>
-                <input type="text" name="nombre" class="form-control" maxlength="100" required>
+                <input type="text" name="nombre" class="form-control" maxlength="100" required value="<?php echo $nombre_completo ?>">
             </div>
 
             <div class="col-md-6">
                 <label>Nombre usuario</label>
-                <input type="text" name="nombrecorto" class="form-control" maxlength="50" required>
+                <input type="text" name="nombrecorto" class="form-control" maxlength="50" required value="<?php echo $nombre_corto ?>">
             </div>
 
         </div>
@@ -97,7 +123,7 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label for="email">Email <span class="text-muted"></span></label>
-                <input type="text" class="form-control" maxlength="45" name="email" placeholder="you@example.com">
+                <input type="text" class="form-control" maxlength="45" name="email" placeholder="you@example.com" value="<?php echo $correo ?>">
                 <div class="invalid-feedback">
                     Please enter a valid email address for shipping updates.
                 </div>
@@ -106,32 +132,18 @@
 
             <div class="col-md-4">
                 <label>Celular</label>
-            <input type="text" name="celular" class="form-control" maxlength="13" required>
+                <input type="text" name="celular" class="form-control" maxlength="13" required value="<?php echo $celular ?>">
             </div>
             <div class="col-md-4">
                 <label>Teléfono</label>
-                <input type="text" name="telefono" class="form-control" maxlength="13" required>
+                <input type="text" name="telefono" class="form-control" maxlength="13" required value="<?php echo $telefono ?>">
             </div>
         </div>
-
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label>Contraseña</label>
-                <input type="password" name="contrasena" min="5" max="10" class="form-control" required>
-            </div>
-
-            <div class="col-md-6">
-                <label>Repetir contraseña</label>
-                <input type="password" name="contrasena2" min="5" max="10"  class="form-control" required>
-
-            </div>
-        </div>
-
 
         <div class="row mb-3">
             <div class="col-md-12">
                 <label>Seleccione el día de pago:</label>
-                <select type="int" name="dia_pago" class="form-control" required>
+                <select type="date" name="dia_pago" class="form-control" required><?php echo $dias_pago ?>
                     <option value="" selected="selected"></option>
                     <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option>
                     <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="8">9</option> <option value="8">10</option>
@@ -143,22 +155,13 @@
 
             </div>
         </div>
-
-
-        <div class="row mb-3">
-            <div class="col-md-12">
-            <label>Seleccione tipo de usuario:</label>
-            <select name="tipo" class="form-control" required>
-                <?php while($rec = $resultado3->fetch_assoc() ) { ?>
-                    <option value="<?php echo $rec['id_tipo_usuario']; ?>"><?php echo $rec['desc_tipo_usuario']; ?></option>
-                <?php  } ?>
-            </select>
-            </div>
-        </div>
     </form>
+    <?php
+    }
+    ?>
 </main>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
