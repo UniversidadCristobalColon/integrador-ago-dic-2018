@@ -44,7 +44,7 @@
                $resultado = $db->query($sql);
 
               $id2 = base64_encode($id);
-
+			   logros($id); 
              header("Location: perfil.php?id=".$id2);
 
           } catch (Exception $e) {

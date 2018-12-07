@@ -46,6 +46,7 @@
               $id2 = base64_encode($id);
 
              header("Location: generalExpediente.php?id=".$id2);
+			   logros($id); 
 
           } catch (Exception $e) {
 

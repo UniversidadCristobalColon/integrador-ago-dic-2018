@@ -1,89 +1,16 @@
 <?php
-session_start();
-
-/*error_reporting(E_ALL);
-ini_set('display_errors', 'on');*/
-
-define('BASE', '//' . $_SERVER['HTTP_HOST'] . '/');
-
-$db = mysqli_connect("35.225.5.28", "sarx_user", "oBSH6d4RicpMR8Ja", "sarx_db");
-
-if (!$db) {
-    echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
-    echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
-    echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}
-
-////CODIFICACION//
-
-//$codifica1 = base64_encode($cadena);
-//$decodifica2 = base64_decode($codifica1);
-
-////// FUNCIONES PARA CALCULAR LOGROS
-function muestralogros($id_usuario){
-    global $db;
-
-    if(!empty($id_usuario)){
-        $sql = "SELECT * FROM logros where id_logro not in (select id_logro from logrosclientes where id_usuario = $id_usuario)";
-        $res = mysqli_query($db, $sql);
-        if($res){
-            while($l = mysqli_feth_assoc($res)){
-                $id_logro = $l["id_logro"];
-                switch($id_logro){
-                    case 1:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen']."; ?>.png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-
-                        break;
-                    case 2:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-    
-                        break;
-                    case 3:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-   
-                        break;
-                    case 4:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-        
-                        break;
-                    case 5:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-                    
-                        break;
-                    case 6:
-						echo "<div class=\"col-lg-4 col-sm-6 text-center mb-4\">
-									<img src=\"../../img/".$l['imagen'].".png\" class=\"rounded-circle img-fluid d-block mx-auto\">
-								  <h3>";
-                       
-                        break;
-                }
-            }
-        }
-    }
-}
-////// FUNCIONES PARA CALCULAR LOGROS
-//////////////////////////////////////////////////////////////////////////
 function logros($id_usuario){
     global $db;
 
     if(!empty($id_usuario)){
+        //determinar qué logros no ha hecho el usuario
         $sql = "SELECT * FROM logros where id_logro not in (select id_logro from logrosclientes where id_usuario = $id_usuario)";
         $res = mysqli_query($db, $sql);
         if($res){
             while($f = mysqli_feth_assoc($res)){
                 $id_logro = $f["id_logro"];
-
+                
+                //llamar los logros que no haya hecho
                 switch($id_logro){
                     case 1:
                         logro1($id_usuario);
@@ -242,10 +169,4 @@ function logro6($id_usuario){
 
     return false;
 }
-
-function fechaConDia($fecha){
-	setlocale(LC_TIME, 'es_MX');
-	return !empty($fecha) ? strftime("%A %e de %B de %Y",strtotime($fecha)) : '';
-}
-
 ?>

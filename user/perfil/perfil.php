@@ -4,10 +4,18 @@ $id= $_SESSION['user'] = 2;
 
       try {
         require_once('../../scripts/config.php');
+		  
+		  /////////logros
+
+		  $sqlogro = "SELECT * FROM logros";
+		  $logros = $db->query($sqlogro);
+		  
+		  $sqlogrou = "SELECT * FROM `logrosclientes` WHERE id_usuario = '{$id}'";
+		  $logrosu = $db->query($sqlogrou);
 
         /////RELLENA RECORDS TABLA
 
-        $records = "SELECT `nombre_rutina`,`tipo_record`,`t1`.`repeticiones/puntos`,`t1`.`peso`,`t1`.`tiempo`,`t1`.`id_usuario`,`ejercicios_rutina`,`t1`.`id_record` ,`t1`.`id_rutina` FROM `records` `t1`";
+        $records = "SELECT `nombre_rutina`,`tipo_record`,`t1`.`repeticiones_puntos`,`t1`.`peso`,`t1`.`tiempo`,`t1`.`id_usuario`,`ejercicios_rutina`,`t1`.`id_record` ,`t1`.`id_rutina` FROM `records` `t1`";
         $records .= "INNER JOIN (SELECT `id_rutina`,MAX(`fecha_creacion`) as `fecha` FROM `records` GROUP BY `id_rutina`) `t2` ";
         $records .= "ON (`t1`.`id_rutina` = `t2`.`id_rutina` and `t1`.`fecha_creacion` = `t2`.`fecha`) ";
         $records .= "LEFT JOIN `rutinas` `rut` on `rut`.`id_rutina` = `t1`.`id_rutina` LEFT JOIN `tiporecord` `tp`";
@@ -242,7 +250,7 @@ $id= $_SESSION['user'] = 2;
                          <td><?php echo $records['tipo_record']; ?></td>
                          <td><?php echo $records['peso']; ?></td>
                          <td><?php echo $records['tiempo']; ?></td>
-                         <td><?php echo $records['repeticiones/puntos']; ?></td>
+                         <td><?php echo $records['repeticiones_puntos']; ?></td>
                          <td>
                              <a class="icono" target="_blank" href="verRecordPerfil.php?id=<?php echo base64_encode($records['id_record']);?>&id2=<?php echo base64_encode($records['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
                          </td>
@@ -266,7 +274,35 @@ $id= $_SESSION['user'] = 2;
 
                 <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
                     <br>
+							<!-- logros view -->
+					
+							  <div class="row">
+								<div class="col-lg-12">
+								  <h2 class="my-4">Tus Logros</h2>
+								</div>
+							  
+								 
 
+								  <?php while($logrou = $logrosu->fetch_assoc() ) { 	
+								   while($logro = $logros->fetch_assoc() ) { ?>
+								  
+								   
+								<div class="col-lg-4 col-sm-6 text-center mb-4">
+									
+									<img src="../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
+																			if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";} 
+									 ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+									
+								  <h3>
+									<?php echo $logro['nombre_logro']; ?>
+								  </h3>
+								  <p><?php echo $logro['descripcion_logro']; ?></p>
+								</div>
+								   <?php }
+								  } ?>
+								  
+							 
+							  </div>
                     </div>
          </div>
     </main>
