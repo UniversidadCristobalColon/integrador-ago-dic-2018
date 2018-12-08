@@ -8,7 +8,6 @@
 require_once '../../../scripts/config.php';
 
 $id_usuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
-$id_usuario = 1;
 $descripcion = $_POST['descripcion'];
 $user = $_POST['user'];
 $importe = $_POST['importe'];

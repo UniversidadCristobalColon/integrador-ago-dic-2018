@@ -7,6 +7,8 @@
  */
 
 require_once '../../../scripts/config.php';
+
+$id_usuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
 $xid = $_POST['id'];
 $descripcion = $_POST['descripcion'];
 $user = $_POST['user'];
@@ -17,7 +19,8 @@ $query="UPDATE `egresos` SET
                       `descripcion_egresos` = '$descripcion',
                       `id_usuario` = '$user',
                       `importe` = '$importe',
-                      `fecha_modificacion` = '$fecha'
+                      `fecha_modificacion` = '$fecha',
+                      `usuario_modificacion` = '$id_usuario'
                       WHERE `egresos`.`id_egresos` = $xid;";
 
 $result=mysqli_query($db,$query);
