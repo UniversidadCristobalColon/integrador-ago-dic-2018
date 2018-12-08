@@ -14,7 +14,7 @@
 
 
     $nombre_rutina = $valores['nombre_rutina'];
-    $ejercicios_rutina = $valores['ejercicios_rutina'];
+    $ejercicios_rutina = stripslashes($valores['ejercicios_rutina']);
 
     $datos = array(
         'nombre' => $nombre_rutina,
