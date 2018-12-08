@@ -8,6 +8,7 @@
 require_once '../../../scripts/config.php';
 
 $id_usuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
+$id_usuario = 2;
 $descripcion = $_POST['descripcion'];
 $user = $_POST['user'];
 $importe = $_POST['importe'];
@@ -31,12 +32,7 @@ $query="INSERT INTO `egresos` (
 $result=mysqli_query($db,$query);
 
 if ($result === TRUE) {
-    $message = "El nuevo egreso se ha guardado.";
-    echo "<script type='text/javascript'>alert('$message');</script>";
-    ?>
-    <!--Redireccionamiento al index de egresos -->
-    <meta http-equiv="refresh" content="1;url=index.php">
-    <?php
+    header("location: index.php?exito=1");
 }
 else {
     $message = "No se ha podido completar el registro del nuevo egreso, inténtalo de nuevo." . $query . "<br>" . $db->error;

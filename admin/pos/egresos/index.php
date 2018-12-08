@@ -69,11 +69,15 @@
     ?>
 
     <div class="starter-template">
+        <?php
+        if(empty($_GET['exito'])==false && $_GET['exito']==1){
+            echo '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Se ha guardado la información
+                </div>';
+        }
+        ?>
         <h1>Egresos</h1>
-        <!--        <div class="alert alert-success alert-dismissible">-->
-        <!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
-        <!--            <strong>Success!</strong> Indicates a successful or positive action.-->
-        <!--        </div>-->
         <form action="index.php" method="get">
             <div class="row mb-3">
                 <div class="col-md-12">
