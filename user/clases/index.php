@@ -38,7 +38,7 @@
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "mre" link when too many events
-                events: 'http://localhost:8888/int2018/user/clases/eventoClases.php'
+                events: 'eventoClases.php'
             });
 
         });

@@ -32,7 +32,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'botonClase, month,agendaWeek,agendaDay,listMonth'
+                    right: 'botonClase, month,listMonth'
                 },
                 customButtons:{
                     botonClase:{
@@ -48,7 +48,7 @@
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events:
-                    'http://localhost:8888/int2018/admin/clases/eventoClases.php'
+                    'eventoClases.php'
             });
         });
 
