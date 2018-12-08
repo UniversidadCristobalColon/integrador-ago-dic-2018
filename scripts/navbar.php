@@ -1,14 +1,7 @@
 <?php
-$idUsuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
-
 $nombre_corto = 'Sin usuario';
-if(!empty($db) && !empty($idUsuario)) {
-    $sql = "SELECT nombre_corto FROM usuarios WHERE id_usuario = '$idUsuario'";
-    $res = mysqli_query($db, $sql);
-    if($res){
-        $f = mysqli_fetch_array($res);
-        $nombre_corto = $f[0];
-    }
+if(!empty($_SESSION['nombre_corto'])) {
+    $nombre_corto = $_SESSION['nombre_corto'];
 }
 
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
