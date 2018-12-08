@@ -10,8 +10,11 @@
 
 
 
-
+$_SESSION['nombre_corto'];
+$_SESSION['nombre_completo'];
+                      
 $idUsuario = $_SESSION['id_usuario'];
+
 $sql = "SELECT id_usuario, nombre_corto, id_tipo_usuario FROM usuarios WHERE id_usuario = '$idUsuario'";
 	$result = $mysqli->query($sql);
 	
