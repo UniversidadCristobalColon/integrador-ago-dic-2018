@@ -129,9 +129,8 @@
                     <td><?php echo $usuario ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>
-                        <a href="edita_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                        <a href="eliminar_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
-                           onclick='return confirm("¿Está seguro que quiere eliminar este ingreso?");'>Eliminar</a>
+                        <a href="edita_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a> 
+                        <a href="eliminar_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Está seguro que quiere eliminar este ingreso?");'>Eliminar</a>
                     </td>
                 </tr>
                 <?php

@@ -6,82 +6,98 @@
  * Time: 11:35 PM
  */
 
-require_once('../../../scripts/TCPDF-master/tcpdf.php');
-require_once ('../../../scripts/config.php');
+require '../../../scripts/fpdf/fpdf.php';
 
+require_once '../../../scripts/config.php';
 
-// create new PDF document
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+class PDF extends FPDF
+{
+// Cabecera de página
+    function Header()
+    {
+        // Logo
+        $this->Image('../../../img/logo.png',10,8,33);
+        // Arial bold 15
+        $this->SetFont('Arial','B',15);
+        // Movernos a la derecha
+        $this->Cell(80);
+        // Título
+        $this->SetFont('Arial','B',14);
+        $this->Cell(30,10,'SarX Wellness Center',0,0,'C');
+        $this->SetFont('Arial','',12);
+        $this->Cell(10);
+        $this->Cell(30,10,'Ingresos',0,0,'C');
+        // Salto de línea
+        $this->Ln(20);
+    }
 
-$pdf->SetAuthor('Solicitud de Ingresos');
-$pdf->SetTitle('SarX Wellness Center');
-$pdf->SetSubject('');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+    function headerTable(){
+        $this->SetFont('Times','B',12);
+        $this->Cell(100,10,'Descripcion',1,0,'C');
+        $this->Cell(30,10,'Cantidad',1,0,'C');
+        $this->Cell(35,10,'Importe',1,0,'C');
+        $this->Cell(30,10,'Cliente',1,0,'C');
+        $this->Cell(30,10,'Usuario',1,0,'C');
+        $this->Cell(40,10,'Fecha',1,0,'C');
+        $this->Ln();
+    }
 
-$fecha1=$_POST['fecha1'];
-$fecha2=$_POST['fecha2'];
+    function viewTable($db){
+        $fecha1=$_POST['fecha1'];
+        $fecha2=$_POST['fecha2'];
 
-$query="select id_ingresos,
+        $this->SetFont('Times','',12);
+        $query = "select id_ingresos,
                 descripcion_ingresos,
                 ingresos.id_usuario AS idingreuser,
                 ingresos.id_cliente AS idingrecli,
                 cantidad,
                 importe,
                 ingresos.fecha_modificacion AS ingrefecha,
-                nombre_corto 
+                nombre_corto
                 from ingresos INNER JOIN usuarios on usuarios.id_usuario = ingresos.id_usuario WHERE ingresos.fecha_modificacion between '$fecha1' AND '$fecha2'";
+        $result = mysqli_query($db, $query);
+        while($row = mysqli_fetch_array($result)){
+            $monto = $row['importe'];
+            $importe = number_format($monto,2);
+            $t = $row['idingrecli'];
 
-$pdf->AddPage('L');
+            $this->Cell(100,10,$row['descripcion_ingresos'],1,0,'L');
+            $this->Cell(30,10,$row['cantidad'],1,0,'L');
+            $this->Cell(35,10,$importe,1,0,'L');
 
-$pdf->Cell(0,0,"SarX Wellness Center");
+            if($t==1){
+                $client="admin";
+                $this->Cell(30,10,$client,1,0,'L');
+            }elseif ($t==2) {
+                $client = "cliente";
+                $this->Cell(30, 10, $client, 1, 0, 'L');
+            }
+            $this->Cell(30,10,$row['nombre_corto'],1,0,'L');
+            $this->Cell(40,10,$row['ingrefecha'],1,0,'L');
+            $this->Ln();
+        }
+    }
 
-$result=mysqli_query($db,$query);
-
-$html="<table>
-            <thead>
-            <tr>
-                <th><b>Descripción</b></th>
-                <th><b>Cantidad</b></th>
-                <th><b>Importe</b></th>
-                <th><b>Cliente</b></th>
-                <th><b>Usuario</b></th>
-                <th><b>Fecha</b></th>
-            </tr>
-            </thead>
-            <tbody>";
-
-while ($row=mysqli_fetch_array($result)) {
-    $id = $row['id_ingresos'];
-    $descripcion = $row['descripcion_ingresos'];
-    $user = $row['idingreuser'];
-    $cliente = $row['idingrecli'];
-    $monto = $row['importe'];
-    $importe = number_format($monto,2);
-    $cantidad = $row['cantidad'];
-    $fecha = $row['ingrefecha'];
-    $usuario = $row['nombre_corto'];
-
-
-    $html .= "<tr>
-                    <td>$descripcion</td>
-                    <td>$cantidad</td>
-                    <td>$importe</td>
-                    <td>$cliente</td>
-                    <td>$usuario</td>
-                    <td>$fecha</td>
-                </tr>";
+// Pie de página
+    function Footer()
+    {
+        // Posición: a 1,5 cm del final
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('Arial','I',8);
+        // Número de página
+        date_default_timezone_set("America/Mexico_City");
+        $date = date("d/m/Y H:i:s");
+        $this->Cell(0,10,$date,0,0,'C');
+    }
 }
 
-$html .= "</tbody></table>";
-// output the HTML content
-$pdf->writeHTML($html, true, false, true, false, 'l');
-
-
-// ---------------------------------------------------------
-
-//Close and output PDF document
-$pdf->Output("ingresos.pdf", 'I');
-
-//============================================================+
-// END OF FILE
-//============================================================+
+// Creación del objeto de la clase heredada
+$pdf = new PDF();
+$pdf->SetTitle('SarX Wellness Center ');
+$pdf->AliasNbPages();
+$pdf->AddPage('L','A4',0);
+$pdf->headerTable();
+$pdf->viewTable($db);
+$pdf->Output();
