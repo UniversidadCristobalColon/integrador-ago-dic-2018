@@ -54,7 +54,7 @@ class PDF extends FPDF
                 cantidad,
                 importe,
                 ingresos.fecha_modificacion AS ingrefecha,
-                nombre_corto 
+                nombre_corto
                 from ingresos INNER JOIN usuarios on usuarios.id_usuario = ingresos.id_usuario WHERE ingresos.fecha_modificacion between '$fecha1' AND '$fecha2'";
         $result = mysqli_query($db, $query);
         while($row = mysqli_fetch_array($result)){
