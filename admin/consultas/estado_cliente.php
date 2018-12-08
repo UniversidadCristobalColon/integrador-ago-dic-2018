@@ -67,10 +67,6 @@ try {
                 <p class="mb-1"><span class="text-muted">Numero de telefono </span><?php echo $registros['telefono']; ?></p>
             </div>
 
-            <div class="pull-center">
-                <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
-            </div>
-
             <?php  } ?>
         </div>
 
@@ -116,12 +112,6 @@ try {
             </div>
         </div>
 
-        <div class="d-flex flex-row-reverse bg-dark text-white p-4">
-            <div class="py-3 px-5 text-right">
-                <div class="mb-2">Total</div>
-                <div class="h2 font-weight-light">$234,234</div>
-            </div>
-        </div>
     </div>
     </div>
     </div>
