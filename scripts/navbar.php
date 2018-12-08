@@ -46,7 +46,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
             <li class="nav-item">
 
                 <a class="nav-link" href="'. $base .'/admin/consultas/">Consultas</a>
-            </li>                                      
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
@@ -99,14 +99,14 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
 
 
 if(isset($_SESSION['correo'])){
-    
+
     if($_SESSION['correo']['id_tipo_usuario'] == "1"){
-     echo $navbar_admin;  
-        
+     echo $navbar_admin;
+
     }else{
-        echo $navbar_clientes; 
+        echo $navbar_clientes;
     }
-    
+
 }else{
-   header('Location: ../index.php');   
+   header('Location: ../index.php');
 }

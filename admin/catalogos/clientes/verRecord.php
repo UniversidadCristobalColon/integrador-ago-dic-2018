@@ -22,7 +22,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
       $resultado  = $db->query($sql);
 
 
-      $records = "SELECT `nombre_rutina`,`tipo_record`,`repeticiones/puntos`,`peso`,`tiempo`,`id_usuario`,`ejercicios_rutina`,`id_record`,`fecha_creacion`  from `records` `rec` LEFT OUTER JOIN `rutinas` `rut` on `rut`.`id_rutina` = `rec`.`id_rutina` LEFT OUTER JOIN `tiporecord` `tp` on `tp`.`id_tipo_record` = `rec`.`id_tipo_record` WHERE `id_usuario` = '{$id2}' AND `rec`.`id_rutina` =  '{$id_rutina}' ORDER BY `fecha_creacion` DESC ";
+      $records = "SELECT `nombre_rutina`,`tipo_record`,`repeticiones_puntos`,`peso`,`tiempo`,`id_usuario`,`ejercicios_rutina`,`id_record`,`fecha_creacion`  from `records` `rec` LEFT OUTER JOIN `rutinas` `rut` on `rut`.`id_rutina` = `rec`.`id_rutina` LEFT OUTER JOIN `tiporecord` `tp` on `tp`.`id_tipo_record` = `rec`.`id_tipo_record` WHERE `id_usuario` = '{$id2}' AND `rec`.`id_rutina` =  '{$id_rutina}' ORDER BY `fecha_creacion` DESC ";
       $resultado5 = $db->query($records);
 
 
@@ -62,7 +62,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
 
 <body>
 
-<?php require_once '../../../scripts/navbar2.php' ?>
+<?php require_once '../../../scripts/navbar.php' ?>
 
 
 <main role="main" class="container">

@@ -40,12 +40,13 @@
           try {
               require_once('../../scripts/config.php');
 
-               $sql =  "INSERT INTO `records` (`id_record`,`id_rutina` ,`id_tipo_record`, `id_unidad_puntos`, `repeticiones/puntos`, `id_unidad_peso`, `peso`, `tiempo`, `fecha_creacion`, `id_usuario`, `id_clase`) VALUES (NULL,'{$wod}','{$tipo}',NULL, '{$repeticiones}', '{$unidad_peso}', '{$peso_record}', '{$nuevo}','{$fecha_record}','{$id}', NULL)";
+               $sql =  "INSERT INTO `records` (`id_record`,`id_rutina` ,`id_tipo_record`, `id_unidad_puntos`, `repeticiones_puntos`, `id_unidad_peso`, `peso`, `tiempo`, `fecha_creacion`, `id_usuario`, `id_clase`)";
+               $sql .="VALUES (NULL,'{$wod}','{$tipo}',NULL, '{$repeticiones}', '{$unidad_peso}', '{$peso_record}', '{$nuevo}','{$fecha_record}','{$id}', NULL)";
                $resultado = $db->query($sql);
 
               $id2 = base64_encode($id);
-			   logros($id); 
-             header("Location: perfil.php?id=".$id2);
+			   logros($id);
+             header("Location: index.php?id=".$id2);
 
           } catch (Exception $e) {
 

@@ -1,6 +1,6 @@
 <?php
 
-$decodificar = $_POST['id_record'];
+$decodificar = $_GET['id_record'];
 $id = htmlspecialchars(base64_decode($decodificar));
 
       try {
@@ -41,7 +41,6 @@ $id = htmlspecialchars(base64_decode($decodificar));
     <link href="../../css/base.css" rel="stylesheet">
     <link href="../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -54,7 +53,7 @@ $id = htmlspecialchars(base64_decode($decodificar));
 
 <body>
 
-<?php require_once '../../scripts/navbar2.php' ?>
+<?php require_once '../../scripts/navbar.php' ?>
 
 <main role="main" class="container">
 

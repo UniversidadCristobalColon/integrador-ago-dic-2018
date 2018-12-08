@@ -50,7 +50,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
     <!-- Hojas de estilos -->
     <link href="../../css/base.css" rel="stylesheet">
     <link href="../../css/controlClientes.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -62,7 +62,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
 
 <body>
 
-<?php require_once '../../scripts/navbar2.php' ?>
+<?php require_once '../../scripts/navbar.php' ?>
 
 
 <main role="main" class="container">

@@ -23,7 +23,7 @@
 
             $id2 = base64_encode($id);
 
-            header("Location: perfil.php?id=".$id2);
+            header("Location: index.php?id=".$id2);
 
           } catch (Exception $e) {
 
