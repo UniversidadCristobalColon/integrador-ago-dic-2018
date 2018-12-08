@@ -1,27 +1,15 @@
 <?php
-  
-	require '../scripts/conexionlog.php';
-	include '../funcs.php';
-	
-	//if(!isset($_SESSION["id_usuario"])){ //Si no ha iniciado sesión redirecciona a index.php
-	//	header("Location: index.php");
-	//}
+$idUsuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
 
-
-
-
-
-$idUsuario = $_SESSION['id_usuario'];
-$sql = "SELECT id_usuario, nombre_corto, id_tipo_usuario FROM usuarios WHERE id_usuario = '$idUsuario'";
-	$result = $mysqli->query($sql);
-	
-	$row = $result->fetch_assoc();
-$user =  $row['nombre_corto'];
-//print($_SESSION["id_usuario"]);
-
-
-
-
+$nombre_corto = 'Sin usuario';
+if(!empty($db) && !empty($idUsuario)) {
+    $sql = "SELECT nombre_corto FROM usuarios WHERE id_usuario = '$idUsuario'";
+    $res = mysqli_query($db, $sql);
+    if($res){
+        $f = mysqli_fetch_array($res);
+        $nombre_corto = $f[0];
+    }
+}
 
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 //var_dump($doc_root);
@@ -68,7 +56,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">'.$user.'</a>
+                       aria-haspopup="true" aria-expanded="false">'.$nombre_corto.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="'. $base .'/user/perfil/">Perfil</a>
                         <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>
@@ -94,7 +82,7 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">'.$usuario.'</a>
+                       aria-haspopup="true" aria-expanded="false">'.$nombre_corto.'</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="'. $base .'/user/perfil/">Perfil</a>
                         <a class="dropdown-item" href="'. $base .'/logout.php">Salir</a>
@@ -104,17 +92,4 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
         </form>
     </div>
 </nav>';
-$navbar = $_SESSION['id_tipo_usuario'] == 1 ? $navbar_admin : $navbar_clientes;
-echo $navbar;
-/*if(isset($_SESSION['correo'])){
-    
-    if($_SESSION['correo']['id_tipo_usuario'] == "1"){
-     echo $navbar_admin;  
-        
-    }else{
-        echo $navbar_clientes; 
-    }
-    
-}else{
-   header('Location: ../index.php');   
-}*/
+echo !empty($_SESSION['id_tipo_usuario']) && $_SESSION['id_tipo_usuario'] == 1 ? $navbar_admin : $navbar_clientes;
