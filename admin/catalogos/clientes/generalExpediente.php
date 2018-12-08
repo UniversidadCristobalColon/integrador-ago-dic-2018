@@ -105,7 +105,7 @@
         </li>
     </ul>
 
-    <div class="tab-content" id="myTabContent">
+<div class="tab-content" id="myTabContent">
 
 
 <!--************************************* Datos personales ************************************************* -->
@@ -277,46 +277,48 @@
                     </tfoot>
            </table>
         </div>
-
 <!--************************************* Logros ************************************************* -->
-
-                <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
+   <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
                     <br>
                     <!-- logros view -->
 
-        							  <div class="row">
+        						<div class="row">
         								<div class="col-lg-12">
         								  <h2 class="my-4">Tus Logros</h2>
         								</div>
+                        <!--///////////////// si tiene logros-->
+                                         <?php if(!empty($logrosu)){
+                                           while($logrou = $logrosu->fetch_assoc() ) {
+                                           while($logro = $logros->fetch_assoc() ) { ?>
+                                           <div class="col-lg-4 col-sm-6 text-center mb-4">
+                                             <img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
+                                                             if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";}
+                                               ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+                                              <h3>
+                                               <?php echo $logro['nombre_logro']; ?>
+                                              </h3>
+                                              <p><?php echo $logro['descripcion_logro']; ?></p>
+                                           </div>
+                                          <?php }
+                                         }
+                                       }?>
+                        <!--//////////// si no tiene logros-->
+                                          <?php
+                                            while($logro = $logros->fetch_assoc() ) { ?>
+                                           <div class="col-lg-4 col-sm-6 text-center mb-4">
+                                             <img src="../../../img/<?php echo $logro['imagen']."b";
+                                              ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+                                             <h3>
+                                             <?php echo $logro['nombre_logro']; ?>
+                                             </h3>
+                                             <p><?php echo $logro['descripcion_logro']; ?></p>
+                                           </div>
+                                          <?php }
+                                           ?>
 
-
-
-        					<?php while($logrou = $logrosu->fetch_assoc() ) {
-        								   while($logro = $logros->fetch_assoc() ) { ?>
-
-        								<div class="col-lg-4 col-sm-6 text-center mb-4">
-
-        									<img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
-        																			if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";}
-        									 ?>.png" class="rounded-circle img-fluid d-block mx-auto">
-
-        								  <h3>
-        									<?php echo $logro['nombre_logro']; ?>
-        								  </h3>
-        								  <p><?php echo $logro['descripcion_logro']; ?></p>
-        								</div>
-        								   <?php }
-        							 } ?>
-
-
-        							  </div>
-
-
-							</div>
-          </div>
-         </div>
-
-
+                     </div><!-- fin row -->
+							</div> <!-- fin logros-->
+      </div> <!-- fin tabs -->
 
 <?php $db->close(); ?>
     </main>
