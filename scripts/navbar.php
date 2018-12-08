@@ -1,7 +1,28 @@
 <?php
-$tsesion    = !empty($_SESSION['correo']['id_tipo_usuario']) ? $_SESSION['correo']['id_tipo_usuario'] : '';
-$user       = !empty($_SESSION['correo']['nombre_corto']) ? $_SESSION['correo']['nombre_corto'] : '';
-$usuario    = !empty($_SESSION["user_name"]) ? $_SESSION["user_name"] : 'Usuario';
+  
+	require '../scripts/conexionlog.php';
+	include '../funcs.php';
+	
+	//if(!isset($_SESSION["id_usuario"])){ //Si no ha iniciado sesión redirecciona a index.php
+	//	header("Location: index.php");
+	//}
+
+
+
+
+
+$idUsuario = $_SESSION['id_usuario'];
+$sql = "SELECT id_usuario, nombre_corto, id_tipo_usuario FROM usuarios WHERE id_usuario = '$idUsuario'";
+	$result = $mysqli->query($sql);
+	
+	$row = $result->fetch_assoc();
+$user =  $row['nombre_corto'];
+//print($_SESSION["id_usuario"]);
+
+
+
+
+
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 //var_dump($doc_root);
 $realpath   = str_replace('\\', '/', realpath ("."));
