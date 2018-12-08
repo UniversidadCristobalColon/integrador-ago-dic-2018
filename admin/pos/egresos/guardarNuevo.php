@@ -7,6 +7,8 @@
  */
 require_once '../../../scripts/config.php';
 
+$id_usuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
+$id_usuario = 1;
 $descripcion = $_POST['descripcion'];
 $user = $_POST['user'];
 $importe = $_POST['importe'];
@@ -17,12 +19,14 @@ $query="INSERT INTO `egresos` (
                           `descripcion_egresos`,
                           `id_usuario`,
                           `importe`,
-                          `fecha_modificacion`) VALUES (
+                          `fecha_modificacion`,
+                          `usuario_modificacion`) VALUES (
                                     NULL,
                                     '$descripcion',
                                     '$user',
                                     '$importe',
-                                    '$fecha'
+                                    '$fecha',
+                                    '$id_usuario'
                                     );";
 
 $result=mysqli_query($db,$query);
