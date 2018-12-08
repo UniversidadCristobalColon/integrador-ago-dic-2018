@@ -104,7 +104,7 @@ $navbar_clientes = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixe
         </form>
     </div>
 </nav>';
-$navbar = 1 == 1 ? $navbar_admin : $navbar_clientes;
+$navbar = $_SESSION['id_tipo_usuario'] == 1 ? $navbar_admin : $navbar_clientes;
 echo $navbar;
 /*if(isset($_SESSION['correo'])){
     
