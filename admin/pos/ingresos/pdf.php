@@ -95,7 +95,7 @@ class PDF extends FPDF
 
 // Creación del objeto de la clase heredada
 $pdf = new PDF();
-$pdf->SetTitle('SarX Wellness Center ');
+$pdf->SetTitle('SarX Wellness Center');
 $pdf->AliasNbPages();
 $pdf->AddPage('L','A4',0);
 $pdf->headerTable();
