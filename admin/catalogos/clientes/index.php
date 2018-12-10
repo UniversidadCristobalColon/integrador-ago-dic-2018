@@ -3,7 +3,7 @@
 
         try {
           require_once('../../../scripts/config.php');
-          $_SESSION['id_usuario'] = 4;
+          $_SESSION['id_usuario'];
           $sql = 'SELECT * FROM usuarios';
           $resultado = $db->query($sql);
         } catch (Exception $e) {

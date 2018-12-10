@@ -1,6 +1,6 @@
 <?php
 
-$id= $_SESSION["id_usuario"] = 2;
+$id= $_SESSION['id_usuario'];
 
       try {
         require_once('../../scripts/config.php');
