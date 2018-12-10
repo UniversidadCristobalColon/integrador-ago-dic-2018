@@ -2,7 +2,7 @@
 try {
     require_once('../../scripts/config.php');
     $_SESSION['user'] = 4;
-    $sql = 'SELECT * FROM usuarios';
+    $sql = 'SELECT * FROM usuarios LIMIT 50';
     $resultado = $db->query($sql);
 } catch (Exception $e) {
 }
@@ -85,9 +85,9 @@ try {
                             <tr id="<?php $registros['id_usuario']; ?>">
                                 <td><?php echo $registros['nombre_completo']; ?></td>
                                 <td><?php echo $registros['correo']; ?></td>
-                                <td>Activo</td>
+                                <td><?php echo $registros['estado']; ?></td>
                                 <td>
-                                    <a title="Ver este usuario" href="estado_cliente.php?id=<?php echo $registros['id_usuario']; ?>" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
+                                    <a title="Ver este usuario" href="estado_cliente.php?id=<?php echo $registros['id_usuario']; ?>" target="_blank" class="btn btn-default btn-sm "> <i class="glyphicon glyphicon-eye-open text-primary"></i> </a>
                                 </td>
                             </tr>
                         <?php } ?>
