@@ -53,7 +53,7 @@
         <!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
         <!--            <strong>Success!</strong> Indicates a successful or positive action.-->
         <!--        </div>-->
-        <a href="base.php" class="btn btn-success" role="button">Nueva</a>
+        <a href="base.php" class="btn btn-success" role="button">Nuevo</a>
         <p class="lead">
             <table id="example" class="table" style="width:100%">
                 <thead>
