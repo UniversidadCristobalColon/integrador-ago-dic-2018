@@ -538,7 +538,7 @@
                                                     INNER JOIN horario ON asistencias.id_horario = horario.id_horario
                                                     INNER JOIN clases ON asistencias.id_clase = clases.id_clase
                                                     WHERE asistencias.id_clase =$id_clase
-                                                    AND asistencia=1";
+                                                    AND asistencia=1 ORDER BY hora";
                                 $result=mysqli_query($db,$buscar_asistencia);
                                 while($row=mysqli_fetch_array($result)){
 
