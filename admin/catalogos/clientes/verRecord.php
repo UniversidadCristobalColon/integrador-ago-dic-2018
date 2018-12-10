@@ -1,14 +1,15 @@
 <?php
 
-$decodificar = ($_GET['id']);
-$id= htmlspecialchars(base64_decode($decodificar));
-
-$decodifica = ($_GET['id2']);
-$id2= htmlspecialchars(base64_decode($decodifica));
 
 
     try {
       require_once('../../../scripts/config.php');
+
+      $decodificar = ($_GET['id']);
+      $id= htmlspecialchars(decript($decodificar));
+
+      $decodifica = ($_GET['id2']);
+      $id2= htmlspecialchars(decript($decodifica));
 
 
       $sql2 = "SELECT `id_rutina` FROM `records` WHERE `id_record`= '{$id}' ";
@@ -22,7 +23,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
       $resultado  = $db->query($sql);
 
 
-      $records = "SELECT `nombre_rutina`,`tipo_record`,`repeticiones/puntos`,`peso`,`tiempo`,`id_usuario`,`ejercicios_rutina`,`id_record`,`fecha_creacion`  from `records` `rec` LEFT OUTER JOIN `rutinas` `rut` on `rut`.`id_rutina` = `rec`.`id_rutina` LEFT OUTER JOIN `tiporecord` `tp` on `tp`.`id_tipo_record` = `rec`.`id_tipo_record` WHERE `id_usuario` = '{$id2}' AND `rec`.`id_rutina` =  '{$id_rutina}' ORDER BY `fecha_creacion` DESC ";
+      $records = "SELECT `nombre_rutina`,`tipo_record`,`repeticiones_puntos`,`peso`,`tiempo`,`id_usuario`,`ejercicios_rutina`,`id_record`,`fecha_creacion`  from `records` `rec` LEFT OUTER JOIN `rutinas` `rut` on `rut`.`id_rutina` = `rec`.`id_rutina` LEFT OUTER JOIN `tiporecord` `tp` on `tp`.`id_tipo_record` = `rec`.`id_tipo_record` WHERE `id_usuario` = '{$id2}' AND `rec`.`id_rutina` =  '{$id_rutina}' ORDER BY `fecha_creacion` DESC ";
       $resultado5 = $db->query($records);
 
 
@@ -62,7 +63,7 @@ $id2= htmlspecialchars(base64_decode($decodifica));
 
 <body>
 
-<?php require_once '../../../scripts/navbar2.php' ?>
+<?php require_once '../../../scripts/navbar.php' ?>
 
 
 <main role="main" class="container">
@@ -94,10 +95,10 @@ $id2= htmlspecialchars(base64_decode($decodifica));
                  <td><?php echo $records['tipo_record']; ?></td>
                  <td><?php echo $records['peso']; ?></td>
                  <td><?php echo $records['tiempo']; ?></td>
-                 <td><?php echo $records['repeticiones/puntos']; ?></td>
+                 <td><?php echo $records['repeticiones_puntos']; ?></td>
                  <td><?php echo $records['fecha_creacion']; ?></td>
                  <td>
-                    <a class="icono" href="eliminarRecord.php?id=<?php echo base64_encode($records['id_record']); ?>&id2=<?php echo base64_encode($records['id_usuario']); ?>"> <ion-icon name="trash"><ion-icon> </a>
+                    <a class="icono" href="eliminarRecord.php?id=<?php echo encript($records['id_record']); ?>&id2=<?php echo encript($records['id_usuario']); ?>"> <ion-icon name="trash"><ion-icon> </a>
                  </td>
               </tr>
               <?php  } ?>

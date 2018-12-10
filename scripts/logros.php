@@ -9,7 +9,7 @@ function logros($id_usuario){
         if($res){
             while($f = mysqli_feth_assoc($res)){
                 $id_logro = $f["id_logro"];
-                
+
                 //llamar los logros que no haya hecho
                 switch($id_logro){
                     case 1:

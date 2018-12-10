@@ -1,19 +1,16 @@
 <?php
 
+$id= $_SESSION["id_usuario"] = 2;
+
       try {
-        require_once('../../../scripts/config.php');
+        require_once('../../scripts/config.php');
 
-        ////CODIFICA
-        $decodificar = ($_GET['id']);
-        $id= htmlspecialchars(decript($decodificar));
+		  /////////logros
+		  $sqlogro = "SELECT * FROM logros";
+		  $logros = $db->query($sqlogro);
 
-        /////////logros
-
-  		  $sqlogro = "SELECT * FROM `logros`";
-  		  $logros = $db->query($sqlogro);
-
-  		  $sqlogrou = "SELECT * FROM `logrosclientes` WHERE id_usuario = '{$id}'";
-  		  $logrosu = $db->query($sqlogrou);
+		  $sqlogrou = "SELECT * FROM `logrosclientes` WHERE id_usuario = '{$id}'";
+		  $logrosu = $db->query($sqlogrou);
 
         /////RELLENA RECORDS TABLA
 
@@ -39,6 +36,7 @@
                     $insert;
                     $db->query($insert);
             }
+
             /////RELLENA EL FORMULARIO DE EXPEDIENTE MEDICO
             $sql2 = "SELECT `e`.`id_usuario` ,`peso` , `altura`, `fecha_nacimiento` ,`cintura` ,`IMC`,`antecedentes_salud` ";
             $sql2 .= " FROM `expedientes` `e` ";
@@ -64,17 +62,19 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <link rel="icon" href="../../../img/favicon.png">
+    <link rel="icon" href="../../img/favicon.png">
 
     <!-- Hojas de estilos -->
-    <link href="../../../css/controlClientes.css" rel="stylesheet">
+    <link href="../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../../../js/tablas.js"></script>
-    <script src="../../../js/formulariosValidar.js"></script>
+    <script src="../../js/base.js"></script>
+    <script src="../../js/tablas.js"></script>
+    <script src="../../js/formulariosValidar.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -84,11 +84,11 @@
 
 <body>
 
-<?php  require_once '../../../scripts/navbar.php' ?>
+<?php require_once '../../scripts/navbar.php' ?>
 
 <main role="main" class="container">
   <br>  <br><br>  <br>
-    <h1>Expediente</h1>
+    <h1>Expediente </h1>
     <br>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -105,7 +105,7 @@
         </li>
     </ul>
 
-<div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent">
 
 
 <!--************************************* Datos personales ************************************************* -->
@@ -116,24 +116,24 @@
      <?php while($registros = $resultado->fetch_assoc() ) { ?>
 
 
-            <form action="modificacionDatosPersonales.php" method="post">
+            <form action="modificacionDatosPersonalesPerfil.php" method="post">
                 <br>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Nombre Completo*</label>
                     <div class="col-10">
-                        <input class="form-control" name="nombre_completo" id="nombre_completo" maxlength="100" type="text" value="<?php echo $registros['nombre_completo']; ?>" required>
+                        <input class="form-control" name="nombre_completo" id="nombre_completo" type="text"  maxlength="100" value="<?php echo $registros['nombre_completo']; ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Nombre Corto*</label>
                     <div class="col-10">
-                        <input class="form-control" name="nombre_corto" id="nombre_corto"  maxlength="50" type="text" value="<?php echo $registros['nombre_corto']; ?>" required>
+                        <input class="form-control" name="nombre_corto" id="nombre_corto" type="text" maxlength="50" value="<?php echo $registros['nombre_corto']; ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">E-mail*</label>
                     <div class="col-10">
-                        <input class="form-control" name="correo" id="correo"  maxlength="45" type="text" value="<?php echo $registros['correo']; ?>" required>
+                        <input class="form-control" name="correo" id="correo" type="text" maxlength="45" value="<?php echo $registros['correo']; ?>" required>
                       <div id="emailOk">  </div>
                     </div>
                 </div>
@@ -156,14 +156,14 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Nombre Completo*</label>
                     <div class="col-10">
-                        <input class="form-control" name="nombre_emergencia"  maxlength="100" id="nombre_emergencia" type="text" value="<?php echo $registros['nombre_emergencia']; ?>" required>
+                        <input class="form-control" name="nombre_emergencia" id="nombre_emergencia" type="text" maxlength="100" value="<?php echo $registros['nombre_emergencia']; ?>" required>
                         <div id="emernomOk">  </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Celular*</label>
                     <div class="col-10">
-                        <input class="form-control" name="telefono_emergencia"  maxlength="11" id="numero_emergencia" type="text" maxlength="10" value="<?php echo $registros['telefono_emergencia']; ?>" required>
+                        <input class="form-control" name="telefono_emergencia" id="numero_emergencia" type="text" maxlength="11" value="<?php echo $registros['telefono_emergencia']; ?>" required>
                         <div id="emernumOk">  </div>
                     </div>
                 </div>
@@ -183,47 +183,40 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Peso (Kg)*</label>
                     <div class="col-10">
-                        <input class="form-control" name="peso" id="peso" type="text" maxlength="10" value="<?php echo $registro['peso']; ?>" required>
-                        <div id="pesoOk">  </div>
+                        <input class="form-control" name="peso" id="peso" type="text" maxlength="10" value="<?php echo $registro['peso']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Altura (cm)*</label>
                     <div class="col-10">
-                        <input class="form-control" name="altura" id="altura" type="text" maxlength="10" value="<?php echo $registro['altura']; ?>" required>
-                        <div id="alturaOk">  </div>
+                        <input class="form-control" name="altura" id="altura" type="text" maxlength="10" value="<?php echo $registro['altura']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Fecha de Nacimiento*</label>
                     <div class="col-10">
-                        <input class="form-control" name="fecha_nacimiento" type="text" id="datepicker" value="<?php echo $registro['fecha_nacimiento']; ?>" required>
+                        <input class="form-control" name="fecha_nacimiento" type="text" id="datepicker" value="<?php echo $registro['fecha_nacimiento']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Cintura (cm)</label>
                     <div class="col-10">
-                        <input class="form-control" name="cintura"  type="text" maxlength="10" value="<?php echo $registro['cintura']; ?>" >
-                        <div id="cinturaOk">  </div>
+                        <input class="form-control" name="cintura"  type="text" maxlength="10" value="<?php echo $registro['cintura']; ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">IMC</label>
                     <div class="col-10">
-                        <input class="form-control" name="imc"  type="text" maxlength="10" value="<?php echo $registro['IMC']; ?>">
-                        <div id="imcOk">  </div>
+                        <input class="form-control" name="imc"  type="text" maxlength="10" value="<?php echo $registro['IMC']; ?>" disabled>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="exampleTextarea" class="col-2 col-form-label">Comentarios de Salud</label>
                     <div class="col-10">
-                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3"><?php echo $registro['antecedentes_salud']; ?></textarea>
+                        <textarea class="form-control" name="comentarios_salud" id="exampleTextarea" rows="3" disabled> <?php echo $registro['antecedentes_salud']; ?> </textarea>
                     </div>
                 </div>
-
-                <input type="hidden" value="<?php echo encript($registro['id_usuario']); ?>" name="id_ficha">
-                <input type="submit" id="but" class="btn btn-success btnGuardar" value="Guardar">
 
           </form>
            <?php  } ?>
@@ -233,7 +226,7 @@
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <br><br>
 
-          <form action="nuevoRecord.php" method="get" id="formulario_nuevo">
+          <form action="nuevoRecordPerfil.php" method="get" id="formulario_nuevo">
               <input type="hidden" value="<?php echo encript($id);?>" name="id_record">
               <input type="submit" class="btn btn-success btnNuevoCliente"  value="Nuevo +" >
           </form>
@@ -260,7 +253,7 @@
                          <td><?php echo $records['tiempo']; ?></td>
                          <td><?php echo $records['repeticiones_puntos']; ?></td>
                          <td>
-                             <a class="icono" target="_blank" href="verRecord.php?id=<?php echo encript($records['id_record']);?>&id2=<?php echo encript($records['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
+                             <a class="icono" target="_blank" href="verRecordPerfil.php?id=<?php echo encript($records['id_record']);?>&id2=<?php echo encript($records['id_usuario']); ?>"> <ion-icon name="eye"><ion-icon> </a>
                          </td>
                       </tr>
                      <?php  } ?>
@@ -278,49 +271,48 @@
            </table>
         </div>
 <!--************************************* Logros ************************************************* -->
-   <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
-                    <br>
-                    <!-- logros view -->
+<div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact2-tab">
+                 <br>
+                 <!-- logros view -->
 
-        						<div class="row">
-        								<div class="col-lg-12">
-        								  <h2 class="my-4">Tus Logros</h2>
-        								</div>
-                        <!--///////////////// si tiene logros-->
-                                         <?php if(!empty($logrosu)){
-                                           while($logrou = $logrosu->fetch_assoc() ) {
-                                           while($logro = $logros->fetch_assoc() ) { ?>
-                                           <div class="col-lg-4 col-sm-6 text-center mb-4">
-                                             <img src="../../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
-                                                             if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";}
-                                               ?>.png" class="rounded-circle img-fluid d-block mx-auto">
-                                              <h3>
-                                               <?php echo $logro['nombre_logro']; ?>
-                                              </h3>
-                                              <p><?php echo $logro['descripcion_logro']; ?></p>
-                                           </div>
-                                          <?php }
-                                         }
-                                       }?>
-                        <!--//////////// si no tiene logros-->
-                                          <?php
-                                            while($logro = $logros->fetch_assoc() ) { ?>
-                                           <div class="col-lg-4 col-sm-6 text-center mb-4">
-                                             <img src="../../../img/<?php echo $logro['imagen']."b";
-                                              ?>.png" class="rounded-circle img-fluid d-block mx-auto">
-                                             <h3>
-                                             <?php echo $logro['nombre_logro']; ?>
-                                             </h3>
-                                             <p><?php echo $logro['descripcion_logro']; ?></p>
-                                           </div>
-                                          <?php }
-                                           ?>
+                 <div class="row">
+                     <div class="col-lg-12">
+                       <h2 class="my-4">Tus Logros</h2>
+                     </div>
+                     <!--///////////////// si tiene logros-->
+                                      <?php if(!empty($logrosu)){
+                                        while($logrou = $logrosu->fetch_assoc() ) {
+                                        while($logro = $logros->fetch_assoc() ) { ?>
+                                        <div class="col-lg-4 col-sm-6 text-center mb-4">
+                                          <img src="../../img/<?php if($logro['id_logro'] == $logrou['id_logro']){echo $logro['imagen'];}
+                                                          if($logro['id_logro'] != $logrou['id_logro']){echo $logro['imagen']."b";}
+                                            ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+                                           <h3>
+                                            <?php echo $logro['nombre_logro']; ?>
+                                           </h3>
+                                           <p><?php echo $logro['descripcion_logro']; ?></p>
+                                        </div>
+                                       <?php }
+                                      }
+                                    }?>
+                     <!--//////////// si no tiene logros-->
+                                       <?php
+                                         while($logro = $logros->fetch_assoc() ) { ?>
+                                        <div class="col-lg-4 col-sm-6 text-center mb-4">
+                                          <img src="../../img/<?php echo $logro['imagen']."b";
+                                           ?>.png" class="rounded-circle img-fluid d-block mx-auto">
+                                          <h3>
+                                          <?php echo $logro['nombre_logro']; ?>
+                                          </h3>
+                                          <p><?php echo $logro['descripcion_logro']; ?></p>
+                                        </div>
+                                       <?php }
+                                        ?>
 
-                     </div><!-- fin row -->
-							</div> <!-- fin logros-->
-      </div> <!-- fin tabs -->
-
-<?php $db->close(); ?>
+                  </div><!-- fin row -->
+           </div> <!-- fin logros-->
+   </div> <!-- fin tabs -->
+      <?php $db->close(); ?>
     </main>
 
       <script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>

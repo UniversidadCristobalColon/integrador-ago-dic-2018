@@ -3,7 +3,6 @@ $nombre_corto = 'Sin usuario';
 if(!empty($_SESSION['nombre_corto'])) {
     $nombre_corto = $_SESSION['nombre_corto'];
 }
-
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 //var_dump($doc_root);
 $realpath   = str_replace('\\', '/', realpath ("."));
