@@ -1,7 +1,9 @@
 <?php
-
+    session_start();
     require_once '../../scripts/config.php';
     require_once '../../scripts/funciones_php.php';
+
+
 
 
     //Informacion de la clase

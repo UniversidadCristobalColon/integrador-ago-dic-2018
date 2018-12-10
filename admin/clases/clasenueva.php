@@ -1,8 +1,9 @@
 <?php
+    session_start();
     require_once '../../scripts/config.php';
 
     //id's que provienen del calendario
-    $id_disciplina=1;
+    $id_disciplina=$_REQUEST['id_dis'];
     $id_clase=$_REQUEST['id'];
 
     //Datos que se mostrarán
