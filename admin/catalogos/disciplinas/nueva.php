@@ -46,14 +46,6 @@
                         </div>
                         <div class="col-md-6">
 
-                            <label for="inputMonto">Fecha: </label>
-                            <input id="datepicker" name="fecha_modificacion" required>
-                            <script>
-                                $('#datepicker').datepicker({
-                                    uiLibrary: 'bootstrap4',
-                                    format: 'yyyy-mm-dd'
-                                });
-                            </script>
                         </div>
                     </div>
 

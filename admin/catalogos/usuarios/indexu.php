@@ -55,55 +55,54 @@
         <!--        </div>-->
         <a href="base.php" class="btn btn-success" role="button">Nuevo</a>
         <p class="lead">
-            <table id="example" class="table" style="width:100%">
-                <thead>
+        <table id="example" class="table" style="width:100%">
+            <thead>
+            <tr>
+
+                <th>Nombre</th>
+                <th>Alias</th>
+                <th>Email</th>
+                <th>Día de pago</th>
+                <th>Opciones</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $query="select * from usuarios";
+            $guardarbase=mysqli_query($db,$query);
+            while ($row=mysqli_fetch_array($guardarbase)) {
+                $id = $row['id_usuario'];
+                $nombre_completo= $row['nombre_completo'];
+                $nombre_corto = $row['nombre_corto'];
+                $correo = $row['correo'];
+                $celular = $row['celular'];
+                $telefono = $row['telefono'];
+                $contrasena = $row['contrasena'];
+                $contrasena2= $row['contrasena2'];
+                $dias_pago = $row['dias_pago'];
+                $id_tipo_usuario = $row['id_usuario'];
+                ?>
                 <tr>
 
-                    <th>Nombre</th>
-                    <th>Alias</th>
-                    <th>Email</th>
-                    <th>Día de pago</th>
-                    <th>Opciones</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query="select * from usuarios";
-                $guardarbase=mysqli_query($db,$query);
-                while ($row=mysqli_fetch_array($guardarbase)) {
-                    $id = $row['id_usuario'];
-                    $nombre_completo= $row['nombre_completo'];
-                    $nombre_corto = $row['nombre_corto'];
-                    $correo = $row['correo'];
-                    $celular = $row['celular'];
-                    $telefono = $row['telefono'];
-                    $contrasena = $row['contrasena'];
-                    $contrasena2= $row['contrasena2'];
-                    $dias_pago = $row['dias_pago'];
-                    $id_tipo_usuario = $row['id_usuario'];
-                    ?>
-                    <tr>
-
-                        <?php
-
-                        ?>
-                        <td><?php echo $nombre_completo ?></td>
-                        <td><?php echo $nombre_corto ?></td>
-                        <td><?php echo $correo ?></td>
-                        <td><?php echo $dias_pago ?></td>
-
-                        <td>
-                            <a href="editarusu.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                            <a href="eliminaru.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
-                               onclick='return confirm("¿Estás seguro que quieres eliminar este usuario? ");'>Eliminar</a>
-                        </td>
-                    </tr>
                     <?php
-                }
-                ?>
-                </tbody>
-            </table>
+                    ?>
+                    <td><?php echo $nombre_completo ?></td>
+                    <td><?php echo $nombre_corto ?></td>
+                    <td><?php echo $correo ?></td>
+                    <td><?php echo $dias_pago ?></td>
+
+                    <td>
+                        <a href="editarusu.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
+                        <a href="eliminaru.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
+                           onclick='return confirm("¿Estás seguro que quieres eliminar este usuario? ");'>Eliminar</a>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
         </p>
     </div>
 </main>
