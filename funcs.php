@@ -136,7 +136,7 @@
 		$mail->Username = 'sarxwc@gmail.com'; //Modificar
 		$mail->Password = 'sarxwc123'; //Modificar
 		
-		$mail->setFrom('sarxwc@gmail.com', 'sarx'); //Modificar
+		$mail->setFrom('sarxwc@gmail.com', 'Sarx Wellnes Center'); //Modificar
 		$mail->addAddress($email, $nombre);
 		
 		$mail->Subject = $asunto;
