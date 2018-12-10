@@ -31,6 +31,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
+
             $('#tabla').DataTable({
                 "language":{
                     "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -42,7 +43,6 @@
                 format: 'yyyy-mm-dd'
             });
             $(".datepicker").attr("readonly", true);
-
             $('.datepicker1').datepicker({
                 uiLibrary: 'bootstrap4',
                 format: 'yyyy-mm-dd'
@@ -80,7 +80,6 @@
                     <label for="inputFecha1">De: </label>
                     <input class="datepicker" name="fecha1" value="<?php echo $fecha1 ?>">
                     <script>
-
                     </script>
                 </div>
                 <div class="col-md-3">
@@ -136,9 +135,8 @@
                     <td><?php echo $usuario ?></td>
                     <td><?php echo $fecha ?></td>
                     <td>
-                        <a href="edita_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
-                        <a href="eliminar_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
-                           onclick='return confirm("¿Está seguro que quiere eliminar este ingreso?");'>Eliminar</a>
+                        <a href="edita_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a> 
+                        <a href="eliminar_ingreso.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button" onclick='return confirm("¿Está seguro que quiere eliminar este ingreso?");'>Eliminar</a>
                     </td>
                 </tr>
                 <?php
