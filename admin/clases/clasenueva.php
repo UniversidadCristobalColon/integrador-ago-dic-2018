@@ -3,8 +3,8 @@
     require_once '../../scripts/config.php';
 
     //id's que provienen del calendario
-    $id_disciplina=$_REQUEST['id_dis'];
-    $id_clase=$_REQUEST['id'];
+    $id_disciplina = empty($_REQUEST['id_dis']) ? 1 : $_REQUEST['id_dis'];
+    $id_clase = $_REQUEST['id'];
 
     //Datos que se mostrarán
     $sql="SELECT nombre_disciplina 
