@@ -12,7 +12,8 @@ $base       = str_replace($doc_root, '', $realpath);
 $pos        = strpos($base, '/',1);
 $base       = substr($base,0, $pos);
 //var_dump($base);
-$base       == '/' ? '' : $base;
+//$base       == '/' ? '' : $base;
+$base = '';
 $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <span class="navbar-brand">Sarx</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
