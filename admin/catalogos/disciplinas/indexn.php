@@ -60,7 +60,6 @@
                     <th>ID</th>
                     <th>Disciplina</th>
                     <th>Descripcion</th>
-                    <th>Fecha</th>
                     <th>Opciones</th>
                 </tr>
                 </thead>
@@ -72,7 +71,6 @@
                     $id = $row['id_disciplina'];
                     $nombre_disciplina = $row['nombre_disciplina'];
                     $descripcion_disciplinas = $row['descripcion_disciplinas'];
-                    $fecha_modificacion = $row['fecha_modificacion'];
                     ?>
                     <tr>
 
@@ -82,7 +80,6 @@
                         <td><?php echo $id ?></td>
                         <td><?php echo $nombre_disciplina ?></td>
                         <td><?php echo $descripcion_disciplinas ?></td>
-                        <td><?php echo $fecha_modificacion ?></td>
                         <td>
                             <a href="editar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button">Editar</a>
                             <a href="eliminar.php?xid=<?php echo $id; ?>" class="btn btn-link" role="button"
