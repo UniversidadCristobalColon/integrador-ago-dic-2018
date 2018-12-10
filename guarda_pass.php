@@ -19,7 +19,7 @@
 			} else {
 			
 			echo "Error al modificar contrase&ntilde;a";
-			
+          
 		}
 		
 		} else {

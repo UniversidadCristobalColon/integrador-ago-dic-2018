@@ -88,7 +88,7 @@ include 'funcs.php';
 	<div class="checkbox mb-3">
         
 		<label>
-            <a href="recuperarpass.php" class="resultado" target="_blank">  ¿Se le olvido su contraseña?</a>
+            <a href="recuperarpass.php" class="resultado" target="_blank">  ¿Olvidó su contraseña?</a>
 		</label>
 	</div>
              <button id="btn-login" type="submit" class="btn btn-success">Iniciar Sesi&oacute;n</button>     
