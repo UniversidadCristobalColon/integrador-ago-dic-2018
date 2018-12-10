@@ -17,6 +17,8 @@ require 'scripts/conexionlog.php';
 	if(!verificaTokenPass($user_id, $token))
 	{
 echo 'No se pudo verificar los Datos';
+        
+       
 exit;
 	}
 
@@ -59,13 +61,13 @@ exit;
 </nav>';
 echo $navbar?>
 
-<main role="main" class="container">
+ <!-- <main role="main" class="container">-->
 
 
-    <div class="container">
+    <!-- <div class="container">-->
         <!-- <form class="form-signin"> -->
         
-            <form id="loginform" class="form-horizontal" role="form" action="guarda_pass.php" method="POST" autocomplete="off">
+            <form id="loginform" class="form-signin" role="form" action="guarda_pass.php" method="POST" autocomplete="off">
             
             	<input type="hidden" id="user_id" name="user_id" value ="<?php echo $user_id; ?>" />
                 
@@ -77,19 +79,21 @@ echo $navbar?>
                 <br>
                 <p>Ingrese nueva contraseña.</p>
 
-                <input type="password" id="inputpass" class="form-control" placeholder="Nueva Contraseña" name="password"  required autofocus>
+                <input type="password" id="inputpass" class="form-control" placeholder="Nueva Contraseña" name="password" maxlength="30" required autofocus>
                 <br>
-                <input type="password" id="inputpass" class="form-control" placeholder="Confirmar Contraseña" name="con_password" required autofocus>
+                <input type="password" id="inputpass" class="form-control" placeholder="Confirmar Contraseña" name="con_password" maxlength="30" required autofocus>
 
 
 
                 <br>
 
                 <button class="btn btn-lg btn-primary" id="btn-login" type="submit">Guardar</button>
+                
+                
             </div>
         </form>
-    </div>
-</main>
+    <!-- </div>-->
+ <!-- </main>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

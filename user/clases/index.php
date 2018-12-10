@@ -33,46 +33,12 @@
                 defaultView: 'listMonth',
                 header: {
                     left: 'prev,next today',
-                    center: 'title',
-                    right: 'customButtons, listMonth'
+                    center: 'title'
                 },
-                customButtons: {
-                    datePickerButton: {
-                        themeIcon:'circle-triangle-s',
-                        click: function () {
-
-
-                            var $btnCustom = $('.fc-datePickerButton-button'); // name of custom  button in the generated code
-                            $btnCustom.after('<input type="hidden" id="hiddenDate" class="datepicker"/>');
-
-                            $("#hiddenDate").datepicker({
-                                showOn: "button",
-
-                                dateFormat:"yy-mm-dd",
-                                onSelect: function (dateText, inst) {
-                                    $('#calendar').fullCalendar('gotoDate', dateText);
-                                },
-                            });
-
-                            var $btnDatepicker = $(".ui-datepicker-trigger"); // name of the generated datepicker UI
-                            //Below are required for manipulating dynamically created datepicker on custom button click
-                            $("#hiddenDate").show().focus().hide();
-                            $btnDatepicker.trigger("click"); //dynamically generated button for datepicker when clicked on input textbox
-                            $btnDatepicker.hide();
-                            $btnDatepicker.remove();
-                            $("input.datepicker").not(":first").remove();//dynamically appended every time on custom button click
-
-                        }
-                    }
-                },
-                /*dayClick:function(date, jsEvent, view){
-
-                },*/
-                /*defaultDate: '2018-03-12',*/
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: 'http://localhost:8888/int2018/user/clases/eventoClases.php'
+                eventLimit: true, // allow "mre" link when too many events
+                events: 'eventoClases.php'
             });
 
         });
@@ -90,8 +56,6 @@
     <h2>Clases</h2><br>
 
     <form>
-        Fecha (mes y año):
-        <input type="month" name="fecha"><br>
         Disciplina:
         <select class="custom-select d-block w-100" id="country" required>
             <?php

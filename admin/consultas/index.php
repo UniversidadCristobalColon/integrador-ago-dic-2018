@@ -55,11 +55,6 @@ try {
     <div class="starter-template">
         <h1>Historial de pagos</h1>
 
-        </br><div class="pull-right">
-            <a href="index.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
-            <a href= "situacion_clientes.php" class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
-        </div></br>
-
     </div>
 
     <div class="container">

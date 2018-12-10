@@ -1,13 +1,7 @@
 <?php
-$idUsuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
 $nombre_corto = 'Sin usuario';
-if(!empty($db) && !empty($idUsuario)) {
-    $sql = "SELECT nombre_corto FROM usuarios WHERE id_usuario = '$idUsuario'";
-    $res = mysqli_query($db, $sql);
-    if($res){
-        $f = mysqli_fetch_array($res);
-        $nombre_corto = $f[0];
-    }
+if(!empty($_SESSION['nombre_corto'])) {
+    $nombre_corto = $_SESSION['nombre_corto'];
 }
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 //var_dump($doc_root);
@@ -48,7 +42,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
-            </li>
+            </li> 
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">

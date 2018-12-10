@@ -1,23 +1,26 @@
 <?php
     require_once '../../scripts/config.php';
 
+    session_start();
+    $id_usuario = $_SESSION['id_usuario'];
+
     //Formulario del archivo clasenueva.php
-    $id_disciplina=1;
-    $id_usuario = 1;
-/*
+    $id_disciplina= $_POST['id_disciplina'];
     $id_clase  = $_POST['id_clase'];
+
     $fecha = $_POST['fecha'];
-    $fechaa=date('Y-m-d',strtotime($fecha));
+        $fechaa=date('Y-m-d',strtotime($fecha));
     $hora_revelacion = $_POST['hora_revelacion'];
     $tipo_record = $_POST['tipo_record'];
     $tipo_unidad = $_POST['id_tipo_peso'];
-    $titulo_clase = $_POST['titulo_clase'];
+    $titulo_clase = trim($_POST['titulo_clase']);
     $calentamiento = $_POST['calentamiento'];
     $id_rutina = $_POST['id_rutina'];
-    $nombre_rutina = $_POST['nombre_rutina'];
-    $ejercicios_rutina =  $_POST['ejercicios_rutina'];
-*/
+    $nombre_rutina = trim($_POST['nombre_rutina']);
+    $ejercicios_rutina = trim($_POST['ejercicios_rutina']);
 
+
+/*
     echo "id_usuario: ".$id_usuario."<br>";
     echo "id_disc ".$id_disciplina."<br>";
     echo "id_clase: ".$id_clase."<br>";
@@ -29,7 +32,7 @@
     echo "calentamiento: ".$calentamiento."<br>";
     echo "id_rutina: ".$id_rutina."<br>";
     echo "rutina: ".$nombre_rutina."<br>";
-    echo "ejercicios: ".$ejercicios_rutina."<br>";
+*/
 
     if($id_clase!=-1){//Actualizar registro
         //Saber si para esa clase es la misma fecha
@@ -59,9 +62,295 @@
                     $result = mysqli_query($db, $query);
                     $valores = mysqli_fetch_assoc($result);
 
-                    if($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != $valores['ejercicios_rutina']){
+                    if($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != stripslashes($valores['ejercicios_rutina'])){
                         //Es una rutina editada
+                        $eje_rut= addslashes($ejercicios_rutina);
                         $rutina_editada = "INSERT INTO rutinas(id_rutina,
+                                                    nombre_rutina,
+                                                    ejercicios_rutina,
+                                                    fecha_modificacion,
+                                                    id_disciplina,
+                                                    id_usuario_modificacion)
+                                            VALUES('0',
+                                                  '$nombre_rutina',
+                                                  '$eje_rut',
+                                                  CURDATE(),
+                                                  '$id_disciplina',
+                                                  '$id_usuario')";
+
+                        if ($db->query($rutina_editada) === true) {
+                            $saber_id = "SELECT id_rutina, nombre_rutina
+                                        FROM rutinas
+                                       WHERE nombre_rutina LIKE  '%$nombre_rutina'";
+                            $result_id = mysqli_query($db, $saber_id);
+                            $valor_id = mysqli_fetch_assoc($result_id);
+
+                            $id_nueva_rutina = $valor_id['id_rutina'];
+
+                            if($tipo_record!=1){
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '0'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+
+                            }else{
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '$tipo_unidad'
+                                                WHERE id_clase=$id_clase";
+
+                                if ($db->query($update_clase) === true){
+                                   echo "1";
+                                }else{
+                                    echo "2";
+                                }
+                            }
+                        }else{
+                            echo "Ha ocurrido un error con la rutina.";
+                        }
+                    }else{
+                        //Se tomó una rutina que ya existe y no se modificó
+                        if($tipo_record!=1){
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '0'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+
+                            }else{
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '$tipo_unidad'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+                            }
+                    }
+                }else{
+                    $rutina_nueva = "INSERT INTO rutinas(id_rutina,
+                                                    nombre_rutina,
+                                                    ejercicios_rutina,
+                                                    fecha_modificacion,
+                                                    id_disciplina,
+                                                    id_usuario_modificacion)
+                                            VALUES('0',
+                                                  '$nombre_rutina',
+                                                  '$ejercicios_rutina',
+                                                  CURDATE(),
+                                                  '$id_disciplina',
+                                                  '$id_usuario')";
+
+                        if ($db->query($rutina_nueva) === true) {
+                            $saber_id = "SELECT id_rutina, nombre_rutina
+                                        FROM rutinas
+                                       WHERE nombre_rutina LIKE  '%$nombre_rutina'";
+                            $result_id = mysqli_query($db, $saber_id);
+                            $valor_id = mysqli_fetch_assoc($result_id);
+
+                            $id_nueva_rutina = $valor_id['id_rutina'];
+
+                            if($tipo_record!=1){
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '0'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+
+                            }else{
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '$tipo_unidad'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+                            }
+                        }else{
+                            echo "3";
+                        }
+                
+                
+                
+                
+                
+            }
+        }else{  //Es otra fecha
+            if($valores_comp2['count_id']==0){
+                //No hay clases en la misma fecha de esa disciplina
+                if ($id_rutina!=-1){
+                    //Comparación de la rutina del formulario con la de la base de datos
+                    $query = "SELECT * FROM rutinas
+                            WHERE id_rutina=$id_rutina";
+                    $result = mysqli_query($db, $query);
+                    $valores = mysqli_fetch_assoc($result);
+
+                    if($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != stripslashes($valores['ejercicios_rutina'])){
+                        //Es una rutina editada
+                        $eje_rut= addslashes($ejercicios_rutina);
+                        $rutina_editada = "INSERT INTO rutinas(id_rutina,
+                                                    nombre_rutina,
+                                                    ejercicios_rutina,
+                                                    fecha_modificacion,
+                                                    id_disciplina,
+                                                    id_usuario_modificacion)
+                                            VALUES('0',
+                                                  '$nombre_rutina',
+                                                  '$eje_rut',
+                                                  CURDATE(),
+                                                  '$id_disciplina',
+                                                  '$id_usuario')";
+
+                        if ($db->query($rutina_editada) === true) {
+                            $saber_id = "SELECT id_rutina, nombre_rutina
+                                        FROM rutinas
+                                       WHERE nombre_rutina LIKE  '%$nombre_rutina'";
+                            $result_id = mysqli_query($db, $saber_id);
+                            $valor_id = mysqli_fetch_assoc($result_id);
+
+                            $id_nueva_rutina = $valor_id['id_rutina'];
+
+                            if($tipo_record!=1){
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '0'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+
+                            }else{
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_nueva_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '$tipo_unidad'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+                            }
+                        }else{
+                            echo "3";
+                        }
+                    }else{
+                        //Se tomó una rutina que ya existe y no se modificó
+                        if($tipo_record!=1){
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '0'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+
+                            }else{
+                                //Actualizar la clase
+                                $update_clase = "UPDATE clases
+                                                SET id_usuario_modificacion= '$id_usuario',
+                                                    id_rutina = '$id_rutina',
+                                                    titulo_clase = '$titulo_clase',
+                                                    calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
+                                                    hora_revelacion= '$hora_revelacion',
+                                                    id_tipo_record = '$tipo_record',
+                                                    id_tipo_unidad_peso = '$tipo_unidad'
+                                                WHERE id_clase=$id_clase";
+                                
+                                if ($db->query($update_clase) === true){
+                                    echo "1";
+                                }else{
+                                    echo "2";
+                                }
+                            }
+                    }
+                }else{
+                     $rutina_editada = "INSERT INTO rutinas(id_rutina,
                                                     nombre_rutina,
                                                     ejercicios_rutina,
                                                     fecha_modificacion,
@@ -90,15 +379,16 @@
                                                     id_rutina = '$id_nueva_rutina',
                                                     titulo_clase = '$titulo_clase',
                                                     calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
                                                     hora_revelacion= '$hora_revelacion',
                                                     id_tipo_record = '$tipo_record',
                                                     id_tipo_unidad_peso = '0'
                                                 WHERE id_clase=$id_clase";
                                 
                                 if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
+                                    echo "1";
                                 }else{
-                                    echo "No se pudo actualizar la clase.";
+                                    echo "2";
                                 }
 
                             }else{
@@ -108,315 +398,31 @@
                                                     id_rutina = '$id_nueva_rutina',
                                                     titulo_clase = '$titulo_clase',
                                                     calentamiento = '$calentamiento',
+                                                    fecha_clase = '$fechaa',
                                                     hora_revelacion= '$hora_revelacion',
                                                     id_tipo_record = '$tipo_record',
                                                     id_tipo_unidad_peso = '$tipo_unidad'
                                                 WHERE id_clase=$id_clase";
                                 
                                 if ($db->query($update_clase) === true){
-                                   echo "Se actualizó la clase.";
+                                    echo "1";
                                 }else{
-                                    echo "No se pudo actualizar la clase.";
+                                    echo "2";
                                 }
                             }
                         }else{
-                            echo "Ha ocurrido un error con la rutina.";
-                        }
-                    }else{
-                        //Se tomó una rutina que ya existe y no se modificó
-                        if($tipo_record!=1){
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '0'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-
-                            }else{
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '$tipo_unidad'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-                            }
-                    }
-                }else{
-                    $rutina_nueva = "INSERT INTO rutinas(id_rutina,
-                                                    nombre_rutina,
-                                                    ejercicios_rutina,
-                                                    fecha_modificacion,
-                                                    id_disciplina,
-                                                    id_usuario_modificacion)
-                                            VALUES('0',
-                                                  '$nombre_rutina',
-                                                  '$ejercicios_rutina',
-                                                  CURDATE(),
-                                                  '$id_disciplina',
-                                                  '$id_usuario')";
-
-                        if ($db->query($rutina_nueva) === true) {
-                            $saber_id = "SELECT id_rutina, nombre_rutina
-                                        FROM rutinas
-                                       WHERE nombre_rutina LIKE  '%$nombre_rutina%'";
-                            $result_id = mysqli_query($db, $saber_id);
-                            $valor_id = mysqli_fetch_assoc($result_id);
-
-                            $id_nueva_rutina = $valor_id['id_rutina'];
-
-                            if($tipo_record!=1){
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '0'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-
-                            }else{
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '$tipo_unidad'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-                            }
-                        }else{
-                            echo "Hubo un error al actualizar la rutina.";
-                        }
-                
-                
-                
-                
-                
-            }
-        }else{  //Es otra fecha
-            if($valores_comp2['count_id']==0){
-                //No hay clases en la misma fecha de esa disciplina
-                if ($id_rutina!=-1){
-                    //Comparación de la rutina del formulario con la de la base de datos
-                    $query = "SELECT * FROM rutinas
-                            WHERE id_rutina=$id_rutina";
-                    $result = mysqli_query($db, $query);
-                    $valores = mysqli_fetch_assoc($result);
-
-                    if($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != $valores['ejercicios_rutina']){
-                        //Es una rutina editada
-                        $rutina_editada = "INSERT INTO rutinas(id_rutina,
-                                                    nombre_rutina,
-                                                    ejercicios_rutina,
-                                                    fecha_modificacion,
-                                                    id_disciplina,
-                                                    id_usuario_modificacion)
-                                            VALUES('0',
-                                                  '$nombre_rutina',
-                                                  '$ejercicios_rutina',
-                                                  CURDATE(),
-                                                  '$id_disciplina',
-                                                  '$id_usuario')";
-
-                        if ($db->query($rutina_editada) === true) {
-                            $saber_id = "SELECT id_rutina, nombre_rutina
-                                        FROM rutinas
-                                       WHERE nombre_rutina LIKE  '%$nombre_rutina%'";
-                            $result_id = mysqli_query($db, $saber_id);
-                            $valor_id = mysqli_fetch_assoc($result_id);
-
-                            $id_nueva_rutina = $valor_id['id_rutina'];
-
-                            if($tipo_record!=1){
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '0'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-
-                            }else{
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '$tipo_unidad'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-                            }
-                        }else{
-                            echo "Hubo un error al actualizar la rutina.";
-                        }
-                    }else{
-                        //Se tomó una rutina que ya existe y no se modificó
-                        if($tipo_record!=1){
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '0'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la claseeee.";
-                                }
-
-                            }else{
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '$tipo_unidad'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-                            }
-                    }
-                }else{
-                     $rutina_editada = "INSERT INTO rutinas(id_rutina,
-                                                    nombre_rutina,
-                                                    ejercicios_rutina,
-                                                    fecha_modificacion,
-                                                    id_disciplina,
-                                                    id_usuario_modificacion)
-                                            VALUES('0',
-                                                  '$nombre_rutina',
-                                                  '$ejercicios_rutina',
-                                                  CURDATE(),
-                                                  '$id_disciplina',
-                                                  '$id_usuario')";
-
-                        if ($db->query($rutina_editada) === true) {
-                            $saber_id = "SELECT id_rutina, nombre_rutina
-                                        FROM rutinas
-                                       WHERE nombre_rutina LIKE  '%$nombre_rutina%'";
-                            $result_id = mysqli_query($db, $saber_id);
-                            $valor_id = mysqli_fetch_assoc($result_id);
-
-                            $id_nueva_rutina = $valor_id['id_rutina'];
-
-                            if($tipo_record!=1){
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '0'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-
-                            }else{
-                                //Actualizar la clase
-                                $update_clase = "UPDATE clases
-                                                SET id_usuario_modificacion= '$id_usuario',
-                                                    id_rutina = '$id_nueva_rutina',
-                                                    titulo_clase = '$titulo_clase',
-                                                    calentamiento = '$calentamiento',
-                                                    fecha_clase = '$fechaa',
-                                                    hora_revelacion= '$hora_revelacion',
-                                                    id_tipo_record = '$tipo_record',
-                                                    id_tipo_unidad_peso = '$tipo_unidad'
-                                                WHERE id_clase=$id_clase";
-                                
-                                if ($db->query($update_clase) === true){
-                                    echo "Se actualizó la clase.";
-                                }else{
-                                    echo "No se pudo actualizar la clase.";
-                                }
-                            }
-                        }else{
-                            echo "Hubo un error al actualizar la rutina.";
+                            echo "3";
                         }
                 }
                 
             }else{
-                echo "Ya existe una clase para esa fecha.";
+                echo "4";
             }
             
         }
 
-    }else{
+    }
+    else{
         //Clase nueva
         //Existe la rutina
          //Saber si para esa disciplina ya existe una clase en la misma fecha
@@ -437,8 +443,9 @@
                 $result = mysqli_query($db, $query);
                 $valores = mysqli_fetch_assoc($result);
 
-                if ($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != $valores['ejercicios_rutina']){
+                if ($nombre_rutina != $valores['nombre_rutina'] || $ejercicios_rutina != stripslashes($valores['ejercicios_rutina'])){
                     //Es una rutina editada
+                    $eje_rut= addslashes($ejercicios_rutina);
                     $rutina_editada = "INSERT INTO rutinas(id_rutina,
                                             nombre_rutina,
                                             ejercicios_rutina,
@@ -447,7 +454,7 @@
                                             id_usuario_modificacion)
                                     VALUES('0',
                                           '$nombre_rutina',
-                                          '$ejercicios_rutina',
+                                          '$eje_rut',
                                           CURDATE(),
                                           '$id_disciplina',
                                           '$id_usuario')";
@@ -485,9 +492,9 @@
                                           '0')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }else{
@@ -512,15 +519,15 @@
                                           '$tipo_unidad')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }
 
                     }else{
-                        echo "Hubo un error con la rutina";
+                        echo "3";
                     }
                 }else{
                     if($tipo_record!=1){
@@ -545,9 +552,9 @@
                                           '0')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }else{
@@ -572,9 +579,9 @@
                                           '$tipo_unidad')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }
@@ -627,9 +634,9 @@
                                           '0')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }else{
@@ -654,20 +661,19 @@
                                           '$tipo_unidad')";
 
                             if ($db->query($clase_nueva) === true){
-                                echo "Se guardó la clase.";
+                                echo "5";
                             }else{
-                                echo "No se pudo guardar la clase.";
+                                echo "6";
                             }
 
                         }
 
                     }else{
-                        echo "HUbo un error con la rutina.";
+                        echo "3";
                     }
             }
         }else{
-            echo "Ya existe una clase para esa fecha.";
+            echo "4";
         }
     }
-
 

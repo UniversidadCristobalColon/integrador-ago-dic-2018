@@ -30,12 +30,7 @@ $query="INSERT INTO `rutinas` (
 $result=mysqli_query($db,$query);
 
 if ($result === TRUE) {
-    $message = "La nueva rutina se ha guardado.";
-    echo "<script type='text/javascript'>alert('$message');</script>";
-    ?>
-    <!--Redireccionamiento al index de rutinas -->
-    <meta http-equiv="refresh" content="1;url=index.php">
-    <?php
+    header("location: index.php?exito=1");
 }
 //Mostrar error
 else {

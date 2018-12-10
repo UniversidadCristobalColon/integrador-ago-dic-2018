@@ -27,7 +27,7 @@ if($res){
     $correo = $f["correo"];
     $celular = $f["celular"];
     $telefono = $f["telefono"];
-    $fecha = $f["dias_pago"];
+    $dias_pago = $f["dias_pago"];
 }
 
 ?>
@@ -49,10 +49,11 @@ if($res){
 
     <!-- Hojas de estilos -->
     <link href="../../../css/base.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 
     <!-- Archivos JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../../../js/base.js"></script>
     <script src="../../../js/validar.js"></script>
 
@@ -152,7 +153,6 @@ if($res){
                     <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="24">24</option> <option value="25">25</option>
                     <option value="26">26</option> <option value="27">27</option> <option value="28">28</option> <option value="29">29</option> <option value="30">30</option> <option value="31">31</option>
                 </select>
-
             </div>
         </div>
     </form>
