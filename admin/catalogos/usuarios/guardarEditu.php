@@ -16,8 +16,8 @@ require_once '../../../scripts/config.php';
 
 
 $query="UPDATE `usuarios` SET 
-                      `nombre` = '$nombre_completo',
-                      `nombrecorto` = '$nombre_corto',
+                      `nombre_completo` = '$nombre_completo',
+                      `nombre_corto` = '$nombre_corto',
                       `correo` = '$correo',
                       `celular` = '$celular',
                       `telefono` = '$telefono',
