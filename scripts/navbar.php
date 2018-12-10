@@ -29,6 +29,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                     <a class="dropdown-item" href="#">Inventario</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/ingresos/">Ingresos</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/egresos/">Egresos</a>
+                    <a class="dropdown-item" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -42,7 +43,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
+                <a class="nav-link" href="'. $base .'/admin/clases/">Gestión de clases</a>
             </li> 
         </ul>
         <form class="form-inline my-2 my-lg-0">
