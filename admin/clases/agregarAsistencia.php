@@ -9,7 +9,7 @@
     $array = $ids_selected;
     if($ids_selected){
         //verificar si ya están en la base de datos y si ya tienen la asistencia
-        $sql="SELECT id_usuario FROM asistencias WHERE id_clase=$id_clase AND id_horario=$id_hora AND asistencia=1";
+        $sql="SELECT id_usuario FROM asistencias WHERE id_clase=$id_clase AND id_horario=$id_hora";
         $result = mysqli_query($db,$sql);
         while ($valores=mysqli_fetch_assoc($result)) {
             $index = array_search($valores['id_usuario'], $array);
@@ -32,26 +32,25 @@
                                           '$id_hora',
                                           '1')";
 
-                if ($db->query($asistencias) === true) {
-                        echo "se agregaron";
-                }
+                $db->query($asistencias);
+
             }
+            foreach ($ids_selected as $values) {
+                $update = "UPDATE asistencias SET asistencia='1', id_horario=$id_hora
+                            WHERE id_usuario=$values AND id_clase=$id_clase AND id_horario=$id_hora";
+                $db->query($update);
 
-            //Actualizar a los que si estaban
-            $resultado = array_diff($ids_selected, $array);
-            print_r($resultado);
-
+            }
+            echo "1";
         }else{
-            echo "Todos tienen asistencia";
+            foreach ($ids_selected as $values) {
+                $update = "UPDATE asistencias SET asistencia='1', id_horario=$id_hora
+                          WHERE id_usuario=$values AND id_clase=$id_clase AND id_horario=$id_hora";
+                $db->query($update);
+
+            }
+            echo "1";
         }
-
-
-
-
-    }else{
-        echo "<script>alert(\"Debe seleccionar\");</script>";
     }
-
-
 
 

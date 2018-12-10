@@ -3,7 +3,6 @@
 
     //id's que provienen del calendario
     $id_disciplina=1;
-    //$id_clase = 33;
     $id_clase=$_REQUEST['id'];
 
     //Datos que se mostrarán
@@ -32,6 +31,7 @@
                           hora_revelacion,
                           clases.id_tipo_record AS idrecord,
                           clases.id_tipo_unidad_peso AS idunidad,
+                          clases.id_unidad_puntos AS idunidadpuntos,
                           nombre_rutina,
                           ejercicios_rutina,
                           tipo_record
@@ -56,10 +56,17 @@
             $idclase = $id_clase;
             $id_rutina = $valores_clase['idrutina'];
 
-            if ($valores_clase['idunidad'] == 0) {
+
+            if ($valores_clase['idunidadpuntos'] == 0) {
                 $disabled = 'disabled';
             } else {
                 $disabled = '';
+            }
+
+            if ($valores_clase['idunidad'] == 0) {
+                $disabledP = 'disabled';
+            } else {
+                $disabledP = '';
             }
         }
     }else{
@@ -74,6 +81,7 @@
         $idclase=-1;
         $id_rutina=-1;
         $disabled = 'disabled';
+        $disabledP = 'disabled';
     }
 
 ?>
@@ -111,11 +119,11 @@
     <div class="starter-template">
             <div class="col-md-12 order-md-1">
                 <h1 class="mb-3"><?php echo $titulo; ?></h1>
-                <form class="needs-validation" >
+                <form id="form_id" class="needs-validation">
                     <div class="row">
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="fecha">Fecha</label>
-                            <input id="datepicker" name="fecha" value="<?php echo $fecha_clase; ?>" required>
+                            <input id="datepicker" name="fecha" value="<?php echo $fecha_clase; ?>" >
                             <script>
                                 $('#datepicker').datepicker({
                                     uiLibrary: 'bootstrap4',
@@ -125,9 +133,9 @@
 
                             </script>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        <div class="col-md-2 mb-3">
                             <label for="hora">Hora de revelación</label>
-                            <select name="hora_revelacion" class="custom-select d-block w-100" id="horaRevelacion" required>
+                            <select name="hora_revelacion" class="custom-select d-block w-100" id="horaRevelacion" >
                                 <option value="">Selecciona...</option>
                                 <?php
                                 $query="SELECT * FROM horario";
@@ -156,7 +164,7 @@
                         <div class="col-md-3 mb-3">
                             <!-- Select para el tipo de record con el que se podrá medir el top de la clase -->
                             <label for="record">Tipo de record</label>
-                            <select name="tipo_record" class="custom-select d-block w-100" id="tipoRecord" required>
+                            <select name="tipo_record" class="custom-select d-block w-100" id="tipoRecord" >
                                 <option value="">Selecciona...</option>
                                 <?php
                                 $query="SELECT id_tipo_record, tipo_record 
@@ -178,10 +186,36 @@
                                 ?>
                             </select>
                         </div>
+                        <div class="col-md-2 mb-3">
+                            <!-- Select para el tipo de unidad repeticiones o puntos -->
+                            <label for="peso">Tipo de unidad</label>
+                            <select name="id_tipo_unidad" class="custom-select d-block w-100" id="tipoUPuntos"  <?php echo $disabled; ?>>
+                                <option value="">Selecciona...</option>
+                                <?php
+                                //Este select se activa cuando se selecciona "Repeticiones/puntos" como tipo de record, en caso contrario se desactiva.
+                                $query="SELECT id_tipo_unidad, desc_tipo_unidad
+                                        FROM tipounidad
+                                        ORDER BY desc_tipo_unidad ASC";
+                                $result=mysqli_query($db,$query);
+                                while ($valores=mysqli_fetch_assoc($result)) {
+                                    if($id_clase!=0){
+                                        //Selected de la unidad de repeticiones o puntos cuando se va a editar la clase
+                                        if($valores['id_tipo_unidad']==$valores_clase['idunidadpuntos']){
+                                            echo '<option value="'.$valores[id_tipo_unidad].'" selected>'.$valores[desc_tipo_unidad].'</option>';
+                                        }else{
+                                            echo '<option value="'.$valores[id_tipo_unidad].'">'.$valores[desc_tipo_unidad].'</option>';
+                                        }
+                                    }else{
+                                        echo '<option value="'.$valores[id_tipo_unidad].'">'.$valores[desc_tipo_unidad].'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <div class="col-md-3 mb-3">
                             <!-- Select para el tipo de unidad de peso -->
                             <label for="peso">Tipo de unidad de peso</label>
-                            <select name="id_tipo_peso" class="custom-select d-block w-100" id="tipoUPeso" required <?php echo $disabled; ?>>
+                            <select name="id_tipo_peso" class="custom-select d-block w-100" id="tipoUPeso"  <?php echo $disabledP; ?>>
                                 <option value="">Selecciona...</option>
                                 <?php
                                 //Este select se activa cuando se selecciona "Peso" como tipo de record, en caso contrario se desactiva.
@@ -213,8 +247,8 @@
                             <label for="titulo_clase">Título de la clase</label>
                             <input type="text" name="titulo_clase" class="form-control" id="tituloClaseID"  value="<?php echo $titulos_clase; ?>" required>
                             <br>
-                            <label for="calentamiento">Descripción del calentamiento</label>
-                            <textarea name="calentamiento" class="form-control" id="textCalentamientoID" rows="10" required><?php echo $calentamiento; ?></textarea>
+                            <h3>Calentamiento</h3>
+                            <textarea name="calentamiento" class="form-control" id="textCalentamientoID" rows="10" ><?php echo $calentamiento; ?></textarea>
                         </div>
                     </div>
 
@@ -223,7 +257,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-8 mb-3">
-                                    <h1>Rutina</h1>
+                                    <h3>Rutina</h3>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <button class="btn btn-secondary btn-sm btn-block" type="button" data-toggle="modal" data-target="#modalRutina" data-whatever="@mdo">Agregar rutina</button>
@@ -236,10 +270,10 @@
                                 <div>
                                     <input type="hidden" id="id_rutina" name="id_rutina" value="<?php echo $id_rutina;?>">
                                     <label for="nombre_rutina">Título de la rutina</label>
-                                    <input type="text" id="nombre_rutina" name="nombre_rutina" class="form-control" value="<?php echo $titulo_rutina; ?>" id="tituloRutinaID">
+                                    <input type="text" name="nombre_rutina" class="form-control" value="<?php echo $titulo_rutina; ?>" id="tituloRutinaID">
                                     <br>
                                     <label for="ejercicios_rutina">Descripción de la rutina</label>
-                                    <textarea name="ejercicios_rutina" id="textDescRutinaID"  class="form-control" rows="10" required><?php echo $ejercicios; ?></textarea><br>
+                                    <textarea name="ejercicios_rutina" id="textDescRutinaID"  class="form-control" rows="10" ><?php echo $ejercicios; ?></textarea><br>
                                 </div>
                             <div class="row">
                                 <div class="col-md-10 mb-2">
@@ -333,24 +367,6 @@
             });
         });
 
-        /*
-        $("#editarRutinaID").on("click", function(event){
-            var estado = $(this).data("estado");
-
-            if(estado == 'apagado'){
-                $(this).data("estado",'encendido');
-                $("#textDescRutinaID").prop("disabled", false);
-                $("#tituloRutinaID").prop("disabled", false);
-
-            }else{
-                $(this).data("estado",'apagado');
-                $("#textDescRutinaID").prop("disabled", true);
-                $("#tituloRutinaID").prop("disabled", true);
-            }
-            event.preventDefault();
-        });
-        */
-
         //Borrar rutina seleccionada
         $("#borrarRutinaID").on("click", function(){
             $('#textDescRutinaID').val('');
@@ -370,63 +386,98 @@
             }
         });
 
+
+        $("#tipoRecord").change(function(){
+            var texto = $(this).find('option:selected').text();
+            if(texto =='Repeticiones/Puntos'){
+                $("#tipoUPuntos").prop("disabled", false);
+            }else{
+                $("#tipoUPuntos").prop("disabled", true);
+                $("#tipoUPuntos option:eq(0)").prop("selected",true);
+            }
+        });
+
+
         //Envia los datos para crear o actualizar una clase
         $('#enviarDatos').click(function () {
             var dis = $('#id_disciplina').val();
             var clase = $('#id_clase').val();
+            var idwod = $('#id_rutina').val();
+
             var fechac = $('#datepicker').val();
             var hrs = $('#horaRevelacion').val();
             var record = $('#tipoRecord').val();
+            var unidadpuntos = $('#tipoUPuntos').val();
             var unidad = $('#tipoUPeso').val();
             var titulo = $('#tituloClaseID').val();
             var calent = $('#textCalentamientoID').val();
-            var idwod = $('#id_rutina').val();
-            var namewod = $('#nombre_rutina').val();
+            var namewod = $('#tituloRutinaID').val();
             var wod = $('#textDescRutinaID').val();
 
 
-            $.ajax({
-                type:'post',
-                url:'guardarClase.php',
-                data:{id_disciplina:dis,
-                    id_clase:clase,
-                    fecha:fechac,
-                    hora_revelacion:hrs,
-                    tipo_record:record,
-                    id_tipo_peso:unidad,
-                    titulo_clase:titulo,
-                    calentamiento:calent,
-                    id_rutina:idwod,
-                    nombre_rutina:namewod,
-                    ejercicios_rutina:wod},
-                success:function(response){
-                    switch(response) {
-                        case '1':
-                            alert('Se actualizaron los datos de la clase.');
-                            window.location.href = 'index.php';
-                            break;
-                        case '2':
-                            alert('No se pudo actualizar la clase.');
-                            window.location.href = 'index.php';
-                            break;
-                        case '3':
-                            alert('Ocurrió un error, inténtelo más tarde.');
-                            window.location.href = 'index.php';
-                            break;
-                        case '4':
-                            alert('Existe una clase en la misma fecha.');
-                            break;
-                        case '5':
-                            alert('Se creó la clase.');
-                            window.location.href = 'index.php';
-                            break;
-                        case '6':
-                            alert('No se pudo guardar la clase.');
-                            window.location.href = 'index.php';
-                            break;
+            if(hrs!="" && record!="" && titulo!="" && calent!="" && namewod!="" && wod!="") {
+                if((record==1 && unidad!="") || (record==2 && unidadpuntos!="") || (record==3) ){
+
+                $.ajax({
+                    type: 'post',
+                    url: 'guardarClase.php',
+                    data: {
+                        id_disciplina: dis,
+                        id_clase: clase,
+                        fecha: fechac,
+                        hora_revelacion: hrs,
+                        tipo_record: record,
+                        id_tipo_peso: unidad,
+                        id_unidad_puntos: unidadpuntos,
+                        titulo_clase: titulo,
+                        calentamiento: calent,
+                        id_rutina: idwod,
+                        nombre_rutina: namewod,
+                        ejercicios_rutina: wod
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        switch (response) {
+                            case '1':
+                                alert('Se actualizó la clase.');
+                                window.location.href = 'index.php';
+                                break;
+                            case '2':
+                                alert('No se pudo actualizar la clase.');
+                                window.location.href = 'index.php';
+                                break;
+                            case '3':
+                                alert('Ocurrió un error, inténtelo más tarde.');
+                                window.location.href = 'index.php';
+                                break;
+                            case '4':
+                                alert('Ya existe una rutina con el mismo nombre.');
+                                break;
+                            case '5':
+                                alert('Ya existe una rutina con los mismos ejercicios.');
+                                break;
+                            case '6':
+                                alert('Ya existe una clase en la misma fecha.');
+                                break;
+                            case '7':
+                                alert('Se creó la clase.');
+                                window.location.href = 'index.php';
+                                break;
+                            case '8':
+                                alert('No se pudo crear la clase, inténtelo más tarde.');
+                                window.location.href = 'index.php';
+                                break;
                         }
+                    }
+                });//termina ajax
+                } else{
+                    alert("Faltan campos por llenar.");
                 }
-            });
+            }//termina if
+            else{
+                alert("Faltan campos por llenar.");
+            }
+
         });
     });
 </script>
