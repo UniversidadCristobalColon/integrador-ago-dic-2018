@@ -36,18 +36,18 @@
         <h2>Nueva Disciplina</h2>
         <p class="lead">
             <form action="result.php" method="post">
-                <button type="submit" onclick="location.href='indexn.php'" class="btn btn-success">Guardar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
 
             <br><br>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="exampleFormControlInput1">Nombre</label>
-                            <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit">
+                            <input type="text" class="form-control" name="nombre_disciplina" placeholder="Ejemplo: CrossFit" required>
                         </div>
                         <div class="col-md-6">
 
                             <label for="inputMonto">Fecha: </label>
-                            <input id="datepicker" name="fecha_modificacion">
+                            <input id="datepicker" name="fecha_modificacion" required>
                             <script>
                                 $('#datepicker').datepicker({
                                     uiLibrary: 'bootstrap4',
