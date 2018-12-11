@@ -1,15 +1,17 @@
 <?php
 require_once('../../scripts/config.php');
 
-var_dump($_SESSION);
+
+
+
 
 $id = $_SESSION['id_usuario'];
 if(empty($id)){
 	$id = 2;	
 }
 
-
       try {
+
 		  /////////logros
 		  $sqlogro = "SELECT * FROM logros";
 		  $logros = $db->query($sqlogro);
