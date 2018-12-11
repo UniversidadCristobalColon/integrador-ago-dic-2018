@@ -26,7 +26,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Gestión</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Inventario</a>
+                    <a class="dropdown-item" href="'. $base .'/admin/catalogos/productos/">Inventario</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/ingresos/">Ingresos</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/egresos/">Egresos</a>
                     <a class="dropdown-item" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
