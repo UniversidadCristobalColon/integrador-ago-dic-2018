@@ -58,7 +58,7 @@
         <?php
         if($correcto == 1){?>
             <div id="anuncio" class="alert alert-success mb-3"> ¡El usuario ha sido registrado correctamente!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="location.href='indexu.php'" >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="location.href='index.php'" >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

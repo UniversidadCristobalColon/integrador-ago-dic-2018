@@ -29,10 +29,10 @@ $guardarbase=mysqli_query($db,$query);
     if($guardarbase){
         $message = "Los cambios se han guardado.";
         echo "<script type='text/javascript'>alert('$message');</script>";
-        header("Location: indexu.php");
+        header("Location: index.php");
     }else{
         $message = "No se pudo guardar los cambios, inténtelo de nuevo.";
         echo "<script type='text/javascript'>alert('$message');</script>";
-        header("refresh:2; url=indexu.php");
+        header("refresh:2; url=index.php");
     }
 

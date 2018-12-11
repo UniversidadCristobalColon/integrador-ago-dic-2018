@@ -21,10 +21,10 @@ $result=mysqli_query($db,$query);
     if($result){
         $message = "Los cambios se han guardado.";
         echo "<script type='text/javascript'>alert('$message');</script>";
-        header("Location: indexn.php");
+        header("Location: index.php");
     }else{
         $message = "No se pudo guardar los cambios, inténtelo de nuevo.";
         echo "<script type='text/javascript'>alert('$message');</script>";
-        header("refresh:2; url=indexn.php");
+        header("refresh:2; url=index.php");
     }
 
