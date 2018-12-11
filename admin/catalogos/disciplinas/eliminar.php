@@ -6,8 +6,8 @@ require_once '../../../scripts/config.php';
     $result=mysqli_query($db,$query);
 
     if ($result){
-        header("Location: indexn.php");
+        header("Location: index.php");
     }else{
         echo "No se pudo llevar a acabo la operación.";
-        header("refresh:2; url=indexn.php");
+        header("refresh:2; url=index.php");
     }

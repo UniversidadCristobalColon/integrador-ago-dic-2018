@@ -12,7 +12,7 @@
                 if ($result === TRUE) {?>
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
                     <div id="anuncio" class="alert alert-success mb-3"> ¡La nueva disciplina ha sido registrada correctamente!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="location.href='indexn.php'" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="location.href='index.php'" >
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>

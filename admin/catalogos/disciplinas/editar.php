@@ -49,7 +49,7 @@ if($res){
         <h2>Editar Disciplina</h2>
         <p class="lead">
         <form action="guardarEdit.php" method="post">
-            <button type="submit" onclick="location.href='indexn.php'" class="btn btn-success">Guardar</button>
+            <button type="submit" onclick="location.href='index.php'" class="btn btn-success">Guardar</button>
             <?php
             $xid = $_GET['xid'];
             $query="select * from disciplinas where id_disciplina=$xid";

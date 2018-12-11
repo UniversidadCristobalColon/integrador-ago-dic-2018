@@ -11,8 +11,8 @@ $id = $_GET['xid'];
 $query="delete from usuarios where id_usuario = $id";
 $guardarbase=mysqli_query($db,$query);
 if ($guardarbase){
-    header("Location: indexu.php");
+    header("Location: index.php");
 }else{
     echo "No se pudo llevar a acabo la operación.";
-    header("refresh:2; url=indexu.php");
+    header("refresh:2; url=index.php");
 }
