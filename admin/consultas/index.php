@@ -2,7 +2,7 @@
 try {
     require_once('../../scripts/config.php');
     $_SESSION['user'] = 4;
-    $sql = 'SELECT id_ingresos, descripcion_ingresos, u.nombre_completo, u.correo, importe FROM ingresos i LEFT JOIN usuarios u ON i.id_usuario = u.id_usuario';
+    $sql = 'SELECT id_ingresos, descripcion_ingresos, u.nombre_completo, u.correo, importe  FROM ingresos i LEFT JOIN usuarios u ON i.id_usuario = u.id_usuario LIMIT 50';
     $resultado = $db->query($sql);
 } catch (Exception $e) {
 }
@@ -55,11 +55,6 @@ try {
     <div class="starter-template">
         <h1>Historial de pagos</h1>
 
-        </br><div class="pull-right">
-            <a href="index.php" class="btn btn-default-btn-xs btn-primary"><i class="glyphicon glyphicon-refresh"></i> Actualizar</a>
-            <a href= "situacion_clientes.php" class="btn btn-default-btn-xs btn-success"><i class="glyphicon glyphicon-back"></i> Estado de los clientes</a>
-        </div></br>
-
     </div>
 
     <div class="container">
@@ -85,7 +80,7 @@ try {
                             <td><?php echo $registros['nombre_completo']; ?></td>
                             <td><?php echo $registros['correo']; ?></td>
                             <td>n/a</td>
-                            <td><?php echo $registros['importe']; ?></td>
+                            <td><?php echo "$ ". $registros['importe']; ?></td>
                         </tr>
 
                     <?php } ?>

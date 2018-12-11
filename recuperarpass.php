@@ -19,7 +19,7 @@
 		
 		if(!isEmail($email))
 		{
-			$errors[] = "Debe ingresar un correo electronico valido";
+			$errors[] = "Debe ingresar un correo electrónico valido";
 		}
         if(emailExiste($email))
 		{			
@@ -32,15 +32,15 @@
 			$url = 'http://'.$_SERVER["SERVER_NAME"].'/int7/newpass.php?user_id='.$user_id.'&token='.$token;
 			
 			$asunto = 'Recuperar Password - Sistema de Usuarios';
-			$cuerpo = "Hola $nombre: <br /><br />   Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>$url</a>";
+			$cuerpo = "Hola $nombre: <br /><br />   Se ha solicitado un reinicio de contrase&ntilde;a. <br/><br/>Para restaurar la contrase&ntilde;a, visita la siguiente direcci&oacute;n: <a href='$url'>$url</a> <br /><br />En caso de que no haya requerido recuperar contrase&ntilde;a, ignore este mensaje.";
 			
 			if(enviarEmail($email, $nombre, $asunto, $cuerpo)){
-				echo "Hemos enviado un correo electronico a las direcion $email para restablecer tu password.<br />";
+				echo "Hemos enviado un correo electrónico a la direción $email para restablecer tu contrase&ntilde;a.<br />";
 				echo "<a href='index.php' >Iniciar Sesion</a>";
 				exit;
-			}else{$errors[] = "error en enviar correo";}
+			}else{$errors[] = "Error al enviar correo";}
 			} else {
-			$errors[] = "La direccion de correo electronico no existe";
+			$errors[] = "La dirección de correo electrónico no existe";
 		}
 	}
 	
@@ -83,10 +83,8 @@
 </nav>';
 echo $navbar?>
 
-<main role="main" class="container">
 
 
-<div class="container">
     
    <!--   <form id="loginform" class="form-horizontal" role="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">-->
     <form class="form-signin" id="loginform" ole="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
@@ -95,7 +93,7 @@ echo $navbar?>
 
         <h3>Recuperar Contraseña</h3>
         <br>
-        <p>Ingrese su correo electronico para poder cambiar su contraseña.</p>
+        <p>Ingrese su correo electrónico para poder cambiar su contraseña.</p>
         
         
         
@@ -109,14 +107,14 @@ echo $navbar?>
 
         <button class="btn btn-lg btn-primary" type="submit">Enviar Correo</button>
         
-        
+     
         
         
     </div>
     </form>
      <?php echo resultBlock($errors); ?>
-</div>
-</main>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

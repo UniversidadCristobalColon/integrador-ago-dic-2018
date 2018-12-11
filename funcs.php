@@ -136,7 +136,7 @@
 		$mail->Username = 'sarxwc@gmail.com'; //Modificar
 		$mail->Password = 'sarxwc123'; //Modificar
 		
-		$mail->setFrom('sarxwc@gmail.com', 'sarx'); //Modificar
+		$mail->setFrom('sarxwc@gmail.com', 'Sarx Wellnes Center'); //Modificar
 		$mail->addAddress($email, $nombre);
 		
 		$mail->Subject = $asunto;
@@ -203,7 +203,7 @@
 	{
 		global $mysqli;
 		
-		$stmt = $mysqli->prepare("SELECT id_usuario, id_tipo_usuario, contrasena FROM usuarios WHERE  correo = ? LIMIT 1");
+		$stmt = $mysqli->prepare("SELECT id_usuario, id_tipo_usuario,nombre_corto, nombre_completo, contrasena FROM usuarios WHERE  correo = ? LIMIT 1");
 		$stmt->bind_param("s", $usuario);
 		$stmt->execute();
 		$stmt->store_result();
@@ -214,11 +214,11 @@
 			
 			if(isActivo($usuario)){
 				
-				$stmt->bind_result($id, $id_tipo, $passwd);
+				$stmt->bind_result($id, $id_tipo, $nom_c, $nombre_comp, $passwd);
 				$stmt->fetch();
 				
 				$validaPassw = password_verify($password, $passwd);
-				
+				//print($nom_c);
            // print($password);
                 
 				//if($password = $passwd){	
@@ -228,6 +228,10 @@
 					//lastSession($id);
 					$_SESSION['id_usuario'] = $id;
 					$_SESSION['id_tipo_usuario'] = $id_tipo;
+					$_SESSION['nombre_corto'] = $nom_c ;
+					$_SESSION['nombre_completo'] = $nombre_comp ;
+                      
+                      
                     //print($id_tipo);
                    // print($_SESSION['id_tipo_usuario']);
 					
@@ -238,6 +242,10 @@
 					//lastSession($id);
 					$_SESSION['id_usuario'] = $id;
 					$_SESSION['id_tipo_usuario'] = $id_tipo;
+					$_SESSION['nombre_corto'] = $nom_c ;
+					$_SESSION['nombre_completo'] = $nombre_comp ;
+                      
+                        
                     //print($id_tipo);
                   //  print($_SESSION['id_tipo_usuario']);
 					

@@ -1,13 +1,7 @@
 <?php
-$idUsuario = !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
 $nombre_corto = 'Sin usuario';
-if(!empty($db) && !empty($idUsuario)) {
-    $sql = "SELECT nombre_corto FROM usuarios WHERE id_usuario = '$idUsuario'";
-    $res = mysqli_query($db, $sql);
-    if($res){
-        $f = mysqli_fetch_array($res);
-        $nombre_corto = $f[0];
-    }
+if(!empty($_SESSION['nombre_corto'])) {
+    $nombre_corto = $_SESSION['nombre_corto'];
 }
 $doc_root   = $_SERVER["DOCUMENT_ROOT"];
 //var_dump($doc_root);
@@ -18,7 +12,8 @@ $base       = str_replace($doc_root, '', $realpath);
 $pos        = strpos($base, '/',1);
 $base       = substr($base,0, $pos);
 //var_dump($base);
-$base       == '/' ? '' : $base;
+//$base       == '/' ? '' : $base;
+$base = '';
 $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <span class="navbar-brand">Sarx</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -34,6 +29,7 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                     <a class="dropdown-item" href="#">Inventario</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/ingresos/">Ingresos</a>
                     <a class="dropdown-item" href="'. $base .'/admin/pos/egresos/">Egresos</a>
+                    <a class="dropdown-item" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -47,8 +43,8 @@ $navbar_admin = '<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-t
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="'. $base .'/admin/consultas/situacion_clientes.php">Estado de clientes</a>
-            </li>
+                <a class="nav-link" href="'. $base .'/admin/clases/">Gestión de clases</a>
+            </li> 
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">

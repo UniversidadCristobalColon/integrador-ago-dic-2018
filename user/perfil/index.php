@@ -1,10 +1,16 @@
 <?php
+require_once('../../scripts/config.php');
 
+
+
+
+
+$id = $_SESSION['id_usuario'];
+if(empty($id)){
+	$id = 2;	
+}
 
       try {
-        require_once('../../scripts/config.php');
-
-        $id= $_SESSION['id_usuario'];
 
 		  /////////logros
 		  $sqlogro = "SELECT * FROM logros";

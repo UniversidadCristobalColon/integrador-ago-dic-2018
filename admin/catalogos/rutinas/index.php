@@ -52,10 +52,14 @@
 
     <div class="starter-template">
         <h1>Rutinas</h1>
-<!--        <div class="alert alert-success alert-dismissible">-->
-<!--            <button type="button" class="close" data-dismiss="alert">&times;</button>-->
-<!--            <strong>Success!</strong> Indicates a successful or positive action.-->
-<!--        </div>-->
+        <?php
+        if(empty($_GET['exito'])==false && $_GET['exito']==1){
+            echo '<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Se ha guardado la información
+                </div>';
+        }
+        ?>
         <a href="nueva.php" class="btn btn-success mb-3" role="button">Nueva</a>
 
         <table id="example" class="table">

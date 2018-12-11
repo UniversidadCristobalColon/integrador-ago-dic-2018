@@ -6,6 +6,8 @@ try {
     ////RELLENA EL FORMULARIO DE DATOS DE USUARIO
     $sql = "SELECT * FROM `usuarios` WHERE `id_usuario` LIKE  '{$id}'";
     $resultado = $db->query($sql);
+    $sql2 = "SELECT id_ingresos, descripcion_ingresos, importe,`fecha_modificacion`  FROM ingresos WHERE `id_usuario` LIKE  '{$id}'";
+    $resultado2 = $db->query($sql2);
 } catch (Exception $e) {
 
 }
@@ -67,10 +69,6 @@ try {
                 <p class="mb-1"><span class="text-muted">Numero de telefono </span><?php echo $registros['telefono']; ?></p>
             </div>
 
-            <div class="pull-center">
-                <a href="situacion_clientes.php" class="btn btn-default-btn-xs btn-danger"><i class="glyphicon glyphicon-back"></i> Regresar</a>
-            </div>
-
             <?php  } ?>
         </div>
 
@@ -90,38 +88,21 @@ try {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mensualidad de Septiembre</td>
-                        <td>1</td>
-                        <td>$3452</td>
-                        <td>25/11/2018</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Mensualidad de Octubre</td>
-                        <td>1</td>
-                        <td>$2342</td>
-                        <td>25/11/2018</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Mensualidad de Noviembre</td>
-                        <td>1</td>
-                        <td>$2343</td>
-                        <td>25/11/2018</td>
-                    </tr>
+                    <?php while($registros = $resultado2->fetch_assoc() ) { ?>
+                        <tr>
+                            <td><?php echo $registros['id_ingresos']; ?></td>
+                            <td><?php echo $registros['descripcion_ingresos']; ?></td>
+                            <td>1</td>
+                            <td><?php echo "$ ". $registros['importe']; ?></td>
+                            <td><?php echo $registros['fecha_modificacion']; ?></td>
+                        </tr>
+                    <?php } ?>
+
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="d-flex flex-row-reverse bg-dark text-white p-4">
-            <div class="py-3 px-5 text-right">
-                <div class="mb-2">Total</div>
-                <div class="h2 font-weight-light">$234,234</div>
-            </div>
-        </div>
     </div>
     </div>
     </div>

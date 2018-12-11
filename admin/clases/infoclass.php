@@ -1,13 +1,15 @@
 <?php
-
+    session_start();
     require_once '../../scripts/config.php';
     require_once '../../scripts/funciones_php.php';
-    //$id_clase = $_POST['id'];
 
-//Informacion de la clase
+
+
+
+    //Informacion de la clase
     $id_clase=$_REQUEST['id'];
-
-    $sql = "SELECT clases.id_rutina AS idrutina,
+    $sql = "SELECT count(clases.id_clase) AS count,
+                  clases.id_rutina AS idrutina,
                   titulo_clase,
                   calentamiento,
                   fecha_clase,
@@ -20,9 +22,17 @@
             INNER JOIN rutinas ON rutinas.id_rutina=clases.id_rutina
             INNER JOIN tiporecord ON tiporecord.id_tipo_record=clases.id_tipo_record
             WHERE id_clase=$id_clase";
+
     $result = mysqli_query($db, $sql);
     $valores = mysqli_fetch_assoc($result);
 
+    if($id_clase==""){
+        echo "<script>window.location.href = 'index.php';</script>";
+    }else{
+       if($valores['count']==0){
+           echo "<script>window.location.href = 'index.php';</script>";
+       }
+    }
 
     if(isset($_POST['submit'])){
         $id_asis = $_POST['id_asistencia'];
@@ -60,9 +70,6 @@
     <!--selectpcker -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://www.jqueryscript.net/demo/Bootstrap-4-Chosen-Plugin/dist/css/component-chosen.css" rel="stylesheet">
-
-
-
 </head>
 
 <body>
@@ -129,8 +136,12 @@
                                 <td colspan="2">TÍTULO DE LA RUTINA: <br><input class="form-control" value="<?php echo $valores['nombre_rutina'];?>" readonly></td>
                             </tr>
                             <tr>
+                                <input type="hidden" id="idrecord" name="idrecord" value="<?php echo $valores['idrecord']; ?>">
+                                <td colspan="2">TIPO DE RÉCORD: <br><input class="form-control" value="<?php  echo desctiporecord($valores['idrecord'], $id_clase); ?>" readonly></td>
+                            </tr>
+                            <tr>
                                 <td colspan="2">DESCRIPCIÓN DE LA RUTINA:
-                                <textarea class="form-control" rows="10" readonly><?php echo $valores['ejercicios_rutina']; ?></textarea>
+                                <textarea class="form-control" rows="10" readonly><?php echo stripslashes($valores['ejercicios_rutina']); ?></textarea>
                                 </td>
                             </tr>
                             </tbody>
@@ -142,10 +153,10 @@
                         <br>
                         <div class="row">
                             <div class="col-md-8 mb-2">
-                                <select id="optgroup" class="form-control form-control-chosen" data-placeholder="Escriba el nombre..." multiple required>
+                                <select id="optgroup" name="id_select[]" class="form-control form-control-chosen" data-placeholder="Escriba el nombre..." multiple required>
                                     <optgroup label="A">
                                         <?php
-                                        $query="SELECT id_usuario, nombre_completo 
+                                        $query="SELECT id_usuario, nombre_completo
                                             FROM usuarios
                                             WHERE nombre_completo 
                                             LIKE 'A%'
@@ -484,7 +495,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2 mb-2">
-                                <select class="custom-select d-block w-100" id="" required>
+                                <select class="custom-select d-block w-100" name="id_hora" id="id_hora"required>
                                     <option value="">Hora</option>
                                     <?php
                                     $query="select * from horario";
@@ -496,123 +507,135 @@
                                 </select>
                             </div>
                             <div class="col-md-2 mb-2">
-                                <button class="btn btn-primary btn-md btn-block" type="submit">Guardar asistencias</button>
+                                <input type="hidden" id="id_clase" name="id_clase" value="<?php echo $id_clase; ?>">
+                                <button id="agregarAsis" class="btn btn-primary btn-md btn-block" type="button">Agregar asistencias</button>
                             </div>
                         </div>
+                        <br>
+                        <hr>
 
-
-                        <table class="table ">
+                        <table id="tableAsis" name="tableAsis" class="table table-bordered">
                             <thead class="thead-dark">
                             <tr>
                                 <th >Hora</th>
+                                <th >Nombre</th>
+                                <th >Adeudo</th>
+                                <th >Acciones</th>
                             </tr>
                             </thead>
-                        </table>
-                        <?php
-                             $buscar_asistencia="SELECT id_asistencia,
-                                                        nombre_completo, 
-                                                        asistencia, 
-                                                        hora, 
-                                                        clases.id_clase AS idclase,
-                                                        asistencias.id_usuario AS idusuario
-                                                FROM usuarios
-                                                INNER JOIN asistencias ON usuarios.id_usuario = asistencias.id_usuario
-                                                INNER JOIN horario ON asistencias.id_horario = horario.id_horario
-                                                INNER JOIN clases ON asistencias.id_clase = clases.id_clase
-                                                WHERE asistencias.id_clase =$id_clase
-                                                AND asistencia=1";
+                            <tbody>
+                                <?php
 
-                        $result=mysqli_query($db,$buscar_asistencia);
-                            while($row=mysqli_fetch_array($result)){
-                        ?>
-                                <table class="table">
-                                    <thead class="thead-light">
+                                $buscar_asistencia="SELECT id_asistencia,
+                                                            nombre_completo, 
+                                                            asistencia, 
+                                                            hora, 
+                                                            clases.id_clase AS idclase,
+                                                            asistencias.id_usuario AS idusuario,
+                                                            dias_pago
+                                                    FROM usuarios
+                                                    INNER JOIN asistencias ON usuarios.id_usuario = asistencias.id_usuario
+                                                    INNER JOIN horario ON asistencias.id_horario = horario.id_horario
+                                                    INNER JOIN clases ON asistencias.id_clase = clases.id_clase
+                                                    WHERE asistencias.id_clase =$id_clase
+                                                    AND asistencia=1 ORDER BY hora";
+                                $result=mysqli_query($db,$buscar_asistencia);
+                                while($row=mysqli_fetch_array($result)){
+
+                                ?>
                                     <tr>
-                                        <th colspan="2"><?php echo $row['hora'];?></th>
+                                        <td><?php echo $row['hora'];?></td>
+                                        <td><?php echo $row['nombre_completo'];?></td>
+                                        <td><?php
+                                            date_default_timezone_set('America/Mexico_City');
+                                            $fecha = date('d-m-Y');
+                                            $dia = date('d',strtotime($fecha));
+                                            if($dia>=$row['dias_pago']){
+                                                echo "<img style=\"width:25px;height:25px;\" src=\"../../img/bag.svg\">";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><a href="eliminarAsistencia.php?id=<?php echo $row['id_asistencia']; ?>&idc=<?php echo $id_clase; ?>"><img title="Eliminar asistencia" src="../../img/icons8-trash-24.png"></a></td>
                                     </tr>
-                                    </thead>
-                                </table>
-                                <ul>
-                                    <ul>
-                                        <table  class="table">
-                                            <tr>
-
-                                                <td><li><?php echo $row['nombre_completo'];?></li></td>
-                                                <td><a href="eliminarAsistencia.php?id=<?php echo $row['id_asistencia']; ?>&idc=<?php echo $id_clase; ?>">Borrar</a></td>
-                                            </tr>
-                                        </table>
-                                    </ul>
-                                </ul>
-                        <?php
-                            }
-                        ?>
-
+                                <?php
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
 
                     </div>
                     <div class="tab-pane fade" id="top" role="tabpanel" aria-labelledby="contact-tab">
                         <!-- Contenido del TOP -->
                         <br>
-                        <!--
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <select class="custom-select d-block w-100" id="">
-                                    <option value="">Filtrar por nivel...</option>
-                                    <option>Todos</option>
-                                    <option>Nivel alto</option>
-                                    <option>Nivel medio</option>
-                                    <option>Nivel bajo</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <select class="custom-select d-block w-100" id="">
-                                    <option value="">Ordenar de...</option>
-                                    <option>Menor a mayor</option>
-                                    <option>Mayor a menor</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <button class="btn btn-primary btn-md btn-block" type="submit">Filtrar</button>
-                            </div>
-                        </div>
-                        -->
-
-                        <table id="exampletop" class="table">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Puesto</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Tipo de record</th>
-                                <th scope="col">Record</th>
-                                <th scope="col">Nivel</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $buscar_record="SELECT nombre_completo, tipo_record
+                        <?php
+                            $record_count ="SELECT count(usuarios.id_usuario) AS count
                                             FROM usuarios
                                             INNER JOIN asistencias ON asistencias.id_usuario = usuarios.id_usuario
                                             INNER JOIN clases ON clases.id_clase = asistencias.id_clase
                                             INNER JOIN tiporecord ON tiporecord.id_tipo_record = clases.id_tipo_record
                                             WHERE asistencias.id_clase=$id_clase AND asistencia =1";
+                            $resultado=mysqli_query($db,$record_count);
+                            $valores_count = mysqli_fetch_assoc($resultado);
+                            if($valores_count['count']>0){
+                                echo "<table id=\"tableTop\" class=\"table\">
+                                    <thead class=\"thead-dark\">
+                                    <tr>
+                                        <th scope=\"col\">Puesto</th>
+                                        <th scope=\"col\">Nombre</th>
+                                        <th scope=\"col\">Record</th>
+                                        <th scope=\"col\">Nivel</th>
+                                        <th scope=\"col\">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>";
 
-                            $result=mysqli_query($db,$buscar_record);
-                            while($row=mysqli_fetch_array($result)) {
+                                $buscar_record = "SELECT usuarios.id_usuario AS iduser, nombre_completo,  clases.id_tipo_record AS idtiporecord, id_tipo_unidad_peso, id_unidad_puntos,tipo_record, fecha_clase 
+                                                FROM usuarios
+                                                INNER JOIN asistencias ON asistencias.id_usuario = usuarios.id_usuario
+                                                INNER JOIN clases ON clases.id_clase = asistencias.id_clase
+                                                INNER JOIN tiporecord ON tiporecord.id_tipo_record = clases.id_tipo_record
+                                                WHERE asistencias.id_clase=$id_clase AND asistencia =1";
+                                $result = mysqli_query($db, $buscar_record);
+                                $num = 0;
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $nivel = nivel_cliente($id_clase, $row['iduser']);
+                                    $record = record_cliente($row['idtiporecord'], $id_clase, $row['iduser']);
+                                    $nota = record_nota($row['iduser'],$id_clase);
+                                    $datos_record=$row['nombre_completo']."||".$record."||".$nivel."||".$row['idtiporecord']."||".$nota."||".$row['iduser']."||".$id_clase."||".$row['id_tipo_unidad_peso']."||".$row['id_unidad_puntos']."||".$row['fecha_clase'];
+
+
+                                $num = $num + 1;
+                                echo "<td>" . $num . "</td>";
                                 ?>
-                                <tr>
-                                    <th scope="row"></th>
                                     <td><?php echo $row['nombre_completo']; ?></td>
-                                    <td><?php echo $row['tipo_record']; ?></td>
+                                    <td><?php echo record_cliente($row['idtiporecord'], $id_clase, $row['iduser']); ?></td>
+                                    <td><?php echo nivel_cliente($id_clase, $row['iduser']); ?></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm btn-block" type="button"
-                                                data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" id="agregarAsistencia">
-                                            Agregar
+                                                data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="agregarRecord('<?php echo $datos_record;?>')">
+                                            Editar
                                         </button>
                                     </td>
-                                    <td></td>
                                 </tr>
-                            <?php
+                                <?php
                                 }
+                            }else{
+                                echo "<table id=\"tableTop\" class=\"table\">
+                                    <thead class=\"thead-dark\">
+                                    <tr>
+                                        <th scope=\"col\">Puesto</th>
+                                        <th scope=\"col\">Nombre</th>
+                                        <th scope=\"col\">Record</th>
+                                        <th scope=\"col\">Nivel</th>
+                                        <th scope=\"col\">Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>";
+
+
+                            }
                             ?>
                             </tbody>
                         </table>
@@ -622,7 +645,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Asignar record</h5>
+                                        <h5 class="modal-title" id="record_nombre"></h5>
 
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -631,27 +654,40 @@
                                     <div class="modal-body">
                                         <form>
                                             <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Record</label>
-                                                <input type="text" class="form-control" id="recipient-name" />
+                                                <input type="hidden" id="recordid" name="">
+                                                <input type="hidden" id="recordiduser" name="">
+                                                <input type="hidden" id="recordclase" name="">
+                                                <input type="hidden" id="recordrecord" name="">
+                                                <input type="hidden" id="recordunidad_puntos" name="">
+                                                <input type="hidden" id="recordunidad_peso" name="">
+                                                <input type="hidden" id="recordfecha" name="">
+
+                                                <label for="recipient-name" id="" class="col-form-label">Record</label>
+                                                <input class="form-control"  type="text" id="record_puntaje" name="record_puntaje">
+
+
                                             </div>
                                             <div class="form-group">
-                                                <select class="custom-select d-block w-100" id="">
-                                                    <option>Selecciona Nivel</option>
-                                                    <option>Nivel 1</option>
-                                                    <option>Nivel 2</option>
-                                                    <option>Nivel 3</option>
-                                                    <option>Nivel 4</option>
+                                                <select class="custom-select d-block w-100" id="recordnivel" required>
+                                                    <option value="">Selecciona un nivel</option>
+                                                    <?php
+                                                    $query="select * from niveles_rutina";
+                                                    $result=mysqli_query($db,$query);
+                                                    while ($valores=mysqli_fetch_assoc($result)) {
+                                                        echo '<option value="'.$valores[id_nivel_rutina].'">'.$valores[nivel].'</option>';
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="col-form-label">Notas:</label>
-                                                <textarea class="form-control" rows="10"  id="message-text"></textarea>
+                                                <textarea class="form-control" rows="3"  id="recordnota"></textarea>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+                                        <button type="button" class="btn btn-primary" id="actualizaDatos" data-dismiss="modal">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -670,6 +706,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+<script src="../../js/jquery.rowspanizer.min.js"></script>
+
 <script type="text/javascript">
     $('.form-control-chosen').chosen({
         allow_single_deselect: true,
@@ -694,30 +732,127 @@
         }
     });
 </script>
+
 <script>
     $(document).ready(function(){
-        $("#agregarAsistencia").click(function () {
+        $("#agregarAsis").click(function () {
+            var idclase = $('#id_clase').val();
+            var idhora = $('#id_hora').val();
+            var idsselected = $('#optgroup').val();
+            console.log(idhora);
+            console.log(idclase);
 
+            if(idhora!=""){
+                if(idsselected!=""){
+                    $.ajax({
+                        type: 'post',
+                        url: 'agregarAsistencia.php',
+                        data: {
+                            id_clase: idclase,
+                            id_hora: idhora,
+                            id_select: idsselected
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            switch (response) {
+                                case '1':
+                                    alert('Se actualizaron las asistencias.');
+                                    window.location.href = 'infoclass.php?id='+idclase;
+                                    break;
+                                case '2':
+                                    alert('Todos tienen asistencia.');
+                                    break;
 
+                            }
+                        }
+                    });//termina ajax
+
+                }else{
+                    alert("No ha seleccionado los asistentes");
+                }
+            }//termina el if
+            else{
+                alert("No ha seleccionado la hora");
+            }
         });
     });
 </script>
+
 <!-- datatables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-<script
-        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
-</script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js">
-</script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
 <script>
     $(document).ready( function () {
-        $('#exampletop').DataTable({
+        $('#tableTop').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
         });
     } );
+</script>
+
+<script>
+    $(document).ready( function () {
+
+        $('#tableAsis').rowspanizer({
+            columns: [0]
+        });
+
+        $('#actualizaDatos').click(function(){
+            var iduser = $('#recordiduser').val();
+            var idrecord = $('#recordid').val();
+            var idpeso = $('#recordunidad_peso').val();
+            var idpuntos = $('#recordunidad_puntos').val();
+            var puntaje = $('#record_puntaje').val();
+            var fecha = $('#recordfecha').val();
+            var idclase = $('#recordclase').val();
+            var nota = $('#recordnota').val();
+            var idnivel = $('#recordnivel').val();
+
+            if(idrecord!="") {
+                if(idnivel!="") {
+                    $.ajax({
+                        type: 'post',
+                        url: 'actualizaRecords.php',
+                        data: {
+                            id_user: iduser,
+                            id_record: idrecord,
+                            id_peso: idpeso,
+                            id_puntos: idpuntos,
+                            record_puntaje: puntaje,
+                            record_fecha: fecha,
+                            id_clase: idclase,
+                            notas: nota,
+                            id_nivel: idnivel
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            switch (response) {
+                                case '1':
+                                    alert('Se actualizaron los records.');
+                                    window.location.href = 'infoclass.php?id=' + idclase;
+                                    break;
+                            }
+                        }
+                    });//termina ajax
+                }else{
+                    alert("No ha seleccionado unu nivel.");
+                }
+            }else{
+                alert("Debe escribir un record.");
+            }
+
+
+
+        });
+
+
+    });
+
+
 </script>
 </body>
 </html>
