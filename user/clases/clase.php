@@ -6,7 +6,8 @@
  * Time: 09:21
  */
 require_once '../../scripts/config.php';
-$Usuario=10;
+$Usuario= !empty($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : '';
+//$Usuario=10;
 $hide= 0;
 
 $Clase=  !empty($_GET["id"]) ? $_GET["id"] : '';
@@ -108,7 +109,7 @@ $id_tipo_record = $row4['id_tipo_record'];
 
 <body>
 
-    <?php require_once '../../scripts/navbar2.php' ?>
+    <?php require_once '../../scripts/navbar.php' ?>
 
     <main role="main" class="container">
 
