@@ -69,15 +69,23 @@
     <!-- Hojas de estilos -->
     <link href="../../../css/controlClientes.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 
     <!-- Archivos JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../../js/tablas.js"></script>
     <script src="../../../js/formulariosValidar.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="jquery.ui.datepicker-es.js"></script>
+
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+
 
 
 </head>
@@ -194,10 +202,19 @@
                         <div id="alturaOk">  </div>
                     </div>
                 </div>
+                <script>
+                  $(function () {
+                  $.datepicker.setDefaults($.datepicker.regional["es"]);
+                  $("#datepicker").datepicker({
+                  changeMonth: true,
+                  changeYear: true
+                  });
+                  });
+                  </script>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-2 col-form-label">Fecha de Nacimiento*</label>
                     <div class="col-10">
-                        <input class="form-control" name="fecha_nacimiento" type="text" id="datepicker" value="<?php echo $registro['fecha_nacimiento']; ?>" required>
+                        <input class="form-control" name="fecha_nacimiento" type="text" id="datepicker"  value="<?php echo $registro['fecha_nacimiento']; ?>" required>
                     </div>
                 </div>
                 <div class="form-group row">

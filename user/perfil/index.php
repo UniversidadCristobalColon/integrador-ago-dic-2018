@@ -1,9 +1,10 @@
 <?php
 
-$id= $_SESSION['id_usuario'];
 
       try {
         require_once('../../scripts/config.php');
+
+        $id= $_SESSION['id_usuario'];
 
 		  /////////logros
 		  $sqlogro = "SELECT * FROM logros";
