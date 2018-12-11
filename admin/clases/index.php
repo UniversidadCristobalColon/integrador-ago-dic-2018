@@ -23,6 +23,17 @@
     <script src="../../js/base.js"></script>
     <script src='../../js/fullcalendar/moment.min.js'></script>
     <script src='../../js/fullcalendar/fullcalendar.min.js'></script>
+    <script src="../../js/es.js"></script>
+
+    <?php
+
+    $selected=1;
+
+    if(isset($_GET['disciplinas']))
+    {
+        $selected= $_GET['disciplinas'];
+    }
+    ?>
 
     <script>
 
@@ -38,7 +49,7 @@
                     botonClase:{
                         text: "Nueva Clase",
                         click:function(){
-                            window.location.href = '../clases/clasenueva.php';
+                            window.location.href = '../clases/clasenueva.php?id_dis=<?php echo $selected ?>'; //mandar el id de la diciplina
                         }
                     }
                 },
@@ -48,7 +59,7 @@
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events:
-                    'eventoClases.php'
+                    'eventoClases.php?selected=<?php echo $selected ?>'
             });
         });
 
@@ -62,26 +73,40 @@
 
 <main role="main" class="container">
 
-    <h2>Calendario de clases</h2>
-    <div class="col-md-5 mb-3">
-        <label for="disciplinas">Disciplina</label>
-        <select class="custom-select d-block w-100" id="disciplinas" required>
-            <?php
-            $sql="SELECT id_disciplina, nombre_disciplina FROM disciplinas";
-            $resul=$db->query($sql);
-            $html="<option value='0'>Elige una disciplina...</option>";
-            while ($rowm=mysqli_fetch_array($resul))
-            {
-                $html.="<option value='".$rowm['id_disciplina']."'>".$rowm['nombre_disciplina']."</option>";
-            }
-            echo $html;
-            ?>
-        </select>
-        <div class="invalid-feedback">
-            Favor de seleccionar una diciplina valida..
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"><h2>Calendario de clases</h2></div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <label for="disciplinas">Disciplina</label>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+                    <select class="custom-select d-block w-100" name="disciplinas" id="disciplinas" onchange="this.form.submit();" required>
+                        <?php
+                        $sql="SELECT id_disciplina, nombre_disciplina FROM disciplinas";
+                        $resul=$db->query($sql);
+                        while ($rowm=mysqli_fetch_array($resul))
+                        {
+                            $p_selected = $selected == $rowm["id_disciplina"] ? 'selected="selected"' : '';
+                            $html.="<option value='".$rowm['id_disciplina']."' $p_selected>".$rowm['nombre_disciplina']."</option>";
+                        }
+                        echo $html;
+                        ?>
+                    </select>
+                </form>
+                <div class="invalid-feedback">
+                    Favor de seleccionar una disciplina válida..
+                </div>
+            </div>
         </div>
+
     </div>
+
+    <div class="col-md-5 mb-3"></div>
+
     <div id='calendar'></div>
+
 
 </main>
 
